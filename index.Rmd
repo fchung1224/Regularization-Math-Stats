@@ -1,0 +1,16 @@
+---
+title: 'MATH 455 Regularization'
+author: 'Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College'
+site: bookdown::bookdown_site
+output: 
+  bookdown::gitbook:
+    split_by: chapter
+    config:
+      toc:
+        collapse: chapter
+        scroll_highlight: yes
+documentclass: book  
+github-repo: fchung1224/Regularization-Math-Stats
+---
+  
+# Preface {-}
