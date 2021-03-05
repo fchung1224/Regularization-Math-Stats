@@ -1,0 +1,62 @@
+---
+title: "Proof"
+author: "Federico Chung"
+date: "3/5/2021"
+output: html_document
+---
+
+# Ridge Regression
+
+$$
+y_i = \bar{x}^T_i \beta
+$$
+Lets assume that we have predictors that range from $\bar{x}^T_i  = 1,x^2_i,x^3_i,...,x_i^n$
+
+$\beta$ includes all the coefficients for all our predictors. 
+
+$$
+\begin{aligned}
+\beta^T = [\beta_0, \beta_1,..., \beta_n]  \\
+J = \sum^m_{i=0} (x_i^T\beta - y_i)^2 + \lambda ||\beta||^2
+\end{aligned}
+$$
+
+J is our cost function, the value that we are trying to minimize. Normally we only reduce the sum of squared residuals $\sum^m_{i=0} (x_i^T\beta - y_i)^2 $ but now we also include our Shrinkage parameter $\lambda||\beta||^2$, or also called $L_2$ regularization
+
+$$
+\begin{aligned}
+X^T = [\bar{X}^T_1, \bar{X}^T_2, \bar{X}^T_3, \bar{X}^T_4, ...,\bar{X}^T_n] \\
+Y^T = [y_1, y_2, y_3,y_4,...,y_n] \\ 
+J = (X\beta - Y)^T(X\beta - Y) + \lambda \beta^T\beta \\
+\end{aligned}
+$$
+
+$(X\beta - Y)^T(X\beta - Y)$ --> a way to express squared values in linear algebra lingo
+
+We try to minimize J so we use its derivative and set it to zero to see what value of $\beta$ will minimize the new cost function J
+
+$$
+\begin{aligned}
+\frac{dJ}{d\beta} = 2X^T(X\beta - Y)+ \lambda(2\beta)\\
+2X^T(X\beta - Y)+ \lambda(2\beta) \overset{set}{=} 0 \\
+X^T(X\beta - Y)+ \lambda(\beta) = 0 \\
+X^TX\beta - X^TY + \lambda\beta = 0 \\
+X^TX\beta + \lambda\beta = X^TY\\
+(X^TX+ \lambda I)\beta = X^TY\\
+\beta = (X^TX+ \lambda I)^{-1}X^TY \\
+\end{aligned}
+$$
+If $\lambda = 0$ we have a normal OLS model where:
+
+$$
+\beta = (X^TX)^{-1}X^TY \\
+$$
+
+
+Ridge estimates are a scaled version of the least squares estimates where $\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)$
+
+
+
+
+
+
