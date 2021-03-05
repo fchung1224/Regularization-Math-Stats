@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>MATH 455 Regularization</title>
-  <meta name="description" content="MATH 455 Regularization" />
+  <title>Introduction | MATH 455 Regularization</title>
+  <meta name="description" content="Introduction | MATH 455 Regularization" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="MATH 455 Regularization" />
+  <meta property="og:title" content="Introduction | MATH 455 Regularization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MATH 455 Regularization" />
+  <meta name="twitter:title" content="Introduction | MATH 455 Regularization" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
+<link rel="prev" href="index.html"/>
 
-<link rel="next" href="introduction.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -86,13 +86,19 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">MATH 455 Regularization</h1>
-<p class="author"><em>Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College</em></p>
-</div>
-<div id="preface" class="section level1 unnumbered">
-<h1>Preface</h1>
-<p>For our project, we’re planning to explore penalized regression models (i.e. ridge regression, LASSO, bayesian LASSO, elastic net, etc.). These methods fit in perfectly with what we’ve been learning in class regarding the bias and variance of estimators. The key idea behind penalized regression models is that in settings with many covariates, it can make sense to use estimators with more bias in order to get less variance. To do this, penalized regression models basically encourage the coefficients to be smaller (or even zero with some methods). We were especially interested in this topic because of its connection to both theory and practice. Understanding the intuition and mechanics behind penalized regression models depends on many of the theoretical ideas we have explored in class, and these tools are also useful across a range of applications in both prediction.</p>
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p>Linear regression is one of the most important tools in statistics, useful for both prediction and causal inference across a range of disciplines. At its core, regression is about using observed data to estimate the unknown true relationship between variables. Intuitively, this suggests two key features we might desire in a regression model:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Low Bias</strong>: The model predicts the true relationship correctly on average</p></li>
+<li><p><strong>Low Variance</strong>: The predictions do not vary widely</p></li>
+</ol>
+<p>These two features are illustrated nicely in the following figure:</p>
+<p><img src="bias-variance.png" /></p>
+<p>Ideally, a regression model would satisfy both of these conditions, and the estimates would look something like the bulls-eye on the top left. In many cases, however, there is a tradeoff between low bias and low variance.</p>
+<p>Ordinary least squares, the most commonly used regression model, does well on the first of these two criteria–under reasonable assumptions, it correctly predicts the true relationship on average. However, in cases with many explanatory variables, it fails the second criteria–even though the estimates are correct <em>on average</em> they may vary wildly depending on the specific sample of data that is used. In such cases, the OLS estimates will look like the bulls-eye on the top right in the figure above.</p>
+<p>In this project we consider a modification of Ordinary Least Squares, called regularization, that attempts to overcome this limitation. By penalizing large coefficients, this approach trades off unbiasedness (meaning that the model no longer makes the correct prediction on average) for less variance (meaning that a given estimate may be closer to the true value). Thus, penalized regression estimates may look more like the bulls-eye on the bottom left.</p>
+<p>We begin by introducing penalized regression models in section 2 and present derivations of their bias and variance in section 3. Next, we discuss the pros and cons of different types of penalized regression models in section 4. Then, in section 5, we illustrate the properties derived in section 3 on simulated data, showing how penalized regression estimates differ from OLS and how different types of regularization models differ from each other. Finally, in section 5, we briefly discuss interesting real world applications of penalized regression.</p>
 
 </div>
             </section>
@@ -100,8 +106,8 @@
           </div>
         </div>
       </div>
+<a href="index.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
