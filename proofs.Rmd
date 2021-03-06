@@ -55,6 +55,44 @@ $$
 
 Ridge estimates are a scaled version of the least squares estimates where $\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)$
 
+#Bias Variance Trade-off
+
+
+
+The expected error, the mean squared error, or $E[(y - \hat{f}(x))^2]$ of our predictions can also be expressed as 
+
+$$
+\begin{aligned}
+E[(y - \hat{f}(x))^2] = Bias[\hat{f}(x)]^2 + Var[\hat{f}(x)] + \sigma^2
+\end{aligned}
+$$
+
+
+There are three components that affect the expected error of our predictions:
+
+1. Bias
+
+2. Variance
+
+3. "Irreducible Error term" $\sigma^2$
+
+It is possible to reduce expected error by increasing bias and reducing variance by a lot. Which is why we use ridge regression and lasso to increase the bias by significantly reducing the variance. The trade-off is an important way to reduce our mean squared error for values outside our sample. We tune our $\lambda$ parameter using cross-validation and see how it reacts when there is "new" data. 
+
+
+Proof of the Bias Variance Trade-off
+
+we are comparing our estimate of $\hat{y}$ with the true value of y. 
+
+$$
+\begin{aligned}
+MSE(\hat{y}) = E[(y - \hat{y})^2] &= E(y^2 - 2y\hat{y} + \hat{y}^2)\\
+&= E(y^2) - 2E(y)E(y^2) + E(\hat{y}^2) \\
+&= Var(y) + E(y)^2 - 2E(y)E(\hat{y}) + E(\hat{y}^2)\\
+&= Var(y) + y^2 - 2yE(\hat{y}) + E(\hat{y}^2) \\
+& = Var(y) + E(\hat{y}^2)- 2yE(\hat{y})+ y^2 \\
+&= Var(y) + (E(\hat{y}) - y)^2
+\end{aligned}
+$$
 
 
 
