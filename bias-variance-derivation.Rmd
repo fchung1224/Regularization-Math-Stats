@@ -1,0 +1,65 @@
+
+# Bias and Variance of Penalized Regression {-}
+
+After introducing penalized regression models and finding the estimator for $\hat{\beta}$, we now turn to the properties of these models. In particular, we derive the bias and variance of the estimators, given our focus on the trade-off between them, formally showing that penalized regression models are biased, but have lower variance than OLS. For simplicity, we work exclusively with ridge regression in these derivations, given that it is the only penalized regression model with a  closed form solution, but numerical solutions for LASSO and elastic net show similar properties, as we show through simulation later on. 
+
+## Assumptions
+
+We begin with the standard assumptions regarding our error terms:
+
+1. $E[\epsilon \mid X]=0$
+2. $Var[\epsilon |X]=\sigma^2 I_n$
+3. Error terms are uncorrelated
+
+## Bias
+
+First, we derive the bias of the ridge estimator. Using the fact that $\hat{B}_{ridge}=(X^TX+ \lambda I)^{-1}X^Ty$, we have:
+
+$$
+\begin{aligned}
+E\left[\hat{B}_{ridge}\mid X \right]-\beta&=E\left[(X^TX+ \lambda I)^{-1}X^Ty \mid X \right]-\beta\\
+&= (X^TX+ \lambda I)^{-1}X^TE\left[X\beta+\epsilon \mid X \right]-\beta \text{ by the linearity of expected value}\\
+&= (X^TX+ \lambda I)^{-1}X^TX\beta-\beta \text{ since the error term has mean 0}\\
+
+\end{aligned}
+$$
+
+Thus, the ridge estimator is  unbiased only in the case that $(X^TX+ \lambda I)^{-1}X^TX=I$, which occurs when $\lambda=0$ (that is, when we just have the OLS estimator and no penalty). When $\lambda>0$, on the other hand, the ridge estimator is biased. This result is intuitive: since the OLS estimator is unbiased, we are introducing bias into our estimator by penalizing large coefficients. As we can see, the larger the penalty, the more biased our estimator will be.
+
+## Variance
+
+Now, we derive the variance of the ridge estimator. To do so, we will write the ridge estimator as a function of the OLS estimator, using the fact that $Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}$. First, notice that we can write the $\hat{B}_{ridge}$ as a function of $\hat{B}_{OLS}$
+
+$$
+\begin{aligned}
+\hat{B}_{ridge}&=(X^TX+ \lambda I)^{-1}X^Ty\\
+&=(X^TX+ \lambda I)^{-1}X^TX(X^TX)^{-1}X^T y \text{ since } X^TX(X^TX)^{-1}=I\\
+& = (X^TX+ \lambda I)^{-1} X^TX \hat{B}_{OLS} \text{ since } \hat{B}_{OLS}=(X^TX)^{-1}X^T y
+
+\end{aligned}
+$$
+
+Now, we can derive the variance, using the fact that $Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}$. We have:
+
+$$
+\begin{aligned}
+Var[\hat{B}_{ridge} \mid X]&=Var\left[(X^TX+ \lambda I)^{-1} X^TX \hat{B}_{OLS}\right]\\
+&= (X^TX+ \lambda I)^{-1}X^TX X^TVar[\hat{B}_{OLS} \mid X]\left(\left(X^TX+ \lambda I\right)^{-1}X^TX X^T\right)^{T}\\
+&=  (X^TX+ \lambda I)^{-1}X^TX X^T\sigma^2 (X^TX)^{-1}\left(\left(X^TX+ \lambda I\right)^{-1}X^TX X^T\right)^{T} \text{ since } Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}\\
+&= \sigma^2 (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}
+
+\end{aligned}
+$$
+
+Now, we compare this variance to that of the OLS estimator:
+
+$$
+\begin{aligned}
+Var(\hat{\beta}_{OLS})-Var(\hat{\beta}_{ridge})&=\sigma^2 (X^T X)^{-1}-\sigma^2 (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}\\
+&= \sigma^2 \left((X^T X)^{-1}-  (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}      \right)\\
+&= \sigma^2  (X^TX+\lambda I)^{-1}    (2\lambda X^TX)^{-2} +\lambda^2 (X^TX)^{-3})(X^TX+ \lambda I)^{-1})^{T}\\
+&= \sigma^2 (X^TX+\lambda I)^{-1}(2\lambda I + \lambda^2(X^TX))((X^TX+\lambda I)^{_1})^T
+\end{aligned}
+$$
+
+Since $(X^TX+\lambda I)^{-1}$, $(2\lambda I + \lambda^2(X^TX))$, and $((X^TX+\lambda I)^{_1})^T$ are all non-negative definite, this means that the variance of the OLS estimator is greater than that of the ridge estimator, as expected. 
