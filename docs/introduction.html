@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introduction | MATH 455 Regularization</title>
+  <meta name="description" content="Introduction | MATH 455 Regularization" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introduction | MATH 455 Regularization" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introduction | MATH 455 Regularization" />
+  
+  
+  
+
+<meta name="author" content="Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="bias-and-variance-of-penalized-regression.html"/>
+<script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i>Bias and Variance of Penalized Regression</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>0.1</b> Assumptions</a></li>
+<li class="chapter" data-level="0.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>0.2</b> Bias</a></li>
+<li class="chapter" data-level="0.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>0.3</b> Variance</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH 455 Regularization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction" class="section level1 unnumbered">
+<h1>Introduction</h1>
+<p>Linear regression is one of the most important tools in statistics, useful for both prediction and causal inference across a range of disciplines. At its core, regression is about using observed data to estimate the unknown true relationship between variables. Intuitively, this suggests two key features we might desire in a regression model:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Low Bias</strong>: The model predicts the true relationship correctly on average</p></li>
+<li><p><strong>Low Variance</strong>: The predictions do not vary widely</p></li>
+</ol>
+<p>These two features are illustrated nicely in the following figure:</p>
+<p><img src="bias-variance.png" /></p>
+<p>Ideally, a regression model would satisfy both of these conditions, and the estimates would look something like the bulls-eye on the top left. In many cases, however, there is a tradeoff between low bias and low variance.</p>
+<p>Ordinary least squares, the most commonly used regression model, does well on the first of these two criteria–under reasonable assumptions, it correctly predicts the true relationship on average. However, in cases with many explanatory variables, it fails the second criteria–even though the estimates are correct <em>on average</em> they may vary wildly depending on the specific sample of data that is used. In such cases, the OLS estimates will look like the bulls-eye on the top right in the figure above.</p>
+<p>In this project we consider a modification of Ordinary Least Squares, called regularization, that attempts to overcome this limitation. By penalizing large coefficients, this approach trades off unbiasedness (meaning that the model no longer makes the correct prediction on average) for less variance (meaning that a given estimate may be closer to the true value). Thus, penalized regression estimates may look more like the bulls-eye on the bottom left.</p>
+<p>We begin by introducing penalized regression models in section 2 and present derivations of their bias and variance in section 3. Next, we discuss the pros and cons of different types of penalized regression models in section 4. Then, in section 5, we illustrate the properties derived in section 3 on simulated data, showing how penalized regression estimates differ from OLS and how different types of regularization models differ from each other. Finally, in section 5, we briefly discuss interesting real world applications of penalized regression.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "chapter",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
