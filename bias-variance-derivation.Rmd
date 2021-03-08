@@ -20,7 +20,6 @@ $$
 E\left[\hat{B}_{ridge}\mid X \right]-\beta&=E\left[(X^TX+ \lambda I)^{-1}X^Ty \mid X \right]-\beta\\
 &= (X^TX+ \lambda I)^{-1}X^TE\left[X\beta+\epsilon \mid X \right]-\beta \text{ by the linearity of expected value}\\
 &= (X^TX+ \lambda I)^{-1}X^TX\beta-\beta \text{ since the error term has mean 0}\\
-
 \end{aligned}
 $$
 
@@ -35,7 +34,6 @@ $$
 \hat{B}_{ridge}&=(X^TX+ \lambda I)^{-1}X^Ty\\
 &=(X^TX+ \lambda I)^{-1}X^TX(X^TX)^{-1}X^T y \text{ since } X^TX(X^TX)^{-1}=I\\
 & = (X^TX+ \lambda I)^{-1} X^TX \hat{B}_{OLS} \text{ since } \hat{B}_{OLS}=(X^TX)^{-1}X^T y
-
 \end{aligned}
 $$
 
@@ -47,7 +45,6 @@ Var[\hat{B}_{ridge} \mid X]&=Var\left[(X^TX+ \lambda I)^{-1} X^TX \hat{B}_{OLS}\
 &= (X^TX+ \lambda I)^{-1}X^TX X^TVar[\hat{B}_{OLS} \mid X]\left(\left(X^TX+ \lambda I\right)^{-1}X^TX X^T\right)^{T}\\
 &=  (X^TX+ \lambda I)^{-1}X^TX X^T\sigma^2 (X^TX)^{-1}\left(\left(X^TX+ \lambda I\right)^{-1}X^TX X^T\right)^{T} \text{ since } Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}\\
 &= \sigma^2 (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}
-
 \end{aligned}
 $$
 

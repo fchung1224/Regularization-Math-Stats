@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Bias and Variance of Penalized Regression | MATH 455 Regularization</title>
+  <meta name="description" content="Bias and Variance of Penalized Regression | MATH 455 Regularization" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Bias and Variance of Penalized Regression | MATH 455 Regularization" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bias and Variance of Penalized Regression | MATH 455 Regularization" />
+  
+  
+  
+
+<meta name="author" content="Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+
+<script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i>Bias and Variance of Penalized Regression</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>0.1</b> Assumptions</a></li>
+<li class="chapter" data-level="0.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>0.2</b> Bias</a></li>
+<li class="chapter" data-level="0.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>0.3</b> Variance</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH 455 Regularization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="bias-and-variance-of-penalized-regression" class="section level1 unnumbered">
+<h1>Bias and Variance of Penalized Regression</h1>
+<p>After introducing penalized regression models and finding the estimator for <span class="math inline">\(\hat{\beta}\)</span>, we now turn to the properties of these models. In particular, we derive the bias and variance of the estimators, given our focus on the trade-off between them, formally showing that penalized regression models are biased, but have lower variance than OLS. For simplicity, we work exclusively with ridge regression in these derivations, given that it is the only penalized regression model with a closed form solution, but numerical solutions for LASSO and elastic net show similar properties, as we show through simulation later on.</p>
+<div id="assumptions" class="section level2" number="0.1">
+<h2><span class="header-section-number">0.1</span> Assumptions</h2>
+<p>We begin with the standard assumptions regarding our error terms:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(E[\epsilon \mid X]=0\)</span></li>
+<li><span class="math inline">\(Var[\epsilon |X]=\sigma^2 I_n\)</span></li>
+<li>Error terms are uncorrelated</li>
+</ol>
+</div>
+<div id="bias" class="section level2" number="0.2">
+<h2><span class="header-section-number">0.2</span> Bias</h2>
+<p>First, we derive the bias of the ridge estimator. Using the fact that <span class="math inline">\(\hat{B}_{ridge}=(X^TX+ \lambda I)^{-1}X^Ty\)</span>, we have:</p>
+<p><span class="math display">\[
+\begin{aligned}
+E\left[\hat{B}_{ridge}\mid X \right]-\beta&amp;=E\left[(X^TX+ \lambda I)^{-1}X^Ty \mid X \right]-\beta\\
+&amp;= (X^TX+ \lambda I)^{-1}X^TE\left[X\beta+\epsilon \mid X \right]-\beta \text{ by the linearity of expected value}\\
+&amp;= (X^TX+ \lambda I)^{-1}X^TX\beta-\beta \text{ since the error term has mean 0}\\
+\end{aligned}
+\]</span></p>
+<p>Thus, the ridge estimator is unbiased only in the case that <span class="math inline">\((X^TX+ \lambda I)^{-1}X^TX=I\)</span>, which occurs when <span class="math inline">\(\lambda=0\)</span> (that is, when we just have the OLS estimator and no penalty). When <span class="math inline">\(\lambda&gt;0\)</span>, on the other hand, the ridge estimator is biased. This result is intuitive: since the OLS estimator is unbiased, we are introducing bias into our estimator by penalizing large coefficients. As we can see, the larger the penalty, the more biased our estimator will be.</p>
+</div>
+<div id="variance" class="section level2" number="0.3">
+<h2><span class="header-section-number">0.3</span> Variance</h2>
+<p>Now, we derive the variance of the ridge estimator. To do so, we will write the ridge estimator as a function of the OLS estimator, using the fact that <span class="math inline">\(Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}\)</span>. First, notice that we can write the <span class="math inline">\(\hat{B}_{ridge}\)</span> as a function of <span class="math inline">\(\hat{B}_{OLS}\)</span></p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{B}_{ridge}&amp;=(X^TX+ \lambda I)^{-1}X^Ty\\
+&amp;=(X^TX+ \lambda I)^{-1}X^TX(X^TX)^{-1}X^T y \text{ since } X^TX(X^TX)^{-1}=I\\
+&amp; = (X^TX+ \lambda I)^{-1} X^TX \hat{B}_{OLS} \text{ since } \hat{B}_{OLS}=(X^TX)^{-1}X^T y
+\end{aligned}
+\]</span></p>
+<p>Now, we can derive the variance, using the fact that <span class="math inline">\(Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}\)</span>. We have:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Var[\hat{B}_{ridge} \mid X]&amp;=Var\left[(X^TX+ \lambda I)^{-1} X^TX \hat{B}_{OLS}\right]\\
+&amp;= (X^TX+ \lambda I)^{-1}X^TX X^TVar[\hat{B}_{OLS} \mid X]\left(\left(X^TX+ \lambda I\right)^{-1}X^TX X^T\right)^{T}\\
+&amp;=  (X^TX+ \lambda I)^{-1}X^TX X^T\sigma^2 (X^TX)^{-1}\left(\left(X^TX+ \lambda I\right)^{-1}X^TX X^T\right)^{T} \text{ since } Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}\\
+&amp;= \sigma^2 (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}
+\end{aligned}
+\]</span></p>
+<p>Now, we compare this variance to that of the OLS estimator:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Var(\hat{\beta}_{OLS})-Var(\hat{\beta}_{ridge})&amp;=\sigma^2 (X^T X)^{-1}-\sigma^2 (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}\\
+&amp;= \sigma^2 \left((X^T X)^{-1}-  (X^TX+\lambda I)^{-1}X^TX\left(\left(X^TX+ \lambda I\right)^{-1}\right)^{T}      \right)\\
+&amp;= \sigma^2  (X^TX+\lambda I)^{-1}    (2\lambda X^TX)^{-2} +\lambda^2 (X^TX)^{-3})(X^TX+ \lambda I)^{-1})^{T}\\
+&amp;= \sigma^2 (X^TX+\lambda I)^{-1}(2\lambda I + \lambda^2(X^TX))((X^TX+\lambda I)^{_1})^T
+\end{aligned}
+\]</span></p>
+<p>Since <span class="math inline">\((X^TX+\lambda I)^{-1}\)</span>, <span class="math inline">\((2\lambda I + \lambda^2(X^TX))\)</span>, and <span class="math inline">\(((X^TX+\lambda I)^{_1})^T\)</span> are all non-negative definite, this means that the variance of the OLS estimator is greater than that of the ridge estimator, as expected.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "chapter",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
