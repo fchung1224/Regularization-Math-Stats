@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Penalized Regression Estimators | MATH 455 Regularization</title>
+  <meta name="description" content="Chapter 2 Penalized Regression Estimators | MATH 455 Regularization" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Penalized Regression Estimators | MATH 455 Regularization" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Penalized Regression Estimators | MATH 455 Regularization" />
+  
+  
+  
+
+<meta name="author" content="Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="bias-and-variance-of-penalized-regression.html"/>
+<script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html"><i class="fa fa-check"></i><b>2</b> Penalized Regression Estimators</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#penalized-regression-models"><i class="fa fa-check"></i><b>2.1</b> Penalized Regression Models</a></li>
+<li class="chapter" data-level="2.2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#deriving-the-ridge-estimator"><i class="fa fa-check"></i><b>2.2</b> Deriving the Ridge Estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i><b>3</b> Bias and Variance of Penalized Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>3.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>3.2</b> Bias</a></li>
+<li class="chapter" data-level="3.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>3.3</b> Variance</a></li>
+<li class="chapter" data-level="3.4" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#mean-squared-error"><i class="fa fa-check"></i><b>3.4</b> Mean Squared Error</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH 455 Regularization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="penalized-regression-estimators" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> Penalized Regression Estimators</h1>
+<p>This section introduces penalized regression models and then derives the estimator for ridge regression.</p>
+<div id="penalized-regression-models" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Penalized Regression Models</h2>
+<p>In any type of linear regression, we assume that the relationship between <span class="math inline">\(y\)</span>, our dependent variable, and <span class="math inline">\(X\)</span>, a matrix of our independent variables, can be written as:</p>
+<p><span class="math display">\[y_i=\beta^TX+\epsilon_i\]</span></p>
+<p>where <span class="math inline">\(\beta\)</span> is a vector of coefficients and <span class="math inline">\(\epsilon_i\)</span> is the random error component with mean zero. The goal is to estimate the true coefficient values of <span class="math inline">\(\beta\)</span>. As seen in Stat 155, OLS regression estimates <span class="math inline">\(beta\)</span> by minimizing the sum of squared errors:</p>
+<p><span class="math display">\[\hat{\beta}_{OLS}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2.\]</span></p>
+<p>In penalized regression, we modify this process by adding a penalty term for large coefficient values. There are two common ways to do this. The first, called ridge regression, estimates <span class="math inline">\(\beta\)</span> by minimizing the following equation:</p>
+<p><span class="math display">\[\hat{\beta}_{Ridge}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2+\lambda||\beta||_2^2\]</span></p>
+<p>where <span class="math inline">\(||\beta||_2^2=\sum_j B_j^2\)</span> and the penalty is thus based on the squared 2-norm of the coefficient vector. <span class="math inline">\(\lambda\)</span> represents the penalty parameter – a larger value of <span class="math inline">\(\lambda\)</span> means that we penalized large coefficients more, while a <span class="math inline">\(\lambda\)</span> value of zero is just OLS. The second common method is called LASSO regression, and uses the following equation instead:</p>
+<p><span class="math display">\[\hat{\beta}_{LASSO}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2+\lambda||\beta||_1\]</span></p>
+<p>where <span class="math inline">\(||\beta||_1\sum_{j \in J}|B_j|\)</span>. In LASSO, the penalty is based on the 1-norm of the coefficient vector, rather than the 2-norm as in ridge. Again, <span class="math inline">\(\lambda\)</span> represents the penalization parameter, with larger values corresponding to more deviation from OLS.</p>
+<p>While both LASSO and Ridge have pros and cons (as we show through simulation later on) only Ridge regression has a closed form solution. Thus, our theoretical derivations focus only on ridge regression, although the concepts apply to LASSO a well.</p>
+</div>
+<div id="deriving-the-ridge-estimator" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Deriving the Ridge Estimator</h2>
+<p><span class="math display">\[
+y_i = \bar{x}^T_i \beta
+\]</span>
+Lets assume that we have predictors that range from <span class="math inline">\(\bar{x}^T_i = 1,x^2_i,x^3_i,...,x_i^n\)</span></p>
+<p><span class="math inline">\(\beta\)</span> includes all the coefficients for all our predictors.</p>
+<p><span class="math display">\[
+\begin{aligned}
+\beta^T = [\beta_0, \beta_1,..., \beta_n]  \\
+J = \sum^m_{i=0} (x_i^T\beta - y_i)^2 + \lambda ||\beta||^2
+\end{aligned}
+\]</span></p>
+<p>J is our cost function, the value that we are trying to minimize. Normally we only reduce the sum of squared residuals $^m_{i=0} (x_i^T- y_i)^2 $ but now we also include our Shrinkage parameter <span class="math inline">\(\lambda||\beta||^2\)</span>, or also called <span class="math inline">\(L_2\)</span> regularization</p>
+<p><span class="math display">\[
+\begin{aligned}
+X^T = [\bar{X}^T_1, \bar{X}^T_2, \bar{X}^T_3, \bar{X}^T_4, ...,\bar{X}^T_n] \\
+Y^T = [y_1, y_2, y_3,y_4,...,y_n] \\ 
+J = (X\beta - Y)^T(X\beta - Y) + \lambda \beta^T\beta \\
+\end{aligned}
+\]</span></p>
+<p><span class="math inline">\((X\beta - Y)^T(X\beta - Y)\)</span> –&gt; a way to express squared values in linear algebra lingo</p>
+<p>We try to minimize J so we use its derivative and set it to zero to see what value of <span class="math inline">\(\beta\)</span> will minimize the new cost function J</p>
+<p><span class="math display">\[
+\begin{aligned}
+\frac{dJ}{d\beta} = 2X^T(X\beta - Y)+ \lambda(2\beta)\\
+2X^T(X\beta - Y)+ \lambda(2\beta) \overset{set}{=} 0 \\
+X^T(X\beta - Y)+ \lambda(\beta) = 0 \\
+X^TX\beta - X^TY + \lambda\beta = 0 \\
+X^TX\beta + \lambda\beta = X^TY\\
+(X^TX+ \lambda I)\beta = X^TY\\
+\beta = (X^TX+ \lambda I)^{-1}X^TY \\
+\end{aligned}
+\]</span>
+If <span class="math inline">\(\lambda = 0\)</span> we have a normal OLS model where:</p>
+<p><span class="math display">\[
+\beta = (X^TX)^{-1}X^TY \\
+\]</span></p>
+<p>Ridge estimates are a scaled version of the least squares estimates where <span class="math inline">\(\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)\)</span></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "chapter",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

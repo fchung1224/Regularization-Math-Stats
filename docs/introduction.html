@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Introduction | MATH 455 Regularization</title>
-  <meta name="description" content="Introduction | MATH 455 Regularization" />
+  <title>Chapter 1 Introduction | MATH 455 Regularization</title>
+  <meta name="description" content="Chapter 1 Introduction | MATH 455 Regularization" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Introduction | MATH 455 Regularization" />
+  <meta property="og:title" content="Chapter 1 Introduction | MATH 455 Regularization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Introduction | MATH 455 Regularization" />
+  <meta name="twitter:title" content="Chapter 1 Introduction | MATH 455 Regularization" />
   
   
   
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="bias-and-variance-of-penalized-regression.html"/>
+<link rel="next" href="penalized-regression-estimators.html"/>
 <script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -69,12 +69,18 @@
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i>Bias and Variance of Penalized Regression</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html"><i class="fa fa-check"></i><b>2</b> Penalized Regression Estimators</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>0.1</b> Assumptions</a></li>
-<li class="chapter" data-level="0.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>0.2</b> Bias</a></li>
-<li class="chapter" data-level="0.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>0.3</b> Variance</a></li>
+<li class="chapter" data-level="2.1" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#penalized-regression-models"><i class="fa fa-check"></i><b>2.1</b> Penalized Regression Models</a></li>
+<li class="chapter" data-level="2.2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#deriving-the-ridge-estimator"><i class="fa fa-check"></i><b>2.2</b> Deriving the Ridge Estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i><b>3</b> Bias and Variance of Penalized Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>3.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>3.2</b> Bias</a></li>
+<li class="chapter" data-level="3.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>3.3</b> Variance</a></li>
+<li class="chapter" data-level="3.4" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#mean-squared-error"><i class="fa fa-check"></i><b>3.4</b> Mean Squared Error</a></li>
 </ul></li>
 </ul>
 
@@ -93,8 +99,8 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="introduction" class="section level1 unnumbered">
-<h1>Introduction</h1>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
 <p>Linear regression is one of the most important tools in statistics, useful for both prediction and causal inference across a range of disciplines. At its core, regression is about using observed data to estimate the unknown true relationship between variables. Intuitively, this suggests two key features we might desire in a regression model:</p>
 <ol style="list-style-type: decimal">
 <li><p><strong>Low Bias</strong>: The model predicts the true relationship correctly on average</p></li>
@@ -114,7 +120,7 @@
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="penalized-regression-estimators.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -165,20 +171,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

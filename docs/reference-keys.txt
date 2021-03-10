@@ -1,3 +1,9 @@
 assumptions
 bias
 variance
+introduction
+penalized-regression-estimators
+penalized-regression-models
+deriving-the-ridge-estimator
+bias-and-variance-of-penalized-regression
+mean-squared-error
