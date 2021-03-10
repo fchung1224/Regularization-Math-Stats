@@ -1,4 +1,3 @@
-
 # Bias and Variance of Penalized Regression 
 
 After introducing penalized regression models and finding the estimator for $\hat{\beta}$, we now turn to the properties of these models. In particular, we derive the bias and variance of the estimators, given our focus on the trade-off between them, formally showing that penalized regression models are biased, but have lower variance than OLS. For simplicity, we work exclusively with ridge regression in these derivations, given that it is the only penalized regression model with a  closed form solution, but numerical solutions for LASSO and elastic net show similar properties, as we show through simulation later on. 
