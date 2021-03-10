@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Bias and Variance of Penalized Regression | MATH 455 Regularization</title>
-  <meta name="description" content="Bias and Variance of Penalized Regression | MATH 455 Regularization" />
+  <title>Chapter 3 Bias and Variance of Penalized Regression | MATH 455 Regularization</title>
+  <meta name="description" content="Chapter 3 Bias and Variance of Penalized Regression | MATH 455 Regularization" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Bias and Variance of Penalized Regression | MATH 455 Regularization" />
+  <meta property="og:title" content="Chapter 3 Bias and Variance of Penalized Regression | MATH 455 Regularization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Bias and Variance of Penalized Regression | MATH 455 Regularization" />
+  <meta name="twitter:title" content="Chapter 3 Bias and Variance of Penalized Regression | MATH 455 Regularization" />
   
   
   
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
+<link rel="prev" href="penalized-regression-estimators.html"/>
 
 <script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
@@ -69,12 +69,18 @@
 
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
-<li class="chapter" data-level="" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i>Bias and Variance of Penalized Regression</a>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html"><i class="fa fa-check"></i><b>2</b> Penalized Regression Estimators</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>0.1</b> Assumptions</a></li>
-<li class="chapter" data-level="0.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>0.2</b> Bias</a></li>
-<li class="chapter" data-level="0.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>0.3</b> Variance</a></li>
+<li class="chapter" data-level="2.1" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#penalized-regression-models"><i class="fa fa-check"></i><b>2.1</b> Penalized Regression Models</a></li>
+<li class="chapter" data-level="2.2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#deriving-the-ridge-estimator"><i class="fa fa-check"></i><b>2.2</b> Deriving the Ridge Estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i><b>3</b> Bias and Variance of Penalized Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>3.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>3.2</b> Bias</a></li>
+<li class="chapter" data-level="3.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>3.3</b> Variance</a></li>
+<li class="chapter" data-level="3.4" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#mean-squared-error"><i class="fa fa-check"></i><b>3.4</b> Mean Squared Error</a></li>
 </ul></li>
 </ul>
 
@@ -93,11 +99,11 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="bias-and-variance-of-penalized-regression" class="section level1 unnumbered">
-<h1>Bias and Variance of Penalized Regression</h1>
+<div id="bias-and-variance-of-penalized-regression" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Bias and Variance of Penalized Regression</h1>
 <p>After introducing penalized regression models and finding the estimator for <span class="math inline">\(\hat{\beta}\)</span>, we now turn to the properties of these models. In particular, we derive the bias and variance of the estimators, given our focus on the trade-off between them, formally showing that penalized regression models are biased, but have lower variance than OLS. For simplicity, we work exclusively with ridge regression in these derivations, given that it is the only penalized regression model with a closed form solution, but numerical solutions for LASSO and elastic net show similar properties, as we show through simulation later on.</p>
-<div id="assumptions" class="section level2" number="0.1">
-<h2><span class="header-section-number">0.1</span> Assumptions</h2>
+<div id="assumptions" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Assumptions</h2>
 <p>We begin with the standard assumptions regarding our error terms:</p>
 <ol style="list-style-type: decimal">
 <li><span class="math inline">\(E[\epsilon \mid X]=0\)</span></li>
@@ -105,8 +111,8 @@
 <li>Error terms are uncorrelated</li>
 </ol>
 </div>
-<div id="bias" class="section level2" number="0.2">
-<h2><span class="header-section-number">0.2</span> Bias</h2>
+<div id="bias" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Bias</h2>
 <p>First, we derive the bias of the ridge estimator. Using the fact that <span class="math inline">\(\hat{B}_{ridge}=(X^TX+ \lambda I)^{-1}X^Ty\)</span>, we have:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -117,8 +123,8 @@ E\left[\hat{B}_{ridge}\mid X \right]-\beta&amp;=E\left[(X^TX+ \lambda I)^{-1}X^T
 \]</span></p>
 <p>Thus, the ridge estimator is unbiased only in the case that <span class="math inline">\((X^TX+ \lambda I)^{-1}X^TX=I\)</span>, which occurs when <span class="math inline">\(\lambda=0\)</span> (that is, when we just have the OLS estimator and no penalty). When <span class="math inline">\(\lambda&gt;0\)</span>, on the other hand, the ridge estimator is biased. This result is intuitive: since the OLS estimator is unbiased, we are introducing bias into our estimator by penalizing large coefficients. As we can see, the larger the penalty, the more biased our estimator will be.</p>
 </div>
-<div id="variance" class="section level2" number="0.3">
-<h2><span class="header-section-number">0.3</span> Variance</h2>
+<div id="variance" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Variance</h2>
 <p>Now, we derive the variance of the ridge estimator. To do so, we will write the ridge estimator as a function of the OLS estimator, using the fact that <span class="math inline">\(Var[\hat{\beta}_{OLS} \mid X]= \sigma^2 (X^T X)^{-1}\)</span>. First, notice that we can write the <span class="math inline">\(\hat{B}_{ridge}\)</span> as a function of <span class="math inline">\(\hat{B}_{OLS}\)</span></p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -146,6 +152,34 @@ Var(\hat{\beta}_{OLS})-Var(\hat{\beta}_{ridge})&amp;=\sigma^2 (X^T X)^{-1}-\sigm
 \end{aligned}
 \]</span></p>
 <p>Since <span class="math inline">\((X^TX+\lambda I)^{-1}\)</span>, <span class="math inline">\((2\lambda I + \lambda^2(X^TX))\)</span>, and <span class="math inline">\(((X^TX+\lambda I)^{_1})^T\)</span> are all non-negative definite, this means that the variance of the OLS estimator is greater than that of the ridge estimator, as expected.</p>
+</div>
+<div id="mean-squared-error" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Mean Squared Error</h2>
+<p>The expected error, the mean squared error, or <span class="math inline">\(E[(y - \hat{f}(x))^2]\)</span> of our predictions can also be expressed as</p>
+<p><span class="math display">\[
+\begin{aligned}
+E[(y - \hat{f}(x))^2] = Bias[\hat{f}(x)]^2 + Var[\hat{f}(x)] + \sigma^2
+\end{aligned}
+\]</span></p>
+<p>There are three components that affect the expected error of our predictions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Bias</p></li>
+<li><p>Variance</p></li>
+<li><p>“Irreducible Error term” <span class="math inline">\(\sigma^2\)</span></p></li>
+</ol>
+<p>It is possible to reduce expected error by increasing bias and reducing variance by a lot. Which is why we use ridge regression and lasso to increase the bias by significantly reducing the variance. The trade-off is an important way to reduce our mean squared error for values outside our sample. We tune our <span class="math inline">\(\lambda\)</span> parameter using cross-validation and see how it reacts when there is “new” data.</p>
+<p>Proof of the Bias Variance Trade-off</p>
+<p>we are comparing our estimate of <span class="math inline">\(\hat{y}\)</span> with the true value of y.</p>
+<p><span class="math display">\[
+\begin{aligned}
+MSE(\hat{y}) = E[(y - \hat{y})^2] &amp;= E(y^2 - 2y\hat{y} + \hat{y}^2)\\
+&amp;= E(y^2) - 2E(y)E(y^2) + E(\hat{y}^2) \\
+&amp;= Var(y) + E(y)^2 - 2E(y)E(\hat{y}) + E(\hat{y}^2)\\
+&amp;= Var(y) + y^2 - 2yE(\hat{y}) + E(\hat{y}^2) \\
+&amp; = Var(y) + E(\hat{y}^2)- 2yE(\hat{y})+ y^2 \\
+&amp;= Var(y) + (E(\hat{y}) - y)^2
+\end{aligned}
+\]</span></p>
 
 </div>
 </div>
@@ -154,7 +188,7 @@ Var(\hat{\beta}_{OLS})-Var(\hat{\beta}_{ridge})&amp;=\sigma^2 (X^T X)^{-1}-\sigm
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="penalized-regression-estimators.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
