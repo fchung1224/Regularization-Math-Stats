@@ -1,6 +1,6 @@
 
 
-# Introduction {-}
+# Introduction
 
 Linear regression is one of the most important tools in statistics, useful for both prediction and causal inference across a range of disciplines. At its core, regression is about using observed data to estimate the unknown true relationship between variables. Intuitively, this suggests two key features we might desire in  a regression model:
 
