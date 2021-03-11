@@ -6,75 +6,85 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
 library(dplyr)
+library(caret)
+```
+
+We estimate a statistical model to predict the superconducting critical temperature based on the superconductor's chemical formula
+
+
+
+```{r}
+train<-read.csv("train.csv")
+
+head(train)
+
+#critical_temp --> is the y we are trying to calculate
+```
+
+#calculate the true betas
+
+```{r}
+set.seed(45)
+ols_model<-train(
+  critical_temp~.,
+  data=train, 
+  method="lm",
+  trControl = trainControl(method = "cv", number = 10)
+)
+summary(ols_model)
 ```
 
 
 ```{r}
-set.seed(43)
+betas<-coef(ols_model$finalModel)
+length(betas)
 
-n<-5000
-p<-500
-#x<-matrix(runif(n*p,min=-100,max=100),ncol=p, nrow =n )
-x<-runif(n,min=-1,max=1)
-x
-df<-data.frame(x)
-df<-df%>%
-  mutate(x_2 = x^2)%>%
-  mutate(x_3 = x^3)%>%
-  mutate(x_4 = x^4)%>%
-  mutate(x_5 = x^5)%>%
-  mutate(x_6=x^6)%>%
-  mutate(x_7=x^7)%>%
-  mutate(x_8=x^8)%>%
-  mutate(x_9=x^9)%>%
-  mutate(x_10=x^10)%>%
-  mutate(x_11=x^11)%>%
-  mutate(x_12=x^12)%>%
-  mutate(x_13=x^13)
-
+betas<-betas[2:82]
 ```
 
+
+
 ```{r}
-truebetas<-c(4.868, -4.343, 0, 0.152,  1.533,0, -9.356, -7.131, -1.056, 8.862, -7.694,0, 1.016)
-
-truebetas<-c(4.868, -4.343, 0, 0.152,  0,0,0,0,0,0,0,0,0)
-
-x<-data.matrix(df)
+x<- data.matrix(train[,1:81])
 ```
 
-```{r}
-y<-x%*%truebetas
 
+```{r}
+e<- rnorm(nrow(train), 0, 17.59) 
+```
+
+
+```{r}
+y<-x%*%betas + e
 ```
 
 
 ```{r}
 df<-data.frame(y,x)
 
-# Added Noise
-df<-df%>% 
-  mutate(y = y+rnorm(1, mean = 0, sd = 10))
-df
+head(df)
 ```
-
 
 
 ```{r}
-library(caret)
-head(df)
+params<- preProcess(df, method = c("center","scale"))
+
+transformed<- predict(params, df)
+
+transformed
 ```
+
+
 
 # OLS
 ```{r}
 set.seed(45)
 ols_model<-train(
   y~.,
-  data=df, 
+  data=transformed, 
   method="lm",
   trControl = trainControl(method = "cv", number = 10)
-  
 )
 summary(ols_model)
 
@@ -86,19 +96,27 @@ ols_model$results
 ```
 
 ```{r}
+ols_model$resample
+```
+
+
+```{r}
 ols_model$resample%>%
   summarize(cv_mae=mean(MAE))
 ```
-# Ridge
+
+
+
+# Ridge ONE SE
 ```{r}
-lambda_grid<-10^seq(-3,1,length=300)
+lambda_grid<-10^seq(-4,1,length=300)
 # Set the seed
 set.seed(253)
 
 # Perform Ridge
 ridge_model <- train(
   y~.,
-  data = df,
+  data = transformed,
   method = "glmnet",
   trControl = trainControl(method = "cv", number = 10, selectionFunction = "oneSE"),
   tuneGrid = data.frame(alpha = 0, lambda = lambda_grid),
@@ -106,7 +124,6 @@ ridge_model <- train(
   na.action = na.omit
 )
 
-
 ```
 
 
@@ -116,51 +133,107 @@ plot(ridge_model$finalModel, xvar = "lambda", label = TRUE, col = rainbow(500))
 ```
 
 ```{r}
-plot(ridge_model, xlim=c(0.1,0.3),ylim=c(0,0.4))
+plot(ridge_model)
+```
+
+
+```{r}
+plot(ridge_model, xlim = c(0,0.09), ylim = c(0.43,0.45))
 ```
 
 ```{r}
 ridge_model$resample
 ridge_model$bestTune
+
+ridge_model$resample%>%
+  summarize(cv_mae=mean(MAE))
 ```
 
-# Ridge
+
+
+# RIDGE using best
 ```{r}
-lambda_grid<-10^seq(-3,1,length=300)
+lambda_grid<-10^seq(-4,1,length=300)
 # Set the seed
 set.seed(253)
 
 # Perform Ridge
-ridge_model <- train(
+ridge_model_best <- train(
   y~.,
-  data = df,
+  data = transformed,
   method = "glmnet",
   trControl = trainControl(method = "cv", number = 10, selectionFunction = "best"),
   tuneGrid = data.frame(alpha = 0, lambda = lambda_grid),
   metric = "MAE",
   na.action = na.omit
 )
-
-# for lasso, alpha=1
-
 ```
 
 
 ```{r}
 # Plot coefficients for each Ridge
-plot(ridge_model$finalModel, xvar = "lambda", label = TRUE, col = rainbow(500))
+plot(ridge_model_best$finalModel, xvar = "lambda", label = TRUE, col = rainbow(500))
 ```
 
 ```{r}
-plot(ridge_model, xlim=c(0.1,0.3),ylim=c(0,0.4))
+plot(ridge_model_best)
+```
+```{r}
+plot(ridge_model_best, xlim = c(0,0.08), ylim = c(0.40,0.45))
+```
+
+
+```{r}
+ridge_model_best$resample
+ridge_model_best$resample%>%
+  summarize(cv_mae=mean(MAE))
+ridge_model_best$bestTune
+```
+
+
+#LASSO
+```{r}
+lambda_grid<-10^seq(-4,1,length=300)
+# Set the seed
+set.seed(253)
+
+# Perform Ridge
+lasso_model <- train(
+  y~.,
+  data = transformed,
+  method = "glmnet",
+  trControl = trainControl(method = "cv", number = 10, selectionFunction = "oneSE"),
+  tuneGrid = data.frame(alpha = 1, lambda = lambda_grid),
+  metric = "MAE",
+  na.action = na.omit
+)
+
+
+```
+
+
+```{r}
+# Plot coefficients for each Lasso
+plot(lasso_model$finalModel, xvar = "lambda", label = TRUE, col = rainbow(500))
 ```
 
 ```{r}
-ridge_model$resample
-ridge_model$bestTune
+plot(lasso_model, xlim=c(0,0.004),ylim=c(0,0.5))
 ```
 
+```{r}
+lasso_model$resample
 
+lasso_model$bestTune
+```
+
+```{r}
+a<-as.data.frame(as.matrix(coef(lasso_model$finalModel)))
+
+mean_coef<- as.data.frame(rowMeans(a))\
+
+mean_coef
+```
 
 
 # Elastic Net
@@ -200,3 +273,38 @@ plot(ridge_model, xlim=c(0.1,0.3),ylim=c(0,0.4))
 ridge_model$resample
 ridge_model$bestTune
 ```
+
+
+
+#Functions
+
+```{r}
+#MSE
+get_mse = function(estimate,truth){
+  mean((estimate - truth)^2)
+}
+```
+
+```{r}
+#BIAS
+get_bias = function(estimate, truth){
+  mean(estimate) - truth
+}
+```
+
+```{r}
+#VAR
+get_var = function(estimate){
+  mean((estimate - mean(estimate))^2)
+}
+```
+
+```{r}
+#bias = apply(predictions, 2, get_bias, truth = y)
+#variance = apply(predictions, 2, get_var)
+#mse = apply(predictions, 2, get_mse, truth = y)
+```
+
+
+
+
