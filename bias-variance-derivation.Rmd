@@ -62,30 +62,11 @@ Since $(X^TX+\lambda I)^{-1}$, $(2\lambda I + \lambda^2(X^TX))$, and $((X^TX+\la
 
 ## Mean Squared Error
 
+A nice way to measure the overall performance of an estimator is with the mean squared error, which is a measure of how much the model's prediction differ from the true value. Specifically, the mean squared error is written as
 
-The expected error, the mean squared error, or $E[(y - \hat{f}(x))^2]$ of our predictions can also be expressed as 
+$$MSE=E[(y - \hat{f}(x))^2]$$
 
-$$
-\begin{aligned}
-E[(y - \hat{f}(x))^2] = Bias[\hat{f}(x)]^2 + Var[\hat{f}(x)] + \sigma^2
-\end{aligned}
-$$
-
-
-There are three components that affect the expected error of our predictions:
-
-1. Bias
-
-2. Variance
-
-3. "Irreducible Error term" $\sigma^2$
-
-It is possible to reduce expected error by increasing bias and reducing variance by a lot. Which is why we use ridge regression and lasso to increase the bias by significantly reducing the variance. The trade-off is an important way to reduce our mean squared error for values outside our sample. We tune our $\lambda$ parameter using cross-validation and see how it reacts when there is "new" data. 
-
-
-Proof of the Bias Variance Trade-off
-
-we are comparing our estimate of $\hat{y}$ with the true value of y. 
+Since the MSE depends on the _square_ of the difference between the predicted and true value, it is a function of both the bias and the variance. Specifically, we can express the MSE alternatively as:
 
 $$
 \begin{aligned}
@@ -97,6 +78,18 @@ MSE(\hat{y}) = E[(y - \hat{y})^2] &= E(y^2 - 2y\hat{y} + \hat{y}^2)\\
 &= Var(y) + (E(\hat{y}) - y)^2
 \end{aligned}
 $$
+
+Thus, there are three components that affect the expected error of our predictions:
+
+1. Bias
+
+2. Variance
+
+3. "Irreducible Error term" $\sigma^2$
+
+From this decomposition, we begin to see how penalized regression can have improved performance over OLS. By sacrificing higher bias in order to get much lower variance, the MSE of penalized regression can potentially be much lower in certain circumstances, particularly when there are many covariates.
+
+
 
 
 
