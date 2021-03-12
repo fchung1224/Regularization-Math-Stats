@@ -1,0 +1,475 @@
+---
+title: "Data_Simulation_Final"
+author: "Federico Chung"
+date: "3/12/2021"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(caret)
+library(tibble)
+library(MASS) 
+library(Metrics)
+library(tidyr)
+```
+
+```{r}
+#true betas
+set.seed(2)
+betas<- (sample(-10:10,size=50,replace=TRUE))/10
+betas
+```
+
+
+```{r}
+#create one coefficient
+
+```
+
+
+```{r}
+#do one data simulation
+
+simulation<- function(seed, betas){
+  set.seed(seed)
+  n <- 100    # Number of observations
+  p <- 50     # Number of predictors included in model
+  CovMatrix <- outer(1:p, 1:p, function(x,y) {.7^abs(x-y)})
+  x <- mvrnorm(n, rep(0,p), CovMatrix)
+  
+  e <- rnorm(n, 0, sd = 1)
+
+  y <- x %*% betas + e
+  df<- data.frame(y,x)
+  return(df)
+}
+
+df<-simulation(1, betas)
+```
+
+
+```{r}
+## OLS
+get_ols_model<- function(df){
+  set.seed(45)
+  ols_model<-train(
+    y~.,
+    data=df, 
+    method="lm",
+    trControl = trainControl(method = "cv", number = 10),
+    preProcess = c("center", "scale"),
+    metric = "RMSE"
+  )
+  return(ols_model)
+}
+
+get_ols_coefficient<- function(ols_model){
+  b_ols<-coef(ols_model$finalModel)
+  b_ols<- as.data.frame(as.matrix(b_ols))%>%
+    mutate(Model= "OLS",Coefficient = row_number())
+  return(b_ols)
+}
+```
+
+```{r}
+#tuning grids
+lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+alpha_grid <- 10^seq(-3, 0, length.out = 25)
+srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+```
+
+
+```{r}
+# RIDGE
+get_ridge_model<- function(df, lambda_grid){
+  set.seed(45)
+  ridge_model<-train(
+    y~.,
+    data = df,
+    method = "glmnet",
+    trControl = trainControl(method = "cv", number = 10, selectionFunction = "best"),
+    preProcess = c("center", "scale"),
+    tuneGrid = data.frame(alpha = 0, lambda = lambda_grid),
+    metric = "RMSE"
+  )
+  return(ridge_model)
+}
+
+get_ridge_coefficient<- function(ridge_model){
+  b_ridge<- coef(ridge_model$finalModel, ridge_model$bestTune$lambda)
+  b_ridge<- as.data.frame(as.matrix(b_ridge))%>%
+    mutate(Model = "RIDGE",Coefficient = row_number())
+  return(b_ridge)
+}
+
+get_ridge_tune<- function(ridge_model){
+  ridge_tune<-ridge_model$bestTune%>%
+    mutate(Model = "RIDGE")
+  return(ridge_tune)
+}
+```
+
+```{r}
+#LASSO
+get_lasso_model<- function(df, lambda_grid){
+  set.seed(45)
+  lasso_model <- train(
+    y~.,
+    data = df,
+    method = "glmnet",
+    preProcess = c("center","scale"),
+    trControl = trainControl(method = "cv", number = 10, selectionFunction = "best"),
+    tuneGrid = data.frame(alpha = 1, lambda = lambda_grid),
+    metric = "RMSE"
+  )
+  return(lasso_model)
+}
+
+get_lasso_coefficient<- function(lasso_model){
+  b_lasso<- coef(lasso_model$finalModel, lasso_model$bestTune$lambda)
+  b_lasso<- as.data.frame(as.matrix(b_lasso))%>%
+    mutate(Model = "LASSO",Coefficient = row_number())
+  return(b_lasso)
+}
+
+get_lasso_tune<- function(lasso_model){
+  lasso_tune<-lasso_model$bestTune%>%
+    mutate(Model = "LASSO")
+  return(lasso_tune)
+}
+```
+
+```{r}
+#ELASTIC NET
+get_elastic_net_model <- function(df, srchGrd){
+  elastic_net_model<-train(
+    y~.,
+    data = train,
+    method = "glmnet",
+    trControl = trainControl(method = "cv", number = 10, selectionFunction = "best"),
+    tuneGrid = srchGrd,
+    preProcess = c("center","scale"),
+    metric = "RMSE"
+  )
+  return(elastic_net_model)
+}
+
+get_elastic_net_coefficient<- function(elastic_net_model){
+  b_elastic_net<- coef(elastic_net_model$finalModel, elastic_net_model$bestTune$lambda)
+  b_elastic_net<- as.data.frame(as.matrix(b_elastic_net))%>%
+    mutate(Model = "ELASTIC NET", Coefficient = row_number())
+  return(b_elastic_net)
+}
+
+get_elastic_net_tune<- function(elastic_net_model){
+  elastic_net_tune<-elastic_net_model$bestTune%>%
+    mutate(Model = "ELASTIC NET")
+  return(elastic_net_tune)
+}
+```
+
+
+```{r}
+lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+alpha_grid <- (0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)
+srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+```
+
+
+```{r}
+get_all_b<-function(ols_model,ridge_model,lasso_model,elastic_net_model){
+  #tuning grids
+
+  
+  b_ols<-get_ols_coefficient(ols_model)
+  b_ridge<-get_ridge_coefficient(ridge_model)
+  b_lasso<-get_lasso_coefficient(lasso_model)
+  b_elastic_net<- get_elastic_net_coefficient(elastic_net_model)
+  
+  b_all<-rbind(b_ols,b_ridge,b_lasso,b_elastic_net)
+}
+```
+
+```{r}
+get_all_tune<-function(ols_model,ridge_model,lasso_model,elastic_net_model){
+  
+  ridge_tune<-get_ridge_tune(ridge_model)
+  lasso_tune<-get_lasso_tune(lasso_model)
+  elastic_net_tune<- get_elastic_net_tune(elastic_net_model)
+  
+  tune_all<-rbind(ridge_tune,lasso_tune,elastic_net_tune)
+}
+```
+
+```{r}
+b_true<- as.data.frame(betas)
+b_final_ols<-
+  b_true%>%
+  mutate(Model = "OLS", Coefficient = row_number())
+b_final_ridge<-
+  b_true%>%
+  mutate(Model = "RIDGE", Coefficient = row_number())
+b_final_lasso<-
+  b_true%>%
+  mutate(Model = "LASSO", Coefficient = row_number())
+b_final_elastic<-
+  b_true%>%
+  mutate(Model = "ELASTIC NET", Coefficient = row_number())
+b_final<- rbind(b_final_ols,b_final_ridge,b_final_lasso,b_final_elastic)
+```
+
+
+```{r}
+#one simulation tryout
+
+#inputs in the simulation,betas, b_final
+
+df<-simulation(i,betas)
+
+lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+alpha_grid <- 10^seq(-3, 0, length.out = 25)
+srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+
+ols_model<- get_ols_model(df)
+ridge_model<- get_ridge_model(df, lambda_grid)
+lasso_model<- get_lasso_model(df, lambda_grid)
+elastic_net_model<- get_elastic_net_model(df, srchGrd)
+
+b_ols<-get_ols_coefficient(ols_model)
+colnames(b_ols)[1]<-1
+b_ridge<-get_ridge_coefficient(ridge_model)
+b_lasso<-get_lasso_coefficient(lasso_model)
+b_elastic_net<- get_elastic_net_coefficient(elastic_net_model)
+
+b_all<-rbind(b_ols,b_ridge,b_lasso,b_elastic_net)
+coefficient_column_name<-paste("simulation_",i, sep = "")
+
+colnames(b_all)[1]<- coefficient_column_name
+
+b_final<-b_final%>%
+  left_join(b_all)
+
+b_final
+
+```
+
+```{r}
+simulation_final_all_betas<-function(iterations, betas, b_final){
+  for (i in seq(1, iterations, 1)){
+    lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+    alpha_grid <- 10^seq(-3, 0, length.out = 25)
+    srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+    
+    df<-simulation(seed = i,betas)
+    
+    ols_model<- get_ols_model(df)
+    ridge_model<- get_ridge_model(df, lambda_grid)
+    lasso_model<- get_lasso_model(df, lambda_grid)
+    elastic_net_model<- get_elastic_net_model(df, srchGrd)
+    
+    b_ols<-get_ols_coefficient(ols_model)
+    colnames(b_ols)[1]<-1
+    b_ridge<-get_ridge_coefficient(ridge_model)
+    b_lasso<-get_lasso_coefficient(lasso_model)
+    b_elastic_net<- get_elastic_net_coefficient(elastic_net_model)
+      
+    b_all<-rbind(b_ols,b_ridge,b_lasso,b_elastic_net)
+    
+    coefficient_column_name<-paste("simulation_",i, sep = "")
+    
+    colnames(b_all)[1]<- coefficient_column_name
+    
+    b_final<-b_final%>%
+      left_join(b_all)
+    }
+  
+  return(b_final)
+}
+  
+```
+
+
+```{r}
+simulation_all<-simulation_final_all_betas(100, betas, b_final)
+```
+```{r}
+b_final_elastic<-
+  b_true%>%
+  mutate(Model = "ELASTIC NET", Coefficient = row_number())
+
+simulation_elastic_net<-function(iterations, betas, b_final_elastic){
+  for (i in seq(1, iterations, 1)){
+    lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+    alpha_grid <- 10^seq(-3, 0, length.out = 25)
+    srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+    
+    df<-simulation(seed = i,betas)
+    elastic_net_model<- get_elastic_net_model(df, srchGrd)
+    
+    b_elastic_net<- get_elastic_net_coefficient(elastic_net_model)
+    
+    
+    coefficient_column_name<-paste("simulation_",i, sep = "")
+    
+    colnames(b_elastic_net)[1]<- coefficient_column_name
+    
+    b_final_elastic<-b_final_elastic%>%
+      left_join(b_elastic_net)
+    }
+  
+  return(b_final_elastic)
+}
+  
+```
+
+```{r}
+elastic_simulation<-simulation_elastic_net(100,betas,b_final_elastic)
+```
+
+```{r}
+write.csv(elastic_simulation,"")
+```
+```{r}
+new_simulation<-simulation_all%>%
+  filter(Model != "ELASTIC NET")
+
+new_simulation_all<-
+  rbind(new_simulation, elastic_simulation)
+```
+
+
+
+We simulated the dataset for 100 times. And now we will see how the bias, mse, and variance of the coefficient estimates vary
+
+```{r}
+bias<-new_simulation_all%>%
+  mutate(Coefficient_Means = rowMeans(.[4:103]))%>%
+  mutate(Bias = Coefficient_Means - betas)%>%
+  dplyr::select(c(Model, Coefficient, Bias, Coefficient_Means, betas))
+
+bias
+```
+
+
+```{r}
+simulation_all_long<-
+  gather(new_simulation_all, Simulation, Estimate, simulation_1:simulation_100)
+
+MSE<-simulation_all_long%>%
+  mutate(diff = (Estimate - betas)^2)%>%
+  group_by(Model, Coefficient)%>%
+  summarize(MSE = mean(diff))
+```
+
+```{r}
+var<-simulation_all_long%>%
+  group_by(Model, Coefficient)%>%
+  mutate(mean_Estimate = mean(Estimate))%>%
+  mutate(diff = (Estimate - mean(Estimate))^2)%>%
+  group_by(Model, Coefficient)%>%
+  summarize(Var = mean(diff))
+```
+
+
+
+```{r}
+results<-bias%>%
+  left_join(MSE)%>%
+  left_join(var)
+
+results_df<-results%>%
+  dplyr::select(Model, Coefficient, betas, Coefficient_Means, Bias, Var, MSE)%>%
+  mutate(Bias_2_plus_Var = Var + Bias^2)
+
+results_df
+```
+
+
+```{r}
+colnames(results_df)<-c("Model", "Coefficient #","True Coefficient Values", "Estimation Mean", "Bias","Var", "MSE", "Calculated MSE")
+results_df
+```
+
+```{r}
+#lets look at coefficient 1 and how the bias, variance and MSE have changed
+median_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model))%>%
+  group_by(Model)%>%
+  summarize_if(is.numeric, median, na.rm=TRUE)
+
+average_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model))%>%
+  group_by(Model)%>%
+  summarize_if(is.numeric, mean, na.rm=TRUE)
+
+average_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model,Coefficient))%>%
+  filter(Coefficient == 1)
+average_results
+```
+
+```{r}
+average_results_plot<-average_results%>%
+  gather(Estimate_Name, Estimate, Bias_2:MSE)
+
+Models<- c("OLS","ELASTIC NET","LASSO","RIDGE")
+
+average_results_plot%>%
+  ggplot(aes(x = Model, y = Estimate , fill = Estimate_Name))+
+  geom_bar(stat  = "identity", position = position_dodge())+
+  scale_x_discrete(limits = Models)
+```
+#TUNING PARAMETERS
+
+```{r}
+get_ridge_tune(ridge_model)
+```
+
+```{r}
+tuning_final<-data_frame(matrix(ncol = 3, nrow = 0))
+
+colnames(tuning_final)<-c("alpha","lambda","Model")
+
+tuning_final
+```
+
+
+```{r}
+
+simulation_final_tuning_parameters<-function(iterations, betas, tuning_final){
+  for (i in seq(1, iterations, 1)){
+    lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+    alpha_grid <- 10^seq(-3, 0, length.out = 25)
+    srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+    
+    df<-simulation(seed = i,betas)
+    
+    ridge_model<- get_ridge_model(df, lambda_grid)
+    lasso_model<- get_lasso_model(df, lambda_grid)
+    elastic_net_model<- get_elastic_net_model(df, srchGrd)
+
+    tuning_all<-get_all_tune(ridge_model,lasso_model,elastic_net_model)
+    
+    coefficient_column_name<-paste("simulation_",i, sep = "")
+    
+    colnames(tuning_all)[1]<- coefficient_column_name
+    
+    tuning_final<- rbind(tuning_final, tuning_all)
+  }
+  
+  return(tuning_final)
+}
+
+```
+
+```{r}
+tuning_all<-simulation_final_tuning_parameters(100, betas, tuning_final)
+
+```
+
+
