@@ -1,4 +1,4 @@
-
+# Simulation
 
 
 ```{r, include=FALSE}
@@ -11,7 +11,7 @@ library(caret)
 library(readr)
 ```
 
-#SIMULATION
+
 
 In this simulation we will use 4 different models and test how the coefficient estimates for each model varies from each other. 
 
@@ -134,7 +134,7 @@ As we can see the property that $MSE = Bias^2 + Var$ is seen by how close the va
 
 Lets see what the average and median value of Bias, MSE, and Variance for our coefficients fair for all the models:
 
-## RESULTS
+## Results
 
 ```{r}
 #lets look at coefficient 1 and how the bias, variance and MSE have changed
@@ -190,7 +190,7 @@ tuning_all<-read_csv("tuning_all.csv")
 ```
 
 
-# Visualizations
+## Visualizations
 
 ```{r}
 tuning_all%>%

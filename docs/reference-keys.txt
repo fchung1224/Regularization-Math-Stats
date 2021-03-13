@@ -10,6 +10,7 @@ mean-squared-error
 calculate-bias-variance-mse-of-the-coefficients-in-the-model
 results
 visualizations
+applications
 deep-learning-algorithms
 autonomous-vehicles
 fraud-detection

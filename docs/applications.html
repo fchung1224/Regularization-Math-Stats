@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Visualizations | MATH 455 Regularization</title>
-  <meta name="description" content="Chapter 4 Visualizations | MATH 455 Regularization" />
+  <title>Chapter 5 Applications | MATH 455 Regularization</title>
+  <meta name="description" content="Chapter 5 Applications | MATH 455 Regularization" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Visualizations | MATH 455 Regularization" />
+  <meta property="og:title" content="Chapter 5 Applications | MATH 455 Regularization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Visualizations | MATH 455 Regularization" />
+  <meta name="twitter:title" content="Chapter 5 Applications | MATH 455 Regularization" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="bias-and-variance-of-penalized-regression.html"/>
-<link rel="next" href="applications.html"/>
+<link rel="prev" href="visualizations.html"/>
+<link rel="next" href="conclusion.html"/>
 <script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -186,40 +186,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="visualizations" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Visualizations</h1>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="visualizations.html#cb23-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="visualizations.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model)<span class="sc">%&gt;%</span></span>
-<span id="cb23-3"><a href="visualizations.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_lambda =</span> <span class="fu">mean</span>(lambda),</span>
-<span id="cb23-4"><a href="visualizations.html#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_alpha =</span> <span class="fu">mean</span>(alpha))</span></code></pre></div>
-<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
-<pre><code>## # A tibble: 3 x 3
-##   Model       mean_lambda mean_alpha
-##   &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;
-## 1 ELASTIC NET      0.111       0.033
-## 2 LASSO            0.0127      1    
-## 3 RIDGE            0.136       0</code></pre>
-<p>As we can see from this table, ELASTIC NET prefers to have a smaller alpha value, meaning that the ELASTIC NET will have a higher Ridge or L2 weight. This makes sense as compared to LASSO, the RIDGE regression provides results with lower MSE. Also as seem by the graph below, we see that the estimates for alpha for the elastic net have modes around 0 and 0.1.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="visualizations.html#cb26-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
-<span id="cb26-2"><a href="visualizations.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Model <span class="sc">==</span> <span class="st">&quot;ELASTIC NET&quot;</span>)<span class="sc">%&gt;%</span></span>
-<span id="cb26-3"><a href="visualizations.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb26-4"><a href="visualizations.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> alpha))</span></code></pre></div>
-<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="visualizations.html#cb27-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
-<span id="cb27-2"><a href="visualizations.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb27-3"><a href="visualizations.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> lambda))<span class="sc">+</span></span>
-<span id="cb27-4"><a href="visualizations.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Model)</span></code></pre></div>
-<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>The tuning parameters are very interesting to explore. Firstly we see that the values of lambda seem to be centered around one value. LASSO seems to have a very clear estimate across simulations, while ridge and elastic net follow sparser values for lambda. When comparing Ridge and Elastic Net estimates for lambda we see that Elastic Net seems to be more smooth bi-modal distribution. Ridge regression seems to be a multi-modal distribution that is not as smooth.</p>
+<div id="applications" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Applications</h1>
+<div id="deep-learning-algorithms" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Deep Learning Algorithms</h2>
+<p>Deep learning is a machine learning technique that attempts to mimic the workings of the human brain in processing data for use in detecting objects, recognizing speech, translating languages, and making decisions. Overall, its goal is to teach computer what comes naturally to humans: learning by example. This requires the machine to “learn” rather than “memorize”. In other words, a machine that is given training data ideally should be able to pick up on the patterns on that data without overfitting to the “noise” in the data so that the model can be successful when confronted with brand new data.</p>
+<p><img src="MachineLearning.png" /></p>
+<p>Let’s look at the model on the right side of the above figure. This model fits extremely well to the data. However, it does not closely conform to the true function. Thus, the model is overfitted; it has high complexity, and picks up and “memorizes” all of the noise and random fluctuation in the data. However, if given new data derived from the same function, the model will perform very poorly, as it has not attempted to recognize the true function that describes the data.</p>
+<p>In contrast, the model on the left hand side of the above figure does not overfit to the data. Although the model has slightly more bias to that specefic sample of data than does the model on the right hand side, it will perform much better when faced with unseen data. It has sacrificed a little bit of present accuracy in order to learn the general pattern of the data.</p>
+</div>
+<div id="autonomous-vehicles" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Autonomous Vehicles</h2>
+<p>In the context of deep learning, the utilization of regularization has massive implications. Let’s take autonomous vehicles as an example. Autonomous vehicles use deep learning algorithms to detect various objects such as traffic signs, pedestrians, and other vehicles. Since no two of these objects that a vehicle will encounter will be exactly the same, the object detection mechanisms utilized by autonomous vehicles must use a form of regularization to ensure the safety of its passengers. A self-driving car, for example, cannot simply stop at only the stop signs it has encountered before, it must be able to recognize all stop signs, including those that may have physical defects. That is why self-driving cars use techniques such as Scale-invariant feature transform (SIFT), a feature detection algorithm that identifies local, general features in images.</p>
+<p><img src="detection.png" /></p>
+</div>
+<div id="fraud-detection" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Fraud Detection</h2>
+<p>One of the main challenges in financial fraud detection is that only a very small percentage (much less than 1%) of transactions is fraud. As a consequence, it is difficult to learn how to identify fraud cases with high accuracy while maintaining low false positive rate. Additionally, there are various forms of froud that are continuously changing; Therefore, historical databases may lack the new fraud patterns.</p>
+<p>A solution to this that utilizes the ideas of regularization is called a “robust deep auto-encoder.” This method is made to handle training data that are not clean, meaning they may contain abnormal or outlier samples. This manifests itself well to fraud detection since financial intermediaries will face many unusual purchases that usually are not fraudulent. The method works by splitting the input data X into 2 parts: X=L+S. L is efficiently reconstructed by auto-encoder and S models the noise and outlier component. Then, a minimizing regularized objective function, or loss function, is applied to both the parts.</p>
+<p><img src="fraud.png" /></p>
 
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
