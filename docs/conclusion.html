@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Penalized Regression Estimators | Applications of Regularization</title>
-  <meta name="description" content="Chapter 2 Penalized Regression Estimators | Applications of Regularization" />
+  <title>Chapter 5 Conclusion | Applications of Regularization</title>
+  <meta name="description" content="Chapter 5 Conclusion | Applications of Regularization" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Penalized Regression Estimators | Applications of Regularization" />
+  <meta property="og:title" content="Chapter 5 Conclusion | Applications of Regularization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Penalized Regression Estimators | Applications of Regularization" />
+  <meta name="twitter:title" content="Chapter 5 Conclusion | Applications of Regularization" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="bias-and-variance-of-penalized-regression.html"/>
+<link rel="prev" href="visualizations.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -184,69 +184,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="penalized-regression-estimators" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Penalized Regression Estimators</h1>
-<p>This section introduces penalized regression models and then derives the estimator for ridge regression.</p>
-<div id="penalized-regression-models" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Penalized Regression Models</h2>
-<p>In any type of linear regression, we assume that the relationship between <span class="math inline">\(y\)</span>, our dependent variable, and <span class="math inline">\(X\)</span>, a matrix of our independent variables, can be written as:</p>
-<p><span class="math display">\[y_i=\beta^TX+\epsilon_i\]</span></p>
-<p>where <span class="math inline">\(\beta\)</span> is a vector of coefficients and <span class="math inline">\(\epsilon_i\)</span> is the random error component with mean zero. The goal is to estimate the true coefficient values of <span class="math inline">\(\beta\)</span>. As seen in Stat 155, OLS regression estimates <span class="math inline">\(beta\)</span> by minimizing the sum of squared errors:</p>
-<p><span class="math display">\[\hat{\beta}_{OLS}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2.\]</span></p>
-<p>In penalized regression, we modify this process by adding a penalty term for large coefficient values. There are two common ways to do this. The first, called ridge regression, estimates <span class="math inline">\(\beta\)</span> by minimizing the following equation:</p>
-<p><span class="math display">\[\hat{\beta}_{Ridge}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2+\lambda||\beta||_2^2\]</span></p>
-<p>where <span class="math inline">\(||\beta||_2^2=\sum_j B_j^2\)</span> and the penalty is thus based on the squared 2-norm of the coefficient vector. <span class="math inline">\(\lambda\)</span> represents the penalty parameter – a larger value of <span class="math inline">\(\lambda\)</span> means that we penalized large coefficients more, while a <span class="math inline">\(\lambda\)</span> value of zero is just OLS. The second common method is called LASSO regression, and uses the following equation instead:</p>
-<p><span class="math display">\[\hat{\beta}_{LASSO}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2+\lambda||\beta||_1\]</span></p>
-<p>where <span class="math inline">\(||\beta||_1\sum_{j \in J}|B_j|\)</span>. In LASSO, the penalty is based on the 1-norm of the coefficient vector, rather than the 2-norm as in ridge. Again, <span class="math inline">\(\lambda\)</span> represents the penalization parameter, with larger values corresponding to more deviation from OLS.</p>
-<p>While both LASSO and Ridge have pros and cons (as we show through simulation later on) only Ridge regression has a closed form solution. Thus, our theoretical derivations focus only on ridge regression, although the concepts apply to LASSO a well.</p>
-</div>
-<div id="deriving-the-ridge-estimator" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Deriving the Ridge Estimator</h2>
-<p>Now, after inroducing the idea behind penalized regression models, we derive the estimator for ride regression.</p>
-<p>Assume that we have predictors that range from <span class="math inline">\(\bar{x}^T_i = 1,x^2_i,x^3_i,...,x_i^n\)</span></p>
-<p><span class="math inline">\(\beta\)</span> includes all the coefficients for all our predictors.</p>
-<p><span class="math display">\[
-\begin{aligned}
-\beta^T = [\beta_0, \beta_1,..., \beta_n]  \\
-J = \sum^m_{i=0} (x_i^T\beta - y_i)^2 + \lambda ||\beta||^2
-\end{aligned}
-\]</span></p>
-<p>J is our cost function, the value that we are trying to minimize. Normally we only reduce the sum of squared residuals $^m_{i=0} (x_i^T- y_i)^2 $ but now we also include our Shrinkage parameter <span class="math inline">\(\lambda||\beta||^2\)</span>, or also called <span class="math inline">\(L_2\)</span> regularization</p>
-<p><span class="math display">\[
-\begin{aligned}
-X^T = [\bar{X}^T_1, \bar{X}^T_2, \bar{X}^T_3, \bar{X}^T_4, ...,\bar{X}^T_n] \\
-Y^T = [y_1, y_2, y_3,y_4,...,y_n] \\ 
-J = (X\beta - Y)^T(X\beta - Y) + \lambda \beta^T\beta \\
-\end{aligned}
-\]</span></p>
-<p><span class="math inline">\((X\beta - Y)^T(X\beta - Y)\)</span> –&gt; a way to express squared values in linear algebra lingo</p>
-<p>We try to minimize J so we use its derivative and set it to zero to see what value of <span class="math inline">\(\beta\)</span> will minimize the new cost function J:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\frac{dJ}{d\beta} = 2X^T(X\beta - Y)+ \lambda(2\beta)\\
-2X^T(X\beta - Y)+ \lambda(2\beta) \overset{set}{=} 0 \\
-X^T(X\beta - Y)+ \lambda(\beta) = 0 \\
-X^TX\beta - X^TY + \lambda\beta = 0 \\
-X^TX\beta + \lambda\beta = X^TY\\
-(X^TX+ \lambda I)\beta = X^TY\\
-\beta = (X^TX+ \lambda I)^{-1}X^TY \\
-\end{aligned}
-\]</span>
-If <span class="math inline">\(\lambda = 0\)</span> we have a normal OLS model where:</p>
-<p><span class="math display">\[
-\beta = (X^TX)^{-1}X^TY \\
-\]</span></p>
-<p>Thus, ridge estimates are a scaled version of the least squares estimates where <span class="math inline">\(\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)\)</span></p>
+<div id="conclusion" class="section level1" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Conclusion</h1>
+<p>In this project, we consider the theory and application of penalized regression models. We motivate our study by the bias-variance traeoff– in some cases, it may be preferable to sacrifice a degree of unbiasedness in order to have an estimator with less variance.</p>
+<p>We begin by introducing penalized regression models and deriving the ridge regression estimator. Next, we prove analytically that penalized regression models are biased, but have less variance than OLS regression. We complement this theoretical work by simulation, showing empirically that penalized regression models can have lower mean squared error than OLS. Finally, we consider several interesting real worl applications of penalized regression.</p>
+<p>Given our simulation values, we are provided with very interesting findings. When we have multicolinear datasets, we see that OLS will provide the highest Coefficient Bias which is unlike what we had expected. From our simulations, we found that for our simulation specifications, Ridge Regression seemed to have the lowest bias, variance, and mse. Although it is hard to pinpoint to one specific reason, we are certain that given the multicolinearity between the X values, penalized regression models that shrink coefficients when there is multicolinearity help in reducing the bias and variance of the estimates. Initally based on the fact that we had some betas to equal zero, we expected LASSO regression to be the best in reducing the MSE values. But because there are a high number of significant parameters, as only 2 parameters are zero, Ridge Regression works better as most predictors impact the response.</p>
 
-</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

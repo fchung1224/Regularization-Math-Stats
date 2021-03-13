@@ -52,7 +52,7 @@ $$
 
 $(X\beta - Y)^T(X\beta - Y)$ --> a way to express squared values in linear algebra lingo
 
-We try to minimize J so we use its derivative and set it to zero to see what value of $\beta$ will minimize the new cost function J
+We try to minimize J so we use its derivative and set it to zero to see what value of $\beta$ will minimize the new cost function J:
 
 $$
 \begin{aligned}

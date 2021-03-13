@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 Penalized Regression Estimators | Applications of Regularization</title>
-  <meta name="description" content="Chapter 2 Penalized Regression Estimators | Applications of Regularization" />
+  <title>Chapter 4 Visualizations | Applications of Regularization</title>
+  <meta name="description" content="Chapter 4 Visualizations | Applications of Regularization" />
   <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 Penalized Regression Estimators | Applications of Regularization" />
+  <meta property="og:title" content="Chapter 4 Visualizations | Applications of Regularization" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 Penalized Regression Estimators | Applications of Regularization" />
+  <meta name="twitter:title" content="Chapter 4 Visualizations | Applications of Regularization" />
   
   
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="introduction.html"/>
-<link rel="next" href="bias-and-variance-of-penalized-regression.html"/>
+<link rel="prev" href="bias-and-variance-of-penalized-regression.html"/>
+<link rel="next" href="conclusion.html"/>
 <script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -184,59 +184,49 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="penalized-regression-estimators" class="section level1" number="2">
-<h1><span class="header-section-number">Chapter 2</span> Penalized Regression Estimators</h1>
-<p>This section introduces penalized regression models and then derives the estimator for ridge regression.</p>
-<div id="penalized-regression-models" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> Penalized Regression Models</h2>
-<p>In any type of linear regression, we assume that the relationship between <span class="math inline">\(y\)</span>, our dependent variable, and <span class="math inline">\(X\)</span>, a matrix of our independent variables, can be written as:</p>
-<p><span class="math display">\[y_i=\beta^TX+\epsilon_i\]</span></p>
-<p>where <span class="math inline">\(\beta\)</span> is a vector of coefficients and <span class="math inline">\(\epsilon_i\)</span> is the random error component with mean zero. The goal is to estimate the true coefficient values of <span class="math inline">\(\beta\)</span>. As seen in Stat 155, OLS regression estimates <span class="math inline">\(beta\)</span> by minimizing the sum of squared errors:</p>
-<p><span class="math display">\[\hat{\beta}_{OLS}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2.\]</span></p>
-<p>In penalized regression, we modify this process by adding a penalty term for large coefficient values. There are two common ways to do this. The first, called ridge regression, estimates <span class="math inline">\(\beta\)</span> by minimizing the following equation:</p>
-<p><span class="math display">\[\hat{\beta}_{Ridge}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2+\lambda||\beta||_2^2\]</span></p>
-<p>where <span class="math inline">\(||\beta||_2^2=\sum_j B_j^2\)</span> and the penalty is thus based on the squared 2-norm of the coefficient vector. <span class="math inline">\(\lambda\)</span> represents the penalty parameter – a larger value of <span class="math inline">\(\lambda\)</span> means that we penalized large coefficients more, while a <span class="math inline">\(\lambda\)</span> value of zero is just OLS. The second common method is called LASSO regression, and uses the following equation instead:</p>
-<p><span class="math display">\[\hat{\beta}_{LASSO}=\text{argmin}_\beta \frac{1}{N}\sum_{i=1}^n (y_i-\beta^TX_i)^2+\lambda||\beta||_1\]</span></p>
-<p>where <span class="math inline">\(||\beta||_1\sum_{j \in J}|B_j|\)</span>. In LASSO, the penalty is based on the 1-norm of the coefficient vector, rather than the 2-norm as in ridge. Again, <span class="math inline">\(\lambda\)</span> represents the penalization parameter, with larger values corresponding to more deviation from OLS.</p>
-<p>While both LASSO and Ridge have pros and cons (as we show through simulation later on) only Ridge regression has a closed form solution. Thus, our theoretical derivations focus only on ridge regression, although the concepts apply to LASSO a well.</p>
+<div id="visualizations" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Visualizations</h1>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="visualizations.html#cb23-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="visualizations.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model)<span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="visualizations.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_lambda =</span> <span class="fu">mean</span>(lambda),</span>
+<span id="cb23-4"><a href="visualizations.html#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_alpha =</span> <span class="fu">mean</span>(alpha))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   Model       mean_lambda mean_alpha
+##   &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;
+## 1 ELASTIC NET      0.111       0.033
+## 2 LASSO            0.0127      1    
+## 3 RIDGE            0.136       0</code></pre>
+<p>As we can see from this table, ELASTIC NET prefers to have a smaller alpha value, meaning that the ELASTIC NET will have a higher Ridge or L2 weight. This makes sense as compared to LASSO, the RIDGE regression provides results with lower MSE. Also as seem by the graph below, we see that the estimates for alpha for the elastic net have modes around 0 and 0.1.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="visualizations.html#cb26-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="visualizations.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Model <span class="sc">==</span> <span class="st">&quot;ELASTIC NET&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="visualizations.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb26-4"><a href="visualizations.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> alpha))</span></code></pre></div>
+<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="visualizations.html#cb27-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="visualizations.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb27-3"><a href="visualizations.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> lambda))<span class="sc">+</span></span>
+<span id="cb27-4"><a href="visualizations.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Model)</span></code></pre></div>
+<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>The tuning parameters are very interesting to explore. Firstly we see that the values of lambda seem to be centered around one value. LASSO seems to have a very clear estimate across simulations, while ridge and elastic net follow sparser values for lambda. When comparing Ridge and Elastic Net estimates for lambda we see that Elastic Net seems to be more smooth bi-modal distribution. Ridge regression seems to be a multi-modal distribution that is not as smooth.</p>
+
+<div id="deep-learning-algorithms" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Deep Learning Algorithms</h2>
+<p>Deep learning is a machine learning technique that attempts to mimic the workings of the human brain in processing data for use in detecting objects, recognizing speech, translating languages, and making decisions. Overall, its goal is to teach computer what comes naturally to humans: learning by example. This requires the machine to “learn” rather than “memorize”. In other words, a machine that is given training data ideally should be able to pick up on the patterns on that data without overfitting to the “noise” in the data so that the model can be successful when confronted with brand new data.</p>
+<p><img src="MachineLearning.png" /></p>
+<p>Let’s look at the model on the right side of the above figure. This model fits extremely well to the data. However, it does not closely conform to the true function. Thus, the model is overfitted; it has high complexity, and picks up and “memorizes” all of the noise and random fluctuation in the data. However, if given new data derived from the same function, the model will perform very poorly, as it has not attempted to recognize the true function that describes the data.</p>
+<p>In contrast, the model on the left hand side of the above figure does not overfit to the data. Although the model has slightly more bias to that specefic sample of data than does the model on the right hand side, it will perform much better when faced with unseen data. It has sacrificed a little bit of present accuracy in order to learn the general pattern of the data.</p>
 </div>
-<div id="deriving-the-ridge-estimator" class="section level2" number="2.2">
-<h2><span class="header-section-number">2.2</span> Deriving the Ridge Estimator</h2>
-<p>Now, after inroducing the idea behind penalized regression models, we derive the estimator for ride regression.</p>
-<p>Assume that we have predictors that range from <span class="math inline">\(\bar{x}^T_i = 1,x^2_i,x^3_i,...,x_i^n\)</span></p>
-<p><span class="math inline">\(\beta\)</span> includes all the coefficients for all our predictors.</p>
-<p><span class="math display">\[
-\begin{aligned}
-\beta^T = [\beta_0, \beta_1,..., \beta_n]  \\
-J = \sum^m_{i=0} (x_i^T\beta - y_i)^2 + \lambda ||\beta||^2
-\end{aligned}
-\]</span></p>
-<p>J is our cost function, the value that we are trying to minimize. Normally we only reduce the sum of squared residuals $^m_{i=0} (x_i^T- y_i)^2 $ but now we also include our Shrinkage parameter <span class="math inline">\(\lambda||\beta||^2\)</span>, or also called <span class="math inline">\(L_2\)</span> regularization</p>
-<p><span class="math display">\[
-\begin{aligned}
-X^T = [\bar{X}^T_1, \bar{X}^T_2, \bar{X}^T_3, \bar{X}^T_4, ...,\bar{X}^T_n] \\
-Y^T = [y_1, y_2, y_3,y_4,...,y_n] \\ 
-J = (X\beta - Y)^T(X\beta - Y) + \lambda \beta^T\beta \\
-\end{aligned}
-\]</span></p>
-<p><span class="math inline">\((X\beta - Y)^T(X\beta - Y)\)</span> –&gt; a way to express squared values in linear algebra lingo</p>
-<p>We try to minimize J so we use its derivative and set it to zero to see what value of <span class="math inline">\(\beta\)</span> will minimize the new cost function J:</p>
-<p><span class="math display">\[
-\begin{aligned}
-\frac{dJ}{d\beta} = 2X^T(X\beta - Y)+ \lambda(2\beta)\\
-2X^T(X\beta - Y)+ \lambda(2\beta) \overset{set}{=} 0 \\
-X^T(X\beta - Y)+ \lambda(\beta) = 0 \\
-X^TX\beta - X^TY + \lambda\beta = 0 \\
-X^TX\beta + \lambda\beta = X^TY\\
-(X^TX+ \lambda I)\beta = X^TY\\
-\beta = (X^TX+ \lambda I)^{-1}X^TY \\
-\end{aligned}
-\]</span>
-If <span class="math inline">\(\lambda = 0\)</span> we have a normal OLS model where:</p>
-<p><span class="math display">\[
-\beta = (X^TX)^{-1}X^TY \\
-\]</span></p>
-<p>Thus, ridge estimates are a scaled version of the least squares estimates where <span class="math inline">\(\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)\)</span></p>
+<div id="autonomous-vehicles" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Autonomous Vehicles</h2>
+<p>In the context of deep learning, the utilization of regularization has massive implications. Let’s take autonomous vehicles as an example. Autonomous vehicles use deep learning algorithms to detect various objects such as traffic signs, pedestrians, and other vehicles. Since no two of these objects that a vehicle will encounter will be exactly the same, the object detection mechanisms utilized by autonomous vehicles must use a form of regularization to ensure the safety of its passengers. A self-driving car, for example, cannot simply stop at only the stop signs it has encountered before, it must be able to recognize all stop signs, including those that may have physical defects. That is why self-driving cars use techniques such as Scale-invariant feature transform (SIFT), a feature detection algorithm that identifies local, general features in images.</p>
+<p><img src="detection.png" /></p>
+</div>
+<div id="fraud-detection" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Fraud Detection</h2>
+<p>One of the main challenges in financial fraud detection is that only a very small percentage (much less than 1%) of transactions is fraud. As a consequence, it is difficult to learn how to identify fraud cases with high accuracy while maintaining low false positive rate. Additionally, there are various forms of froud that are continuously changing; Therefore, historical databases may lack the new fraud patterns.</p>
+<p>A solution to this that utilizes the ideas of regularization is called a “robust deep auto-encoder.” This method is made to handle training data that are not clean, meaning they may contain abnormal or outlier samples. This manifests itself well to fraud detection since financial intermediaries will face many unusual purchases that usually are not fraudulent. The method works by splitting the input data X into 2 parts: X=L+S. L is efficiently reconstructed by auto-encoder and S models the noise and outlier component. Then, a minimizing regularized objective function, or loss function, is applied to both the parts.</p>
+<p><img src="fraud.png" /></p>
 
 </div>
 </div>
@@ -245,8 +235,8 @@ If <span class="math inline">\(\lambda = 0\)</span> we have a normal OLS model w
           </div>
         </div>
       </div>
-<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
