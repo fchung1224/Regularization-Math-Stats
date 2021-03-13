@@ -15,4 +15,4 @@ github-repo: fchung1224/Regularization-Math-Stats
   
 # Preface {-}
 
-In our final project for MATH 455: Mathematical Statistics, we explore the theory behind penalized regression models. 
+In our final project for MATH 455: Mathematical Statistics, we explore the theory and application of penalized regression models. 
