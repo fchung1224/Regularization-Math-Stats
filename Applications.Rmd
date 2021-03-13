@@ -1,11 +1,4 @@
----
-title: "Applications of Regularization"
-output: pdf_document
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+# Applications
 
 ## Deep Learning Algorithms
 

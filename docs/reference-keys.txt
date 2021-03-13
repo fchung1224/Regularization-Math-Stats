@@ -15,6 +15,7 @@ autonomous-vehicles
 fraud-detection
 conclusion
 references
+appendix
 simulation-procedure
 specify-the-true-beta-values
 create-the-simulation-values
