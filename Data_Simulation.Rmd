@@ -65,7 +65,8 @@ $$
 &= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) + \lambda_1 \beta^T\beta+\lambda_2|\beta|
 \end{aligned}
 $$
-## Simulation of explanatory variables
+
+## Simulation of Explanatory Variables
 
 We first start by creating a simulation of data. The dataset includes a covariance matrix to include multicollinearity within the columns of the data. This allows us to explore the benefits of penalized regression models when there is multicollinearity. Based on a pre-determined set of betas we use the these values to create our dependent variable for which we add some noise `e`. 
 
@@ -88,7 +89,7 @@ simulation_all<-read_csv("simulation_all.csv")
 Each simulation consists of 50 predictors, and 100 observations. 
 
 
-## Calculate Bias, Variance, MSE of the coefficients in the model
+## Calculate Bias, Variance, MSE of the Coefficients in the Model
 
 ```{r}
 bias<-simulation_all%>%
