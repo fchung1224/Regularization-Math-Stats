@@ -8,6 +8,7 @@ bias
 variance
 mean-squared-error
 simulation
+simulation-of-explanatory-variables
 calculate-bias-variance-mse-of-the-coefficients-in-the-model
 results
 visualizations
@@ -22,6 +23,6 @@ simulation-procedure
 specify-the-true-beta-values
 create-the-simulation-values
 creating-model-functions
-tryout-the-simulation-for-one-iteration
+try-out-simulation-for-one-iteration
 simulation-for-multiple-iterations
 tuning-parameters

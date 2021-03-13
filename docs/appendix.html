@@ -148,9 +148,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="4" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>4</b> Simulation</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="simulation.html"><a href="simulation.html#calculate-bias-variance-mse-of-the-coefficients-in-the-model"><i class="fa fa-check"></i><b>4.1</b> Calculate Bias, Variance, MSE of the coefficients in the model</a></li>
-<li class="chapter" data-level="4.2" data-path="simulation.html"><a href="simulation.html#results"><i class="fa fa-check"></i><b>4.2</b> Results</a></li>
-<li class="chapter" data-level="4.3" data-path="simulation.html"><a href="simulation.html#visualizations"><i class="fa fa-check"></i><b>4.3</b> Visualizations</a></li>
+<li class="chapter" data-level="4.1" data-path="simulation.html"><a href="simulation.html#simulation-of-explanatory-variables"><i class="fa fa-check"></i><b>4.1</b> Simulation of Explanatory Variables</a></li>
+<li class="chapter" data-level="4.2" data-path="simulation.html"><a href="simulation.html#calculate-bias-variance-mse-of-the-coefficients-in-the-model"><i class="fa fa-check"></i><b>4.2</b> Calculate Bias, Variance, MSE of the Coefficients in the Model</a></li>
+<li class="chapter" data-level="4.3" data-path="simulation.html"><a href="simulation.html#results"><i class="fa fa-check"></i><b>4.3</b> Results</a></li>
+<li class="chapter" data-level="4.4" data-path="simulation.html"><a href="simulation.html#visualizations"><i class="fa fa-check"></i><b>4.4</b> Visualizations</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
 <ul>
@@ -164,13 +165,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="8.1" data-path="appendix.html"><a href="appendix.html#simulation-procedure"><i class="fa fa-check"></i><b>8.1</b> Simulation Procedure</a>
 <ul>
-<li class="chapter" data-level="8.1.1" data-path="appendix.html"><a href="appendix.html#specify-the-true-beta-values"><i class="fa fa-check"></i><b>8.1.1</b> Specify the TRUE Beta Values</a></li>
-<li class="chapter" data-level="8.1.2" data-path="appendix.html"><a href="appendix.html#create-the-simulation-values"><i class="fa fa-check"></i><b>8.1.2</b> CREATE THE SIMULATION VALUES</a></li>
-<li class="chapter" data-level="8.1.3" data-path="appendix.html"><a href="appendix.html#creating-model-functions"><i class="fa fa-check"></i><b>8.1.3</b> CREATING MODEL FUNCTIONS</a></li>
-<li class="chapter" data-level="8.1.4" data-path="appendix.html"><a href="appendix.html#tryout-the-simulation-for-one-iteration"><i class="fa fa-check"></i><b>8.1.4</b> TRYOUT THE SIMULATION FOR ONE ITERATION</a></li>
-<li class="chapter" data-level="8.1.5" data-path="appendix.html"><a href="appendix.html#simulation-for-multiple-iterations"><i class="fa fa-check"></i><b>8.1.5</b> SIMULATION FOR MULTIPLE ITERATIONS</a></li>
+<li class="chapter" data-level="8.1.1" data-path="appendix.html"><a href="appendix.html#specify-the-true-beta-values"><i class="fa fa-check"></i><b>8.1.1</b> Specify the True Beta Values</a></li>
+<li class="chapter" data-level="8.1.2" data-path="appendix.html"><a href="appendix.html#create-the-simulation-values"><i class="fa fa-check"></i><b>8.1.2</b> Create the Simulation Values</a></li>
+<li class="chapter" data-level="8.1.3" data-path="appendix.html"><a href="appendix.html#creating-model-functions"><i class="fa fa-check"></i><b>8.1.3</b> Creating Model Functions</a></li>
+<li class="chapter" data-level="8.1.4" data-path="appendix.html"><a href="appendix.html#try-out-simulation-for-one-iteration"><i class="fa fa-check"></i><b>8.1.4</b> Try Out Simulation for One Iteration</a></li>
+<li class="chapter" data-level="8.1.5" data-path="appendix.html"><a href="appendix.html#simulation-for-multiple-iterations"><i class="fa fa-check"></i><b>8.1.5</b> Simulation for Multiple Iterations</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="appendix.html"><a href="appendix.html#tuning-parameters"><i class="fa fa-check"></i><b>8.2</b> TUNING PARAMETERS</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix.html"><a href="appendix.html#tuning-parameters"><i class="fa fa-check"></i><b>8.2</b> Tuning Parameters</a></li>
 </ul></li>
 </ul>
 
@@ -194,13 +195,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="simulation-procedure" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Simulation Procedure</h2>
 <div id="specify-the-true-beta-values" class="section level3" number="8.1.1">
-<h3><span class="header-section-number">8.1.1</span> Specify the TRUE Beta Values</h3>
+<h3><span class="header-section-number">8.1.1</span> Specify the True Beta Values</h3>
 <p>We create a predetermined set of <span class="math inline">\(\beta\)</span>:</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="appendix.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
 <span id="cb28-2"><a href="appendix.html#cb28-2" aria-hidden="true" tabindex="-1"></a>betas<span class="ot">&lt;-</span> (<span class="fu">sample</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">size=</span><span class="dv">50</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))<span class="sc">/</span><span class="dv">10</span></span></code></pre></div>
 </div>
 <div id="create-the-simulation-values" class="section level3" number="8.1.2">
-<h3><span class="header-section-number">8.1.2</span> CREATE THE SIMULATION VALUES</h3>
+<h3><span class="header-section-number">8.1.2</span> Create the Simulation Values</h3>
 <p>We then use the MVR Norm function which allows us to create X variables with a specified Covarience Matrix.</p>
 <p>This allows our X-values to be</p>
 <ol style="list-style-type: decimal">
@@ -224,7 +225,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>As it can be seen by the code chunk above, <code>CovMatrix</code> is where we specify the covariance matrix where we show that there is multicollinearity between the explanatory variables.</p>
 </div>
 <div id="creating-model-functions" class="section level3" number="8.1.3">
-<h3><span class="header-section-number">8.1.3</span> CREATING MODEL FUNCTIONS</h3>
+<h3><span class="header-section-number">8.1.3</span> Creating Model Functions</h3>
 <p>We create getters for both the model, coefficient, and tuning parameters models for the following models:</p>
 <ul>
 <li><code>OLS</code></li>
@@ -340,8 +341,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb33-26"><a href="appendix.html#cb33-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(elastic_net_tune)</span>
 <span id="cb33-27"><a href="appendix.html#cb33-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="tryout-the-simulation-for-one-iteration" class="section level3" number="8.1.4">
-<h3><span class="header-section-number">8.1.4</span> TRYOUT THE SIMULATION FOR ONE ITERATION</h3>
+<div id="try-out-simulation-for-one-iteration" class="section level3" number="8.1.4">
+<h3><span class="header-section-number">8.1.4</span> Try Out Simulation for One Iteration</h3>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="appendix.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#one simulation tryout</span></span>
 <span id="cb34-2"><a href="appendix.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#inputs in the simulation,betas, b_final</span></span>
 <span id="cb34-3"><a href="appendix.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -372,7 +373,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb34-28"><a href="appendix.html#cb34-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(coefficients_all)</span></code></pre></div>
 </div>
 <div id="simulation-for-multiple-iterations" class="section level3" number="8.1.5">
-<h3><span class="header-section-number">8.1.5</span> SIMULATION FOR MULTIPLE ITERATIONS</h3>
+<h3><span class="header-section-number">8.1.5</span> Simulation for Multiple Iterations</h3>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="appendix.html#cb35-1" aria-hidden="true" tabindex="-1"></a>simulation_final_all_betas<span class="ot">&lt;-</span><span class="cf">function</span>(iterations, betas, b_final){</span>
 <span id="cb35-2"><a href="appendix.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  lambda_grid<span class="ot">&lt;-</span> lambda_grid<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">50</span>)</span>
 <span id="cb35-3"><a href="appendix.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  alpha_grid <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
@@ -409,7 +410,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <div id="tuning-parameters" class="section level2" number="8.2">
-<h2><span class="header-section-number">8.2</span> TUNING PARAMETERS</h2>
+<h2><span class="header-section-number">8.2</span> Tuning Parameters</h2>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="appendix.html#cb38-1" aria-hidden="true" tabindex="-1"></a>tuning_final<span class="ot">&lt;-</span><span class="fu">data_frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">0</span>))</span></code></pre></div>
 <pre><code>## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
 ## Please use `tibble()` instead.
