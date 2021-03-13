@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Simulation | MATH 455 Regularization</title>
+  <meta name="description" content="Chapter 4 Simulation | MATH 455 Regularization" />
+  <meta name="generator" content="bookdown 0.21.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Simulation | MATH 455 Regularization" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="fchung1224/Regularization-Math-Stats" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Simulation | MATH 455 Regularization" />
+  
+  
+  
+
+<meta name="author" content="Federico Chung, Lucas Leiter, and Aidan Toner-Rodgers" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="bias-and-variance-of-penalized-regression.html"/>
+<link rel="next" href="applications.html"/>
+<script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html"><i class="fa fa-check"></i><b>2</b> Penalized Regression Estimators</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#penalized-regression-models"><i class="fa fa-check"></i><b>2.1</b> Penalized Regression Models</a></li>
+<li class="chapter" data-level="2.2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#deriving-the-ridge-estimator"><i class="fa fa-check"></i><b>2.2</b> Deriving the Ridge Estimator</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i><b>3</b> Bias and Variance of Penalized Regression</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>3.1</b> Assumptions</a></li>
+<li class="chapter" data-level="3.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>3.2</b> Bias</a></li>
+<li class="chapter" data-level="3.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>3.3</b> Variance</a></li>
+<li class="chapter" data-level="3.4" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#mean-squared-error"><i class="fa fa-check"></i><b>3.4</b> Mean Squared Error</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>4</b> Simulation</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="simulation.html"><a href="simulation.html#calculate-bias-variance-mse-of-the-coefficients-in-the-model"><i class="fa fa-check"></i><b>4.1</b> Calculate Bias, Variance, MSE of the coefficients in the model</a></li>
+<li class="chapter" data-level="4.2" data-path="simulation.html"><a href="simulation.html#results"><i class="fa fa-check"></i><b>4.2</b> Results</a></li>
+<li class="chapter" data-level="4.3" data-path="simulation.html"><a href="simulation.html#visualizations"><i class="fa fa-check"></i><b>4.3</b> Visualizations</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#deep-learning-algorithms"><i class="fa fa-check"></i><b>5.1</b> Deep Learning Algorithms</a></li>
+<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#autonomous-vehicles"><i class="fa fa-check"></i><b>5.2</b> Autonomous Vehicles</a></li>
+<li class="chapter" data-level="5.3" data-path="applications.html"><a href="applications.html#fraud-detection"><i class="fa fa-check"></i><b>5.3</b> Fraud Detection</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="7" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
+<li class="chapter" data-level="8" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>8</b> Appendix</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="appendix.html"><a href="appendix.html#simulation-procedure"><i class="fa fa-check"></i><b>8.1</b> Simulation Procedure</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="appendix.html"><a href="appendix.html#specify-the-true-beta-values"><i class="fa fa-check"></i><b>8.1.1</b> Specify the TRUE Beta Values</a></li>
+<li class="chapter" data-level="8.1.2" data-path="appendix.html"><a href="appendix.html#create-the-simulation-values"><i class="fa fa-check"></i><b>8.1.2</b> CREATE THE SIMULATION VALUES</a></li>
+<li class="chapter" data-level="8.1.3" data-path="appendix.html"><a href="appendix.html#creating-model-functions"><i class="fa fa-check"></i><b>8.1.3</b> CREATING MODEL FUNCTIONS</a></li>
+<li class="chapter" data-level="8.1.4" data-path="appendix.html"><a href="appendix.html#tryout-the-simulation-for-one-iteration"><i class="fa fa-check"></i><b>8.1.4</b> TRYOUT THE SIMULATION FOR ONE ITERATION</a></li>
+<li class="chapter" data-level="8.1.5" data-path="appendix.html"><a href="appendix.html#simulation-for-multiple-iterations"><i class="fa fa-check"></i><b>8.1.5</b> SIMULATION FOR MULTIPLE ITERATIONS</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="appendix.html"><a href="appendix.html#tuning-parameters"><i class="fa fa-check"></i><b>8.2</b> TUNING PARAMETERS</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">MATH 455 Regularization</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simulation" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Simulation</h1>
+<p>In this simulation we will use 4 different models and test how the coefficient estimates for each model varies from each other.</p>
+<p>Each of the models tested, outside of OLS, have a loss function that includes additional “penalties”, which is why these functions are labeled as penalized regression models. The models we will be testing are the following:</p>
+<p>-OLS</p>
+<p>Which tries to find <span class="math inline">\(\beta\)</span> estimates that minimize:</p>
+<p><span class="math display">\[
+\begin{aligned}
+MSE = \frac{1}{N}(Y - X\beta)^T(Y-X\beta)
+\end{aligned}
+\]</span></p>
+<p>-Ridge Regression</p>
+<p>Which has an additional regression penalty, called L2: <span class="math inline">\(\lambda \beta^T\beta\)</span></p>
+<p>Ridge Regression tries to find <span class="math inline">\(\beta\)</span> estimates that minimizes:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;= MSE  +  \lambda \beta^T\beta\\
+&amp;= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) + \lambda \beta^T\beta
+\end{aligned}
+\]</span>
+-LASSO</p>
+<p>Which has an additional regression penalty, called L1: <span class="math inline">\(\lambda|\beta|\)</span></p>
+<p>LASSO tries to find <span class="math inline">\(\beta\)</span> estimates that minimizes:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;= MSE  +  \lambda|\beta|\\
+&amp;= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) +  \lambda|\beta|
+\end{aligned}
+\]</span></p>
+<p>-Elastic Net</p>
+<p>Which is a combination of both L1 and L2 penalties: $^T+|| $</p>
+<p>Elastic Net Regression tries to find <span class="math inline">\(\beta\)</span> estimates that minimizes:</p>
+<p><span class="math display">\[
+\begin{aligned}
+&amp;= MSE  +  \lambda \beta^T\beta+\lambda|\beta|\\
+&amp;= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) + \lambda_1 \beta^T\beta+\lambda_2|\beta|
+\end{aligned}
+\]</span>
+## Simulation of explanatory variables</p>
+<p>We first start by creating a simulation of data. The dataset includes a covariance matrix to include multicollinearity within the columns of the data. This allows us to explore the benefits of penalized regression models when there is multicollinearity. Based on a pre-determined set of betas we use the these values to create our dependent variable for which we add some noise <code>e</code>.</p>
+<p>We decided to use a small dataset with loads of predictors to see what potential benefits Penalized Regression Models can have on small datasets.</p>
+<p>The true values of Y will be estimated using the following formula:</p>
+<p><span class="math display">\[
+Y = X\beta + \epsilon 
+\]</span>
+Where <span class="math inline">\(\epsilon \sim N(0,25)\)</span></p>
+<p>We simulated the dataset for 100 times. And the dataset <code>simulation_all</code> contains all the 50 different coefficient estimates for all the 100 iterations for all 4 models.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="simulation.html#cb1-1" aria-hidden="true" tabindex="-1"></a>simulation_all<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;simulation_all.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_double(),
+##   Model = col_character()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<p>Each simulation consists of 50 predictors, and 100 observations.</p>
+<div id="calculate-bias-variance-mse-of-the-coefficients-in-the-model" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Calculate Bias, Variance, MSE of the coefficients in the model</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="simulation.html#cb4-1" aria-hidden="true" tabindex="-1"></a>bias<span class="ot">&lt;-</span>simulation_all<span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="simulation.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Coefficient_Means =</span> <span class="fu">rowMeans</span>(.[<span class="dv">4</span><span class="sc">:</span><span class="dv">103</span>]))<span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="simulation.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Bias =</span> Coefficient_Means <span class="sc">-</span> betas)<span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="simulation.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Model, Coefficient, Bias, Coefficient_Means, betas))</span>
+<span id="cb4-5"><a href="simulation.html#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="simulation.html#cb4-6" aria-hidden="true" tabindex="-1"></a>simulation_all_long<span class="ot">&lt;-</span></span>
+<span id="cb4-7"><a href="simulation.html#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(simulation_all, Simulation, Estimate, simulation_1<span class="sc">:</span>simulation_100)</span>
+<span id="cb4-8"><a href="simulation.html#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="simulation.html#cb4-9" aria-hidden="true" tabindex="-1"></a>MSE<span class="ot">&lt;-</span>simulation_all_long<span class="sc">%&gt;%</span></span>
+<span id="cb4-10"><a href="simulation.html#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> (Estimate <span class="sc">-</span> betas)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="simulation.html#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model, Coefficient)<span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="simulation.html#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">MSE =</span> <span class="fu">mean</span>(diff))</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;Model&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="simulation.html#cb6-1" aria-hidden="true" tabindex="-1"></a>var<span class="ot">&lt;-</span>simulation_all_long<span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="simulation.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model, Coefficient)<span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="simulation.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mean_Estimate =</span> <span class="fu">mean</span>(Estimate))<span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="simulation.html#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diff =</span> (Estimate <span class="sc">-</span> <span class="fu">mean</span>(Estimate))<span class="sc">^</span><span class="dv">2</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb6-5"><a href="simulation.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model, Coefficient)<span class="sc">%&gt;%</span></span>
+<span id="cb6-6"><a href="simulation.html#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Var =</span> <span class="fu">mean</span>(diff))</span></code></pre></div>
+<pre><code>## `summarise()` regrouping output by &#39;Model&#39; (override with `.groups` argument)</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="simulation.html#cb8-1" aria-hidden="true" tabindex="-1"></a>results<span class="ot">&lt;-</span>bias<span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="simulation.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(MSE)<span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="simulation.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(var)</span></code></pre></div>
+<pre><code>## Joining, by = c(&quot;Model&quot;, &quot;Coefficient&quot;)</code></pre>
+<pre><code>## Joining, by = c(&quot;Model&quot;, &quot;Coefficient&quot;)</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="simulation.html#cb11-1" aria-hidden="true" tabindex="-1"></a>results_df<span class="ot">&lt;-</span>results<span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="simulation.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(Model, Coefficient, betas, Coefficient_Means, Bias, Var, MSE)<span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="simulation.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Bias_2_plus_Var =</span> Var <span class="sc">+</span> Bias<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb11-4"><a href="simulation.html#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="simulation.html#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(results_df)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;Model&quot;</span>, <span class="st">&quot;Coefficient #&quot;</span>,<span class="st">&quot;True Coefficient Values&quot;</span>, <span class="st">&quot;Estimation Mean&quot;</span>, <span class="st">&quot;Bias&quot;</span>,<span class="st">&quot;Var&quot;</span>, <span class="st">&quot;MSE&quot;</span>, <span class="st">&quot;Calculated MSE&quot;</span>)</span>
+<span id="cb11-6"><a href="simulation.html#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="simulation.html#cb11-7" aria-hidden="true" tabindex="-1"></a>results_df<span class="sc">%&gt;%</span></span>
+<span id="cb11-8"><a href="simulation.html#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="st">`</span><span class="at">Coefficient #</span><span class="st">`</span> <span class="sc">==</span><span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 8
+##   Model `Coefficient #` `True Coefficie… `Estimation Mea…   Bias    Var    MSE
+##   &lt;chr&gt;           &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+## 1 OLS                 4             -0.5           -0.447 0.0525 0.0625 0.0626
+## 2 RIDGE               4             -0.5           -0.367 0.133  0.0362 0.0437
+## 3 LASSO               4             -0.5           -0.396 0.104  0.0600 0.0633
+## 4 ELAS…               4             -0.5           -0.378 0.122  0.0421 0.0478
+## # … with 1 more variable: `Calculated MSE` &lt;dbl&gt;</code></pre>
+<p>We decided to look how our Models fair for the Coefficient of X4, as we can see most of the models come close to the True Coefficient Value of -0.5. And similar to the proofs we solved in previous sections, we see that OLS has the lowest coefficient bias for X4 but unfortunately it has the greatest Variance. Because of its high variance it ends up having the second largest MSE even though it had the lowest Bias.</p>
+<p>As we can see the property that <span class="math inline">\(MSE = Bias^2 + Var\)</span> is seen by how close the value of the Calcualted MSE is to the actual MSE value. And in terms of what it means when evaluating which model to use, by increasing the bias like in the RIDGE Model we are able to reduce the MSE value by almost 0.02.</p>
+<p>Lets see what the average and median value of Bias, MSE, and Variance for our coefficients fair for all the models:</p>
+</div>
+<div id="results" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Results</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="simulation.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#lets look at coefficient 1 and how the bias, variance and MSE have changed</span></span>
+<span id="cb13-2"><a href="simulation.html#cb13-2" aria-hidden="true" tabindex="-1"></a>median_results<span class="ot">&lt;-</span>results<span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="simulation.html#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Bias_2 =</span> Bias<span class="sc">^</span><span class="dv">2</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="simulation.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Bias_2, Var, MSE, Model))<span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="simulation.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model)<span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="simulation.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_if</span>(is.numeric, median, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span>
+<span id="cb13-7"><a href="simulation.html#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="simulation.html#cb13-8" aria-hidden="true" tabindex="-1"></a>average_results<span class="ot">&lt;-</span>results<span class="sc">%&gt;%</span></span>
+<span id="cb13-9"><a href="simulation.html#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Bias_2 =</span> Bias<span class="sc">^</span><span class="dv">2</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb13-10"><a href="simulation.html#cb13-10" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(Bias_2, Var, MSE, Model))<span class="sc">%&gt;%</span></span>
+<span id="cb13-11"><a href="simulation.html#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model)<span class="sc">%&gt;%</span></span>
+<span id="cb13-12"><a href="simulation.html#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize_if</span>(is.numeric, mean, <span class="at">na.rm=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="simulation.html#cb14-1" aria-hidden="true" tabindex="-1"></a>average_results</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 4
+##   Model       Bias_2    Var   MSE
+##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 ELASTIC NET  0.691 0.0410 0.646
+## 2 LASSO        0.732 0.0566 0.703
+## 3 OLS          0.828 0.0642 0.808
+## 4 RIDGE        0.667 0.0354 0.616</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="simulation.html#cb16-1" aria-hidden="true" tabindex="-1"></a>Models<span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;OLS&quot;</span>,<span class="st">&quot;LASSO&quot;</span>,<span class="st">&quot;ELASTIC NET&quot;</span>,<span class="st">&quot;RIDGE&quot;</span>)</span>
+<span id="cb16-2"><a href="simulation.html#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="simulation.html#cb16-3" aria-hidden="true" tabindex="-1"></a>average_results<span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="simulation.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(Estimate_Name, Estimate, Bias_2<span class="sc">:</span>MSE)<span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="simulation.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Model, <span class="at">y =</span> Estimate , <span class="at">fill =</span> Estimate_Name))<span class="sc">+</span></span>
+<span id="cb16-6"><a href="simulation.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat  =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>())<span class="sc">+</span></span>
+<span id="cb16-7"><a href="simulation.html#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> Models)</span></code></pre></div>
+<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>As it can be seen by the results above, we see that on average, Ridge regression tends to have the lowest MSE estimates, while OLS has the highest MSE estimates. This is a bit expected given the multicolinearity of the dataset for which some of the beta values were zero. Unexpectedly, OLS has the highest out of all the models</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="simulation.html#cb17-1" aria-hidden="true" tabindex="-1"></a>median_results</span></code></pre></div>
+<pre><code>## # A tibble: 4 x 4
+##   Model       Bias_2    Var   MSE
+##   &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 ELASTIC NET  0.516 0.0386 0.368
+## 2 LASSO        0.524 0.0565 0.425
+## 3 OLS          0.551 0.0627 0.526
+## 4 RIDGE        0.500 0.0341 0.338</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="simulation.html#cb19-1" aria-hidden="true" tabindex="-1"></a>median_results<span class="sc">%&gt;%</span></span>
+<span id="cb19-2"><a href="simulation.html#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(Estimate_Name, Estimate, Bias_2<span class="sc">:</span>MSE)<span class="sc">%&gt;%</span></span>
+<span id="cb19-3"><a href="simulation.html#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Model, <span class="at">y =</span> Estimate , <span class="at">fill =</span> Estimate_Name))<span class="sc">+</span></span>
+<span id="cb19-4"><a href="simulation.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat  =</span> <span class="st">&quot;identity&quot;</span>, <span class="at">position =</span> <span class="fu">position_dodge</span>())<span class="sc">+</span></span>
+<span id="cb19-5"><a href="simulation.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">limits =</span> Models)</span></code></pre></div>
+<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Similar to the average values, we still see the same pattern. Ridge has both the lowest Bias and Variance, and therefore lowest MSE. And OLS has the highest Bias and Variance and thus the highest MSE.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="simulation.html#cb20-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">&quot;tuning_all.csv&quot;</span>)</span></code></pre></div>
+<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   X1 = col_double(),
+##   alpha = col_double(),
+##   lambda = col_double(),
+##   Model = col_character(),
+##   Simulation_number = col_double()
+## )</code></pre>
+</div>
+<div id="visualizations" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Visualizations</h2>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="simulation.html#cb23-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="simulation.html#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Model)<span class="sc">%&gt;%</span></span>
+<span id="cb23-3"><a href="simulation.html#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_lambda =</span> <span class="fu">mean</span>(lambda),</span>
+<span id="cb23-4"><a href="simulation.html#cb23-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_alpha =</span> <span class="fu">mean</span>(alpha))</span></code></pre></div>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   Model       mean_lambda mean_alpha
+##   &lt;chr&gt;             &lt;dbl&gt;      &lt;dbl&gt;
+## 1 ELASTIC NET      0.111       0.033
+## 2 LASSO            0.0127      1    
+## 3 RIDGE            0.136       0</code></pre>
+<p>As we can see from this table, ELASTIC NET prefers to have a smaller alpha value, meaning that the ELASTIC NET will have a higher Ridge or L2 weight. This makes sense as compared to LASSO, the RIDGE regression provides results with lower MSE. Also as seem by the graph below, we see that the estimates for alpha for the elastic net have modes around 0 and 0.1.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="simulation.html#cb26-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="simulation.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Model <span class="sc">==</span> <span class="st">&quot;ELASTIC NET&quot;</span>)<span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="simulation.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb26-4"><a href="simulation.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> alpha))</span></code></pre></div>
+<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="simulation.html#cb27-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="simulation.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>()<span class="sc">+</span></span>
+<span id="cb27-3"><a href="simulation.html#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="fu">aes</span>(<span class="at">x =</span> lambda))<span class="sc">+</span></span>
+<span id="cb27-4"><a href="simulation.html#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(<span class="sc">~</span>Model)</span></code></pre></div>
+<p><img src="Regularization-Math-Stats_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>The tuning parameters are very interesting to explore. Firstly we see that the values of lambda seem to be centered around one value. LASSO seems to have a very clear estimate across simulations, while ridge and elastic net follow sparser values for lambda. When comparing Ridge and Elastic Net estimates for lambda we see that Elastic Net seems to be more smooth bi-modal distribution. Ridge regression seems to be a multi-modal distribution that is not as smooth.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="bias-and-variance-of-penalized-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="applications.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "chapter",
+"scroll_highlight": true
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

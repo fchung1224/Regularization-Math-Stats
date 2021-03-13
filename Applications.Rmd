@@ -1,5 +1,7 @@
 # Applications
 
+Finally, to illustrate the usefulness of penalized regression techniques across a range of fields, we briefly discuss three interesting real-world applications.
+
 ## Deep Learning Algorithms
 
 Deep learning is a machine learning technique that attempts to mimic the workings of the human brain in processing data for use in detecting objects, recognizing speech, translating languages, and making decisions. Overall, its goal is to teach computer what comes naturally to humans: learning by example. This requires the machine to "learn" rather than "memorize". In other words, a machine that is given training data ideally should be able to pick up on the patterns on that data without overfitting to the "noise" in the data so that the model can be successful when confronted with brand new data.

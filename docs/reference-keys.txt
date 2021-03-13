@@ -7,6 +7,7 @@ assumptions
 bias
 variance
 mean-squared-error
+simulation
 calculate-bias-variance-mse-of-the-coefficients-in-the-model
 results
 visualizations
