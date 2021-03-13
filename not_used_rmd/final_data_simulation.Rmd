@@ -1,0 +1,202 @@
+---
+title: "Data_Simulation_Final"
+author: "Federico Chung"
+date: "3/12/2021"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(tibble)
+library(MASS) 
+library(Metrics)
+library(tidyr)
+library(caret)
+```
+
+
+```{r}
+read_csv("simulation_all.csv")
+```
+
+We simulated the dataset for 100 times. And now we will see how the bias, mse, and variance of the coefficient estimates vary
+
+```{r}
+bias<-simulation_all%>%
+  mutate(Coefficient_Means = rowMeans(.[4:103]))%>%
+  mutate(Bias = Coefficient_Means - betas)%>%
+  dplyr::select(c(Model, Coefficient, Bias, Coefficient_Means, betas))
+
+simulation_all_long<-
+  gather(simulation_all, Simulation, Estimate, simulation_1:simulation_100)
+
+MSE<-simulation_all_long%>%
+  mutate(diff = (Estimate - betas)^2)%>%
+  group_by(Model, Coefficient)%>%
+  summarize(MSE = mean(diff))
+
+var<-simulation_all_long%>%
+  group_by(Model, Coefficient)%>%
+  mutate(mean_Estimate = mean(Estimate))%>%
+  mutate(diff = (Estimate - mean(Estimate))^2)%>%
+  group_by(Model, Coefficient)%>%
+  summarize(Var = mean(diff))
+```
+
+
+
+```{r}
+results<-bias%>%
+  left_join(MSE)%>%
+  left_join(var)
+
+results_df<-results%>%
+  dplyr::select(Model, Coefficient, betas, Coefficient_Means, Bias, Var, MSE)%>%
+  mutate(Bias_2_plus_Var = Var + Bias^2)
+
+results_df%>%
+  filter(`Coefficient #` ==3)
+```
+
+
+```{r}
+colnames(results_df)<-c("Model", "Coefficient #","True Coefficient Values", "Estimation Mean", "Bias","Var", "MSE", "Calculated MSE")
+results_df%>%
+  filter(`Coefficient #` ==1)
+```
+
+```{r}
+#lets look at coefficient 1 and how the bias, variance and MSE have changed
+median_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model))%>%
+  group_by(Model)%>%
+  summarize_if(is.numeric, median, na.rm=TRUE)
+
+average_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model))%>%
+  group_by(Model)%>%
+  summarize_if(is.numeric, mean, na.rm=TRUE)
+
+average_results
+```
+
+```{r}
+average_results_plot<-average_results%>%
+  gather(Estimate_Name, Estimate, Bias_2:MSE)
+
+Models<- c("OLS","ELASTIC NET","LASSO","RIDGE")
+
+average_results_plot%>%
+  ggplot(aes(x = Model, y = Estimate , fill = Estimate_Name))+
+  geom_bar(stat  = "identity", position = position_dodge())+
+  scale_x_discrete(limits = Models)
+
+median_results%>%
+  gather(Estimate_Name, Estimate, Bias_2:MSE)%>%
+  ggplot(aes(x = Model, y = Estimate , fill = Estimate_Name))+
+  geom_bar(stat  = "identity", position = position_dodge())+
+  scale_x_discrete(limits = Models)
+
+```
+#TUNING PARAMETERS
+
+```{r}
+get_ridge_tune(ridge_model)
+```
+
+```{r}
+tuning_final<-data_frame(matrix(ncol = 3, nrow = 0))
+
+colnames(tuning_final)<-c("alpha","lambda","Model")
+
+tuning_final
+```
+
+
+```{r}
+
+simulation_final_tuning_parameters<-function(iterations, betas, tuning_final){
+  for (i in seq(1, iterations, 1)){
+    lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
+    alpha_grid <- c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)
+    srchGrd = expand.grid(.alpha = alpha_grid, .lambda = lambda_grid)
+    
+    df<-simulation(seed = i,betas)
+    
+    ridge_model<- get_ridge_model(df, lambda_grid)
+    lasso_model<- get_lasso_model(df, lambda_grid)
+    elastic_net_model<- get_elastic_net_model(df, srchGrd)
+
+    ridge_tune<-get_ridge_tune(ridge_model)
+    lasso_tune<-get_lasso_tune(lasso_model)
+    elastic_net_tune<- get_elastic_net_tune(elastic_net_model)
+    
+    head(ridge_tune)
+    head(lasso_tune)
+    head(elastic_net_tune)
+    
+    tune_all<-rbind(ridge_tune,lasso_tune,elastic_net_tune)%>%
+      mutate(Simulation_number = i)
+    
+    tuning_final<- rbind(tuning_final, tune_all)
+  }
+  
+  return(tuning_final)
+}
+
+```
+
+```{r}
+tuning_all<-simulation_final_tuning_parameters(100, betas, tuning_final)
+
+```
+```{r}
+write.csv(tuning_all, "tuning_all.csv")
+```
+
+# Visualizations
+
+```{r}
+tuning_all%>%
+  group_by(Model)%>%
+  summarise(mean_lambda = mean(lambda),
+            mean_alpha = mean(alpha))
+```
+
+
+```{r}
+tuning_all%>%
+  filter(Model == "ELASTIC NET")%>%
+  ggplot()+
+  geom_density(aes(x = alpha))
+```
+
+
+```{r}
+tuning_all%>%
+  ggplot()+
+  geom_density(aes(x = lambda))+
+  facet_grid(~Model)
+#LASSO Alpha = 1 , Elastic Net wants to become more like Ridge Regression rather than LASSO, which is interesting as our dataset was created so that LASSO would perform better as we had a lot of predictions that were highly correlated with some values that are closer to 0. 
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

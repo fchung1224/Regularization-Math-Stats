@@ -1,0 +1,242 @@
+---
+title: "Data_Simulation"
+author: "Federico Chung"
+date: "3/12/2021"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(tibble)
+library(MASS) 
+library(Metrics)
+library(tidyr)
+library(caret)
+library(readr)
+```
+
+#SIMULATION
+
+In this simulation we will use 4 different models and test how the coefficient estimates for each model varies from each other. 
+
+Each of the models tested, outside of OLS, have a loss function that includes additional "penalties", which is why these functions are labeled as penalized regression models. The models we will be testing are the following:
+
+-OLS
+
+Which tries to find $\beta$ estimates that minimize:
+
+$$
+\begin{aligned}
+MSE = \frac{1}{N}(Y - X\beta)^T(Y-X\beta)
+\end{aligned}
+$$
+
+-Ridge Regression
+
+Which has an additional regression penalty, called L2: $\lambda \beta^T\beta$
+
+Ridge Regression tries to find $\beta$ estimates that minimizes:
+
+
+$$
+\begin{aligned}
+&= MSE  +  \lambda \beta^T\beta\\
+&= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) + \lambda \beta^T\beta
+\end{aligned}
+$$
+-LASSO
+
+Which has an additional regression penalty, called L1: $\lambda|\beta|$
+
+LASSO tries to find $\beta$ estimates that minimizes:
+
+$$
+\begin{aligned}
+&= MSE  +  \lambda|\beta|\\
+&= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) +  \lambda|\beta|
+\end{aligned}
+$$
+
+-Elastic Net
+
+Which is a combination of both L1 and L2 penalties: $\lambda \beta^T\beta+\lambda|\beta| $
+
+Elastic Net Regression tries to find $\beta$ estimates that minimizes:
+
+$$
+\begin{aligned}
+&= MSE  +  \lambda \beta^T\beta+\lambda|\beta|\\
+&= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) + \lambda_1 \beta^T\beta+\lambda_2|\beta|
+\end{aligned}
+$$
+# Simulation
+
+We first start by creating a simulation of data. The dataset includes a covariance matrix to include multicollinearity within the columns of the data. This allows us to explore the benefits of penalized regression models when there is multicollinearity. Based on a pre-determined set of betas we use the these values to create our dependent variable for which we add some noise `e`. 
+
+We decided to use a small dataset with loads of predictors to see what potential benefits Penalized Regression Models can have on  small datasets. 
+
+The true values of Y will be estimated using the following formula:
+
+$$
+Y = X\beta + \epsilon 
+$$
+Where $\epsilon \sim N(0,25)$
+
+We simulated the dataset for 100 times. And the dataset `simulation_all` contains all the 50 different coefficient estimates for all the 100 iterations for all 4 models. 
+
+
+```{r}
+simulation_all<-read_csv("simulation_all.csv")
+```
+
+Each simulation consists of 50 predictors, and 100 observations. 
+
+
+## Calculate Bias, Variance, MSE of the coefficients in the model
+
+```{r}
+bias<-simulation_all%>%
+  mutate(Coefficient_Means = rowMeans(.[4:103]))%>%
+  mutate(Bias = Coefficient_Means - betas)%>%
+  dplyr::select(c(Model, Coefficient, Bias, Coefficient_Means, betas))
+
+simulation_all_long<-
+  gather(simulation_all, Simulation, Estimate, simulation_1:simulation_100)
+
+MSE<-simulation_all_long%>%
+  mutate(diff = (Estimate - betas)^2)%>%
+  group_by(Model, Coefficient)%>%
+  summarize(MSE = mean(diff))
+
+var<-simulation_all_long%>%
+  group_by(Model, Coefficient)%>%
+  mutate(mean_Estimate = mean(Estimate))%>%
+  mutate(diff = (Estimate - mean(Estimate))^2)%>%
+  group_by(Model, Coefficient)%>%
+  summarize(Var = mean(diff))
+
+results<-bias%>%
+  left_join(MSE)%>%
+  left_join(var)
+
+
+results_df<-results%>%
+  dplyr::select(Model, Coefficient, betas, Coefficient_Means, Bias, Var, MSE)%>%
+  mutate(Bias_2_plus_Var = Var + Bias^2)
+
+colnames(results_df)<-c("Model", "Coefficient #","True Coefficient Values", "Estimation Mean", "Bias","Var", "MSE", "Calculated MSE")
+
+results_df%>%
+  filter(`Coefficient #` ==4)
+```
+
+We decided to look how our Models fair for the Coefficient of X4, as we can see most of the models come close to the True Coefficient Value of -0.5. And similar to the proofs we solved in previous sections, we see that OLS has the lowest coefficient bias for X4 but unfortunately it has the greatest Variance. Because of its high variance it ends up having the second largest MSE even though it had the lowest Bias. 
+
+As we can see the property that $MSE = Bias^2 + Var$ is seen by how close the value of the Calcualted MSE is to the actual MSE value. And in terms of what it means when evaluating which model to use, by increasing the bias like in the RIDGE Model we are able to reduce the MSE value by almost 0.02. 
+
+
+
+Lets see what the average and median value of Bias, MSE, and Variance for our coefficients fair for all the models:
+
+## RESULTS
+
+```{r}
+#lets look at coefficient 1 and how the bias, variance and MSE have changed
+median_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model))%>%
+  group_by(Model)%>%
+  summarize_if(is.numeric, median, na.rm=TRUE)
+
+average_results<-results%>%
+  mutate(Bias_2 = Bias^2)%>%
+  dplyr::select(c(Bias_2, Var, MSE, Model))%>%
+  group_by(Model)%>%
+  summarize_if(is.numeric, mean, na.rm=TRUE)
+
+```
+
+```{r}
+average_results
+```
+
+
+```{r}
+Models<- c("OLS","LASSO","ELASTIC NET","RIDGE")
+
+average_results%>%
+  gather(Estimate_Name, Estimate, Bias_2:MSE)%>%
+  ggplot(aes(x = Model, y = Estimate , fill = Estimate_Name))+
+  geom_bar(stat  = "identity", position = position_dodge())+
+  scale_x_discrete(limits = Models)
+```
+
+As it can be seen by the results above, we see that on average, Ridge regression tends to have the lowest MSE estimates, while OLS has the highest MSE estimates. This is a bit expected given the multicolinearity of the dataset for which some of the beta values were zero. Unexpectedly, OLS has the highest out of all the models
+
+```{r}
+median_results
+```
+
+
+```{r}
+median_results%>%
+  gather(Estimate_Name, Estimate, Bias_2:MSE)%>%
+  ggplot(aes(x = Model, y = Estimate , fill = Estimate_Name))+
+  geom_bar(stat  = "identity", position = position_dodge())+
+  scale_x_discrete(limits = Models)
+```
+
+Similar to the average values, we still see the same pattern. Ridge has both the lowest Bias and Variance, and therefore lowest MSE. And OLS has the highest Bias and Variance and thus the highest MSE. 
+
+
+```{r}
+tuning_all<-read_csv("tuning_all.csv")
+```
+
+
+# Visualizations
+
+```{r}
+tuning_all%>%
+  group_by(Model)%>%
+  summarise(mean_lambda = mean(lambda),
+            mean_alpha = mean(alpha))
+```
+
+As we can see from this table, ELASTIC NET prefers to have a smaller alpha value, meaning that the ELASTIC NET will have a higher Ridge or L2 weight. This makes sense as compared to LASSO, the RIDGE regression provides results with lower MSE. Also as seem by the graph below, we see that the estimates for alpha for the elastic net have modes around 0 and 0.1. 
+
+
+```{r}
+tuning_all%>%
+  filter(Model == "ELASTIC NET")%>%
+  ggplot()+
+  geom_density(aes(x = alpha))
+```
+
+
+```{r}
+tuning_all%>%
+  ggplot()+
+  geom_density(aes(x = lambda))+
+  facet_grid(~Model)
+```
+
+The tuning parameters are very interesting to explore. Firstly we see that the values of lambda seem to be centered around one value. LASSO seems to have a very clear estimate across simulations, while ridge and elastic net follow sparser values for lambda. When comparing Ridge and Elastic Net estimates for lambda we see that Elastic Net seems to be more smooth bi-modal distribution. Ridge regression seems to be a multi-modal distribution that is not as smooth. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
