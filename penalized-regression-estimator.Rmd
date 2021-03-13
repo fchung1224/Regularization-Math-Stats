@@ -27,11 +27,9 @@ While both LASSO and Ridge have pros and cons (as we show through simulation lat
 
 
 ## Deriving the Ridge Estimator
+Now, after inroducing the idea behind penalized regression models, we derive the estimator for ride regression. 
 
-$$
-y_i = \bar{x}^T_i \beta
-$$
-Lets assume that we have predictors that range from $\bar{x}^T_i  = 1,x^2_i,x^3_i,...,x_i^n$
+Assume that we have predictors that range from $\bar{x}^T_i  = 1,x^2_i,x^3_i,...,x_i^n$
 
 $\beta$ includes all the coefficients for all our predictors. 
 
@@ -73,8 +71,7 @@ $$
 \beta = (X^TX)^{-1}X^TY \\
 $$
 
-
-Ridge estimates are a scaled version of the least squares estimates where $\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)$
+Thus, ridge estimates are a scaled version of the least squares estimates where $\hat{\beta}^{ridge} = \hat{\beta}/(1+\lambda)$
 
 
 
