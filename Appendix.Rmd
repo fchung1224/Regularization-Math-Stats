@@ -1,6 +1,6 @@
 #Appendix
 
-```{r setup, include=FALSE}
+```{r, include=FALSE}
 library(dplyr)
 library(tibble)
 library(MASS) 
@@ -267,7 +267,7 @@ tuning_final
 ```
 
 
-```{r}
+```{r,eval=FALSE}
 simulation_final_tuning_parameters<-function(iterations, betas, tuning_final){
   for (i in seq(1, iterations, 1)){
     lambda_grid<- lambda_grid<-10^seq(-3, 3, length.out = 50)
@@ -299,11 +299,11 @@ simulation_final_tuning_parameters<-function(iterations, betas, tuning_final){
 
 ```
 
-```{r}
+```{r, eval = FALSE}
 tuning_all<-simulation_final_tuning_parameters(100, betas, tuning_final)
 ```
 
-```{r}
+```{r, eval = FALSE}
 write.csv(tuning_all, "tuning_all.csv")
 ```
 
