@@ -29,6 +29,4 @@ One of the main challenges in financial fraud detection is that only a very smal
 
 A solution to this that utilizes the ideas of regularization is called a "robust deep auto-encoder." This method is made to handle training data that are not clean, meaning they may contain abnormal or outlier samples. This manifests itself well to fraud detection since financial intermediaries will face many unusual purchases that usually are not fraudulent. The method works by splitting the input data X into 2 parts: X=L+S. L is efficiently reconstructed by auto-encoder and S models the noise and outlier component. Then, a minimizing regularized objective function, or loss function, is applied to both the parts.
 
-
-
 ![](fraud.png)
