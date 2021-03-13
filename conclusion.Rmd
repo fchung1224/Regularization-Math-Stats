@@ -1,0 +1,5 @@
+# Conclusion 
+
+In this project, we consider the theory and application of penalized regression models. We motivate our study by the bias-variance traeoff-- in some cases, it may be preferable to sacrifice a degree of unbiasedness in order to have an estimator with less variance. 
+
+We begin by introducing penalized regression models and deriving the ridge regression estimator. Next, we prove analytically that penalized regression models are biased, but have less variance than OLS regression. We complement this theoretical work by simulation, showing empirically that penalized regression models can have lower mean squared error than OLS. Finally, we consider several interesting real worl applications of penalized regression. 

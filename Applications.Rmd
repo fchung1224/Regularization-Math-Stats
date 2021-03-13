@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = TRUE)
 Deep learning is a machine learning technique that attempts to mimic the workings of the human brain in processing data for use in detecting objects, recognizing speech, translating languages, and making decisions. Overall, its goal is to teach computer what comes naturally to humans: learning by example. This requires the machine to "learn" rather than "memorize". In other words, a machine that is given training data ideally should be able to pick up on the patterns on that data without overfitting to the "noise" in the data so that the model can be successful when confronted with brand new data.
 
 
-
 ![](MachineLearning.png)
 
 Let's look at the model on the right side of the above figure. This model fits extremely well to the data. However, it does not closely conform to the true function. Thus, the model is overfitted; it has high complexity, and picks up and "memorizes" all of the noise and random fluctuation in the data. However, if given new data derived from the same function, the model will perform very poorly, as it has not attempted to recognize the true function that describes the data. 

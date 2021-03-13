@@ -1,6 +1,6 @@
 ---
 title: 'MATH 455 Regularization'
-author: 'Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College'
+author: 'Federico Chung,  Lucas Leiter, and Aidan Toner-Rodgers'
 site: bookdown::bookdown_site
 output: 
   bookdown::gitbook:
@@ -15,5 +15,4 @@ github-repo: fchung1224/Regularization-Math-Stats
   
 # Preface {-}
 
-For our project, we’re planning to explore penalized regression models (i.e. ridge regression, LASSO, bayesian LASSO, elastic net, etc.). These methods fit in perfectly with what we’ve been learning in class regarding the bias and variance of estimators. The key idea behind penalized regression models is that in settings with many covariates, it can make sense to use estimators with more bias in order to get less variance. To do this, penalized regression models basically encourage the coefficients to be smaller (or even zero with some methods). We were especially interested in this topic because of its connection to both theory and practice. Understanding the intuition and mechanics behind penalized regression models depends on many of the theoretical ideas we have explored in class, and these tools are also useful across a range of applications in both prediction.
-
+In our final project for MATH 455: Mathematical Statistics, we explore the theory behind penalized regression models. 

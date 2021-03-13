@@ -1,0 +1,16 @@
+# References 
+
+"Lasso vs Ridge vs Elastic Net | ML". 2020. _Geeks for Geeks._
+
+Liu, Hanzhong  and Yuehan Yang. 2018. "Penalized regression adjusted causal effect estimates
+in high dimensional randomized experiments." _Working Paper_. 
+
+Yen-Chi Chen. 2018. "Regression: Penalized Approach." _Washington University._
+
+Steorts, Rebecca. 2015. "The Bayesian Lasso." _Duke University._
+
+Casella, George, Malay Ghosh, Jeff Gill, Minjung Kyung. "Penalized regression, standard errors, and Bayesian lassos." _Project Euclid._
+
+Regularization: Ridge Regression and the LASSO
+
+"Regularization: Ridge Regression and the LASSO." 2006. _Stanford._
