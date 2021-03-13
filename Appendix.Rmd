@@ -1,9 +1,4 @@
----
-title: "Appendix"
-author: "Federico Chung"
-date: "3/12/2021"
-output: html_document
----
+#Appendix
 
 ```{r setup, include=FALSE}
 library(dplyr)
@@ -14,9 +9,9 @@ library(tidyr)
 library(caret)
 ```
 
-#Simulation Procedure
+## Simulation Procedure
 
-## Specify the TRUE Beta Values
+### Specify the TRUE Beta Values
 We create a predetermined set of $\beta$:
 
 ```{r, eval=FALSE}
@@ -24,7 +19,7 @@ set.seed(2)
 betas<- (sample(-10:10,size=50,replace=TRUE))/10
 ```
 
-## CREATE THE SIMULATION VALUES
+### CREATE THE SIMULATION VALUES
 
 We then use the MVR Norm function which allows us to create X variables with a specified Covarience Matrix.
 
@@ -54,7 +49,7 @@ simulation<- function(seed, betas){
 As it can be seen by the code chunk above, `CovMatrix` is where we specify the covariance matrix where we show that there is multicollinearity between the explanatory variables. 
 
 
-## CREATING MODEL FUNCTIONS
+### CREATING MODEL FUNCTIONS
 We create getters for both the model, coefficient, and tuning parameters models for the following models:
 
 - `OLS`
@@ -180,7 +175,7 @@ get_elastic_net_tune<- function(elastic_net_model){
 ```
 
 
-## TRYOUT THE SIMULATION FOR ONE ITERATION
+### TRYOUT THE SIMULATION FOR ONE ITERATION
 
 ```{r, eval=FALSE}
 #one simulation tryout
@@ -213,7 +208,7 @@ b_final_tryout<-b_final%>%
   left_join(coefficients_all)
 ```
 
-## SIMULATION FOR MULTIPLE ITERATIONS
+### SIMULATION FOR MULTIPLE ITERATIONS
 
 ```{r, eval=FALSE}
 simulation_final_all_betas<-function(iterations, betas, b_final){
@@ -260,7 +255,7 @@ simulation_all<-simulation_final_all_betas(100, betas, b_final)
 write.csv(simulation_all, "simulation_all.csv")
 ```
 
-# TUNING PARAMETERS
+## TUNING PARAMETERS
 
 
 ```{r}

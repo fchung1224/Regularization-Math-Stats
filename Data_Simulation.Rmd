@@ -1,9 +1,4 @@
----
-title: "Data_Simulation"
-author: "Federico Chung"
-date: "3/12/2021"
-output: html_document
----
+
 
 
 ```{r setup, include=FALSE}
@@ -70,7 +65,7 @@ $$
 &= \frac{1}{N}(Y - X\beta)^T(Y-X\beta) + \lambda_1 \beta^T\beta+\lambda_2|\beta|
 \end{aligned}
 $$
-# Simulation
+## Simulation of explanatory variables
 
 We first start by creating a simulation of data. The dataset includes a covariance matrix to include multicollinearity within the columns of the data. This allows us to explore the benefits of penalized regression models when there is multicollinearity. Based on a pre-determined set of betas we use the these values to create our dependent variable for which we add some noise `e`. 
 
