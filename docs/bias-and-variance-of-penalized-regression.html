@@ -21,7 +21,7 @@
   
   
 
-<meta name="author" content="Federico Chung, Aidan, and Lucas, Fall 2020 Macalester College" />
+<meta name="author" content="Federico Chung, Lucas Leiter, and Aidan Toner-Rodgers" />
 
 
 
@@ -155,21 +155,9 @@ Var(\hat{\beta}_{OLS})-Var(\hat{\beta}_{ridge})&amp;=\sigma^2 (X^T X)^{-1}-\sigm
 </div>
 <div id="mean-squared-error" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Mean Squared Error</h2>
-<p>The expected error, the mean squared error, or <span class="math inline">\(E[(y - \hat{f}(x))^2]\)</span> of our predictions can also be expressed as</p>
-<p><span class="math display">\[
-\begin{aligned}
-E[(y - \hat{f}(x))^2] = Bias[\hat{f}(x)]^2 + Var[\hat{f}(x)] + \sigma^2
-\end{aligned}
-\]</span></p>
-<p>There are three components that affect the expected error of our predictions:</p>
-<ol style="list-style-type: decimal">
-<li><p>Bias</p></li>
-<li><p>Variance</p></li>
-<li><p>“Irreducible Error term” <span class="math inline">\(\sigma^2\)</span></p></li>
-</ol>
-<p>It is possible to reduce expected error by increasing bias and reducing variance by a lot. Which is why we use ridge regression and lasso to increase the bias by significantly reducing the variance. The trade-off is an important way to reduce our mean squared error for values outside our sample. We tune our <span class="math inline">\(\lambda\)</span> parameter using cross-validation and see how it reacts when there is “new” data.</p>
-<p>Proof of the Bias Variance Trade-off</p>
-<p>we are comparing our estimate of <span class="math inline">\(\hat{y}\)</span> with the true value of y.</p>
+<p>A nice way to measure the overall performance of an estimator is with the mean squared error, which is a measure of how much the model’s prediction differ from the true value. Specifically, the mean squared error is written as</p>
+<p><span class="math display">\[MSE=E[(y - \hat{f}(x))^2]\]</span></p>
+<p>Since the MSE depends on the <em>square</em> of the difference between the predicted and true value, it is a function of both the bias and the variance. Specifically, we can express the MSE alternatively as:</p>
 <p><span class="math display">\[
 \begin{aligned}
 MSE(\hat{y}) = E[(y - \hat{y})^2] &amp;= E(y^2 - 2y\hat{y} + \hat{y}^2)\\
@@ -180,6 +168,13 @@ MSE(\hat{y}) = E[(y - \hat{y})^2] &amp;= E(y^2 - 2y\hat{y} + \hat{y}^2)\\
 &amp;= Var(y) + (E(\hat{y}) - y)^2
 \end{aligned}
 \]</span></p>
+<p>Thus, there are three components that affect the expected error of our predictions:</p>
+<ol style="list-style-type: decimal">
+<li><p>Bias</p></li>
+<li><p>Variance</p></li>
+<li><p>“Irreducible Error term” <span class="math inline">\(\sigma^2\)</span></p></li>
+</ol>
+<p>From this decomposition, we begin to see how penalized regression can have improved performance over OLS. By sacrificing higher bias in order to get much lower variance, the MSE of penalized regression can potentially be much lower in certain circumstances, particularly when there are many covariates.</p>
 
 </div>
 </div>

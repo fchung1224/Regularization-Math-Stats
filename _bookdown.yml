@@ -3,4 +3,4 @@ language:
   ui:
     chapter_name: "Chapter "
 output_dir: "docs"
-rmd_files: ['index.Rmd','Introduction.Rmd','penalized-regression-estimator.Rmd','bias-variance-derivation.Rmd']
+rmd_files: ['index.Rmd','Introduction.Rmd','penalized-regression-estimator.Rmd','bias-variance-derivation.Rmd','Data Simulation Start.Rmd','Applications.Rmd','conclusion.Rmd','referencs.Rmd']
