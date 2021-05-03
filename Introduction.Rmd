@@ -2,6 +2,8 @@
 
 # Introduction
 
+![](bias-variance-tradeoff.png)
+
 Linear regression is one of the most important tools in statistics, useful for both prediction and causal inference across a range of disciplines. At its core, regression is about using observed data to estimate the unknown true relationship between variables. Intuitively, this suggests two key features we might desire in  a regression model:
 
 1. __Low Bias__: The model predicts the true relationship correctly on average
