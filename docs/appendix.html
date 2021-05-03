@@ -32,7 +32,6 @@
   
 <link rel="prev" href="references.html"/>
 
-<script src="libs/header-attrs-2.7.2/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -55,27 +54,25 @@
 
 
 <style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode { white-space: pre; position: relative; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -84,9 +81,9 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  {  }
 @media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+a.sourceLine::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -134,37 +131,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
 <li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
-<li class="chapter" data-level="2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html"><i class="fa fa-check"></i><b>2</b> Penalized Regression Estimators</a>
-<ul>
+<li class="chapter" data-level="2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html"><i class="fa fa-check"></i><b>2</b> Penalized Regression Estimators</a><ul>
 <li class="chapter" data-level="2.1" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#penalized-regression-models"><i class="fa fa-check"></i><b>2.1</b> Penalized Regression Models</a></li>
 <li class="chapter" data-level="2.2" data-path="penalized-regression-estimators.html"><a href="penalized-regression-estimators.html#deriving-the-ridge-estimator"><i class="fa fa-check"></i><b>2.2</b> Deriving the Ridge Estimator</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i><b>3</b> Bias and Variance of Penalized Regression</a>
-<ul>
+<li class="chapter" data-level="3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html"><i class="fa fa-check"></i><b>3</b> Bias and Variance of Penalized Regression</a><ul>
 <li class="chapter" data-level="3.1" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#assumptions"><i class="fa fa-check"></i><b>3.1</b> Assumptions</a></li>
 <li class="chapter" data-level="3.2" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#bias"><i class="fa fa-check"></i><b>3.2</b> Bias</a></li>
 <li class="chapter" data-level="3.3" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#variance"><i class="fa fa-check"></i><b>3.3</b> Variance</a></li>
 <li class="chapter" data-level="3.4" data-path="bias-and-variance-of-penalized-regression.html"><a href="bias-and-variance-of-penalized-regression.html#mean-squared-error"><i class="fa fa-check"></i><b>3.4</b> Mean Squared Error</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>4</b> Simulation</a>
-<ul>
+<li class="chapter" data-level="4" data-path="simulation.html"><a href="simulation.html"><i class="fa fa-check"></i><b>4</b> Simulation</a><ul>
 <li class="chapter" data-level="4.1" data-path="simulation.html"><a href="simulation.html#simulation-of-explanatory-variables"><i class="fa fa-check"></i><b>4.1</b> Simulation of Explanatory Variables</a></li>
 <li class="chapter" data-level="4.2" data-path="simulation.html"><a href="simulation.html#calculate-bias-variance-mse-of-the-coefficients-in-the-model"><i class="fa fa-check"></i><b>4.2</b> Calculate Bias, Variance, MSE of the Coefficients in the Model</a></li>
 <li class="chapter" data-level="4.3" data-path="simulation.html"><a href="simulation.html#results"><i class="fa fa-check"></i><b>4.3</b> Results</a></li>
 <li class="chapter" data-level="4.4" data-path="simulation.html"><a href="simulation.html#visualizations"><i class="fa fa-check"></i><b>4.4</b> Visualizations</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a>
-<ul>
+<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
 <li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#deep-learning-algorithms"><i class="fa fa-check"></i><b>5.1</b> Deep Learning Algorithms</a></li>
 <li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#autonomous-vehicles"><i class="fa fa-check"></i><b>5.2</b> Autonomous Vehicles</a></li>
 <li class="chapter" data-level="5.3" data-path="applications.html"><a href="applications.html#fraud-detection"><i class="fa fa-check"></i><b>5.3</b> Fraud Detection</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
 <li class="chapter" data-level="7" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>7</b> References</a></li>
-<li class="chapter" data-level="8" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>8</b> Appendix</a>
-<ul>
-<li class="chapter" data-level="8.1" data-path="appendix.html"><a href="appendix.html#simulation-procedure"><i class="fa fa-check"></i><b>8.1</b> Simulation Procedure</a>
-<ul>
+<li class="chapter" data-level="8" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>8</b> Appendix</a><ul>
+<li class="chapter" data-level="8.1" data-path="appendix.html"><a href="appendix.html#simulation-procedure"><i class="fa fa-check"></i><b>8.1</b> Simulation Procedure</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="appendix.html"><a href="appendix.html#specify-the-true-beta-values"><i class="fa fa-check"></i><b>8.1.1</b> Specify the True Beta Values</a></li>
 <li class="chapter" data-level="8.1.2" data-path="appendix.html"><a href="appendix.html#create-the-simulation-values"><i class="fa fa-check"></i><b>8.1.2</b> Create the Simulation Values</a></li>
 <li class="chapter" data-level="8.1.3" data-path="appendix.html"><a href="appendix.html#creating-model-functions"><i class="fa fa-check"></i><b>8.1.3</b> Creating Model Functions</a></li>
@@ -190,17 +181,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="appendix" class="section level1" number="8">
+<div id="appendix" class="section level1">
 <h1><span class="header-section-number">Chapter 8</span> Appendix</h1>
-<div id="simulation-procedure" class="section level2" number="8.1">
+<div id="simulation-procedure" class="section level2">
 <h2><span class="header-section-number">8.1</span> Simulation Procedure</h2>
-<div id="specify-the-true-beta-values" class="section level3" number="8.1.1">
+<div id="specify-the-true-beta-values" class="section level3">
 <h3><span class="header-section-number">8.1.1</span> Specify the True Beta Values</h3>
 <p>We create a predetermined set of <span class="math inline">\(\beta\)</span>:</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="appendix.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2</span>)</span>
-<span id="cb28-2"><a href="appendix.html#cb28-2" aria-hidden="true" tabindex="-1"></a>betas<span class="ot">&lt;-</span> (<span class="fu">sample</span>(<span class="sc">-</span><span class="dv">10</span><span class="sc">:</span><span class="dv">10</span>,<span class="at">size=</span><span class="dv">50</span>,<span class="at">replace=</span><span class="cn">TRUE</span>))<span class="sc">/</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw">set.seed</span>(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2">betas&lt;-<span class="st"> </span>(<span class="kw">sample</span>(<span class="op">-</span><span class="dv">10</span><span class="op">:</span><span class="dv">10</span>,<span class="dt">size=</span><span class="dv">50</span>,<span class="dt">replace=</span><span class="ot">TRUE</span>))<span class="op">/</span><span class="dv">10</span></a></code></pre></div>
 </div>
-<div id="create-the-simulation-values" class="section level3" number="8.1.2">
+<div id="create-the-simulation-values" class="section level3">
 <h3><span class="header-section-number">8.1.2</span> Create the Simulation Values</h3>
 <p>We then use the MVR Norm function which allows us to create X variables with a specified Covarience Matrix.</p>
 <p>This allows our X-values to be</p>
@@ -209,248 +200,248 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Multicollinear between the explanatory variables</li>
 </ol>
 <p>The reason for the use of this simulation is that we wanted to simulate real world data where we tend to experience mutlicollinearity between the explanatory variables. Also we wanted to see if including multicollinearity our coefficient estimates for ridge, lasso, or elastic net can become an improvement to the estimates of the OLS model.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="appendix.html#cb29-1" aria-hidden="true" tabindex="-1"></a>simulation<span class="ot">&lt;-</span> <span class="cf">function</span>(seed, betas){</span>
-<span id="cb29-2"><a href="appendix.html#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(seed)</span>
-<span id="cb29-3"><a href="appendix.html#cb29-3" aria-hidden="true" tabindex="-1"></a>  n <span class="ot">&lt;-</span> <span class="dv">100</span>    <span class="co"># Number of observations</span></span>
-<span id="cb29-4"><a href="appendix.html#cb29-4" aria-hidden="true" tabindex="-1"></a>  p <span class="ot">&lt;-</span> <span class="dv">50</span>     <span class="co"># Number of predictors included in model</span></span>
-<span id="cb29-5"><a href="appendix.html#cb29-5" aria-hidden="true" tabindex="-1"></a>  CovMatrix <span class="ot">&lt;-</span> <span class="fu">outer</span>(<span class="dv">1</span><span class="sc">:</span>p, <span class="dv">1</span><span class="sc">:</span>p, <span class="cf">function</span>(x,y) {.<span class="dv">7</span><span class="sc">^</span><span class="fu">abs</span>(x<span class="sc">-</span>y)})</span>
-<span id="cb29-6"><a href="appendix.html#cb29-6" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">mvrnorm</span>(n, <span class="fu">rep</span>(<span class="dv">0</span>,p), CovMatrix)</span>
-<span id="cb29-7"><a href="appendix.html#cb29-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb29-8"><a href="appendix.html#cb29-8" aria-hidden="true" tabindex="-1"></a>  e <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(n, <span class="dv">0</span>, <span class="at">sd =</span> <span class="dv">1</span>)</span>
-<span id="cb29-9"><a href="appendix.html#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="appendix.html#cb29-10" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> x <span class="sc">%*%</span> betas <span class="sc">+</span> e</span>
-<span id="cb29-11"><a href="appendix.html#cb29-11" aria-hidden="true" tabindex="-1"></a>  df<span class="ot">&lt;-</span> <span class="fu">data.frame</span>(y,x)</span>
-<span id="cb29-12"><a href="appendix.html#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(df)</span>
-<span id="cb29-13"><a href="appendix.html#cb29-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">simulation&lt;-<span class="st"> </span><span class="cf">function</span>(seed, betas){</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">  <span class="kw">set.seed</span>(seed)</a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">  n &lt;-<span class="st"> </span><span class="dv">100</span>    <span class="co"># Number of observations</span></a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">  p &lt;-<span class="st"> </span><span class="dv">50</span>     <span class="co"># Number of predictors included in model</span></a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">  CovMatrix &lt;-<span class="st"> </span><span class="kw">outer</span>(<span class="dv">1</span><span class="op">:</span>p, <span class="dv">1</span><span class="op">:</span>p, <span class="cf">function</span>(x,y) {.<span class="dv">7</span><span class="op">^</span><span class="kw">abs</span>(x<span class="op">-</span>y)})</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">  x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(n, <span class="kw">rep</span>(<span class="dv">0</span>,p), CovMatrix)</a>
+<a class="sourceLine" id="cb30-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb30-8" data-line-number="8">  e &lt;-<span class="st"> </span><span class="kw">rnorm</span>(n, <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb30-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb30-10" data-line-number="10">  y &lt;-<span class="st"> </span>x <span class="op">%*%</span><span class="st"> </span>betas <span class="op">+</span><span class="st"> </span>e</a>
+<a class="sourceLine" id="cb30-11" data-line-number="11">  df&lt;-<span class="st"> </span><span class="kw">data.frame</span>(y,x)</a>
+<a class="sourceLine" id="cb30-12" data-line-number="12">  <span class="kw">return</span>(df)</a>
+<a class="sourceLine" id="cb30-13" data-line-number="13">}</a></code></pre></div>
 <p>As it can be seen by the code chunk above, <code>CovMatrix</code> is where we specify the covariance matrix where we show that there is multicollinearity between the explanatory variables.</p>
 </div>
-<div id="creating-model-functions" class="section level3" number="8.1.3">
+<div id="creating-model-functions" class="section level3">
 <h3><span class="header-section-number">8.1.3</span> Creating Model Functions</h3>
 <p>We create getters for both the model, coefficient, and tuning parameters models for the following models:</p>
 <ul>
 <li><code>OLS</code></li>
 </ul>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="appendix.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="do">## OLS</span></span>
-<span id="cb30-2"><a href="appendix.html#cb30-2" aria-hidden="true" tabindex="-1"></a>get_ols_model<span class="ot">&lt;-</span> <span class="cf">function</span>(df){</span>
-<span id="cb30-3"><a href="appendix.html#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
-<span id="cb30-4"><a href="appendix.html#cb30-4" aria-hidden="true" tabindex="-1"></a>  ols_model<span class="ot">&lt;-</span><span class="fu">train</span>(</span>
-<span id="cb30-5"><a href="appendix.html#cb30-5" aria-hidden="true" tabindex="-1"></a>    y<span class="sc">~</span>.<span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb30-6"><a href="appendix.html#cb30-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data=</span>df, </span>
-<span id="cb30-7"><a href="appendix.html#cb30-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method=</span><span class="st">&quot;lm&quot;</span>,</span>
-<span id="cb30-8"><a href="appendix.html#cb30-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>),</span>
-<span id="cb30-9"><a href="appendix.html#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</span>
-<span id="cb30-10"><a href="appendix.html#cb30-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> <span class="st">&quot;RMSE&quot;</span></span>
-<span id="cb30-11"><a href="appendix.html#cb30-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb30-12"><a href="appendix.html#cb30-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ols_model)</span>
-<span id="cb30-13"><a href="appendix.html#cb30-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb30-14"><a href="appendix.html#cb30-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb30-15"><a href="appendix.html#cb30-15" aria-hidden="true" tabindex="-1"></a>get_ols_coefficient<span class="ot">&lt;-</span> <span class="cf">function</span>(ols_model){</span>
-<span id="cb30-16"><a href="appendix.html#cb30-16" aria-hidden="true" tabindex="-1"></a>  b_ols<span class="ot">&lt;-</span><span class="fu">coef</span>(ols_model<span class="sc">$</span>finalModel)</span>
-<span id="cb30-17"><a href="appendix.html#cb30-17" aria-hidden="true" tabindex="-1"></a>  b_ols<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(b_ols))<span class="sc">%&gt;%</span></span>
-<span id="cb30-18"><a href="appendix.html#cb30-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model=</span> <span class="st">&quot;OLS&quot;</span>,<span class="at">Coefficient =</span> <span class="fu">row_number</span>())</span>
-<span id="cb30-19"><a href="appendix.html#cb30-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(b_ols)</span>
-<span id="cb30-20"><a href="appendix.html#cb30-20" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="co">## OLS</span></a>
+<a class="sourceLine" id="cb31-2" data-line-number="2">get_ols_model&lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb31-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb31-4" data-line-number="4">  ols_model&lt;-<span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb31-5" data-line-number="5">    y<span class="op">~</span>.<span class="op">-</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb31-6" data-line-number="6">    <span class="dt">data=</span>df, </a>
+<a class="sourceLine" id="cb31-7" data-line-number="7">    <span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,</a>
+<a class="sourceLine" id="cb31-8" data-line-number="8">    <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb31-9" data-line-number="9">    <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</a>
+<a class="sourceLine" id="cb31-10" data-line-number="10">    <span class="dt">metric =</span> <span class="st">&quot;RMSE&quot;</span></a>
+<a class="sourceLine" id="cb31-11" data-line-number="11">  )</a>
+<a class="sourceLine" id="cb31-12" data-line-number="12">  <span class="kw">return</span>(ols_model)</a>
+<a class="sourceLine" id="cb31-13" data-line-number="13">}</a>
+<a class="sourceLine" id="cb31-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb31-15" data-line-number="15">get_ols_coefficient&lt;-<span class="st"> </span><span class="cf">function</span>(ols_model){</a>
+<a class="sourceLine" id="cb31-16" data-line-number="16">  b_ols&lt;-<span class="kw">coef</span>(ols_model<span class="op">$</span>finalModel)</a>
+<a class="sourceLine" id="cb31-17" data-line-number="17">  b_ols&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(b_ols))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb31-18" data-line-number="18"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model=</span> <span class="st">&quot;OLS&quot;</span>,<span class="dt">Coefficient =</span> <span class="kw">row_number</span>())</a>
+<a class="sourceLine" id="cb31-19" data-line-number="19">  <span class="kw">return</span>(b_ols)</a>
+<a class="sourceLine" id="cb31-20" data-line-number="20">}</a></code></pre></div>
 <ul>
 <li><code>RIDGE</code></li>
 </ul>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="appendix.html#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># RIDGE</span></span>
-<span id="cb31-2"><a href="appendix.html#cb31-2" aria-hidden="true" tabindex="-1"></a>get_ridge_model<span class="ot">&lt;-</span> <span class="cf">function</span>(df, lambda_grid){</span>
-<span id="cb31-3"><a href="appendix.html#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
-<span id="cb31-4"><a href="appendix.html#cb31-4" aria-hidden="true" tabindex="-1"></a>  ridge_model<span class="ot">&lt;-</span><span class="fu">train</span>(</span>
-<span id="cb31-5"><a href="appendix.html#cb31-5" aria-hidden="true" tabindex="-1"></a>    y<span class="sc">~</span>.<span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb31-6"><a href="appendix.html#cb31-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df,</span>
-<span id="cb31-7"><a href="appendix.html#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
-<span id="cb31-8"><a href="appendix.html#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>),</span>
-<span id="cb31-9"><a href="appendix.html#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</span>
-<span id="cb31-10"><a href="appendix.html#cb31-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">alpha =</span> <span class="dv">0</span>, <span class="at">lambda =</span> lambda_grid),</span>
-<span id="cb31-11"><a href="appendix.html#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> <span class="st">&quot;RMSE&quot;</span></span>
-<span id="cb31-12"><a href="appendix.html#cb31-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb31-13"><a href="appendix.html#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ridge_model)</span>
-<span id="cb31-14"><a href="appendix.html#cb31-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-15"><a href="appendix.html#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-16"><a href="appendix.html#cb31-16" aria-hidden="true" tabindex="-1"></a>get_ridge_coefficient<span class="ot">&lt;-</span> <span class="cf">function</span>(ridge_model){</span>
-<span id="cb31-17"><a href="appendix.html#cb31-17" aria-hidden="true" tabindex="-1"></a>  b_ridge<span class="ot">&lt;-</span> <span class="fu">coef</span>(ridge_model<span class="sc">$</span>finalModel, ridge_model<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)</span>
-<span id="cb31-18"><a href="appendix.html#cb31-18" aria-hidden="true" tabindex="-1"></a>  b_ridge<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(b_ridge))<span class="sc">%&gt;%</span></span>
-<span id="cb31-19"><a href="appendix.html#cb31-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;RIDGE&quot;</span>,<span class="at">Coefficient =</span> <span class="fu">row_number</span>())</span>
-<span id="cb31-20"><a href="appendix.html#cb31-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(b_ridge)</span>
-<span id="cb31-21"><a href="appendix.html#cb31-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb31-22"><a href="appendix.html#cb31-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-23"><a href="appendix.html#cb31-23" aria-hidden="true" tabindex="-1"></a>get_ridge_tune<span class="ot">&lt;-</span> <span class="cf">function</span>(ridge_model){</span>
-<span id="cb31-24"><a href="appendix.html#cb31-24" aria-hidden="true" tabindex="-1"></a>  ridge_tune<span class="ot">&lt;-</span>ridge_model<span class="sc">$</span>bestTune<span class="sc">%&gt;%</span></span>
-<span id="cb31-25"><a href="appendix.html#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;RIDGE&quot;</span>)</span>
-<span id="cb31-26"><a href="appendix.html#cb31-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(ridge_tune)</span>
-<span id="cb31-27"><a href="appendix.html#cb31-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co"># RIDGE</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2">get_ridge_model&lt;-<span class="st"> </span><span class="cf">function</span>(df, lambda_grid){</a>
+<a class="sourceLine" id="cb32-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb32-4" data-line-number="4">  ridge_model&lt;-<span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb32-5" data-line-number="5">    y<span class="op">~</span>.<span class="op">-</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb32-6" data-line-number="6">    <span class="dt">data =</span> df,</a>
+<a class="sourceLine" id="cb32-7" data-line-number="7">    <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</a>
+<a class="sourceLine" id="cb32-8" data-line-number="8">    <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">selectionFunction =</span> <span class="st">&quot;best&quot;</span>),</a>
+<a class="sourceLine" id="cb32-9" data-line-number="9">    <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;scale&quot;</span>),</a>
+<a class="sourceLine" id="cb32-10" data-line-number="10">    <span class="dt">tuneGrid =</span> <span class="kw">data.frame</span>(<span class="dt">alpha =</span> <span class="dv">0</span>, <span class="dt">lambda =</span> lambda_grid),</a>
+<a class="sourceLine" id="cb32-11" data-line-number="11">    <span class="dt">metric =</span> <span class="st">&quot;RMSE&quot;</span></a>
+<a class="sourceLine" id="cb32-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb32-13" data-line-number="13">  <span class="kw">return</span>(ridge_model)</a>
+<a class="sourceLine" id="cb32-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb32-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb32-16" data-line-number="16">get_ridge_coefficient&lt;-<span class="st"> </span><span class="cf">function</span>(ridge_model){</a>
+<a class="sourceLine" id="cb32-17" data-line-number="17">  b_ridge&lt;-<span class="st"> </span><span class="kw">coef</span>(ridge_model<span class="op">$</span>finalModel, ridge_model<span class="op">$</span>bestTune<span class="op">$</span>lambda)</a>
+<a class="sourceLine" id="cb32-18" data-line-number="18">  b_ridge&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(b_ridge))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-19" data-line-number="19"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model =</span> <span class="st">&quot;RIDGE&quot;</span>,<span class="dt">Coefficient =</span> <span class="kw">row_number</span>())</a>
+<a class="sourceLine" id="cb32-20" data-line-number="20">  <span class="kw">return</span>(b_ridge)</a>
+<a class="sourceLine" id="cb32-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb32-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb32-23" data-line-number="23">get_ridge_tune&lt;-<span class="st"> </span><span class="cf">function</span>(ridge_model){</a>
+<a class="sourceLine" id="cb32-24" data-line-number="24">  ridge_tune&lt;-ridge_model<span class="op">$</span>bestTune<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb32-25" data-line-number="25"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model =</span> <span class="st">&quot;RIDGE&quot;</span>)</a>
+<a class="sourceLine" id="cb32-26" data-line-number="26">  <span class="kw">return</span>(ridge_tune)</a>
+<a class="sourceLine" id="cb32-27" data-line-number="27">}</a></code></pre></div>
 <ul>
 <li><code>LASSO</code></li>
 </ul>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="appendix.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#LASSO</span></span>
-<span id="cb32-2"><a href="appendix.html#cb32-2" aria-hidden="true" tabindex="-1"></a>get_lasso_model<span class="ot">&lt;-</span> <span class="cf">function</span>(df, lambda_grid){</span>
-<span id="cb32-3"><a href="appendix.html#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
-<span id="cb32-4"><a href="appendix.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  lasso_model <span class="ot">&lt;-</span> <span class="fu">train</span>(</span>
-<span id="cb32-5"><a href="appendix.html#cb32-5" aria-hidden="true" tabindex="-1"></a>    y<span class="sc">~</span>.<span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb32-6"><a href="appendix.html#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df,</span>
-<span id="cb32-7"><a href="appendix.html#cb32-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
-<span id="cb32-8"><a href="appendix.html#cb32-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>,<span class="st">&quot;scale&quot;</span>),</span>
-<span id="cb32-9"><a href="appendix.html#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>),</span>
-<span id="cb32-10"><a href="appendix.html#cb32-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> <span class="fu">data.frame</span>(<span class="at">alpha =</span> <span class="dv">1</span>, <span class="at">lambda =</span> lambda_grid),</span>
-<span id="cb32-11"><a href="appendix.html#cb32-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> <span class="st">&quot;RMSE&quot;</span></span>
-<span id="cb32-12"><a href="appendix.html#cb32-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb32-13"><a href="appendix.html#cb32-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_model)</span>
-<span id="cb32-14"><a href="appendix.html#cb32-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-15"><a href="appendix.html#cb32-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-16"><a href="appendix.html#cb32-16" aria-hidden="true" tabindex="-1"></a>get_lasso_coefficient<span class="ot">&lt;-</span> <span class="cf">function</span>(lasso_model){</span>
-<span id="cb32-17"><a href="appendix.html#cb32-17" aria-hidden="true" tabindex="-1"></a>  b_lasso<span class="ot">&lt;-</span> <span class="fu">coef</span>(lasso_model<span class="sc">$</span>finalModel, lasso_model<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)</span>
-<span id="cb32-18"><a href="appendix.html#cb32-18" aria-hidden="true" tabindex="-1"></a>  b_lasso<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(b_lasso))<span class="sc">%&gt;%</span></span>
-<span id="cb32-19"><a href="appendix.html#cb32-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;LASSO&quot;</span>,<span class="at">Coefficient =</span> <span class="fu">row_number</span>())</span>
-<span id="cb32-20"><a href="appendix.html#cb32-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(b_lasso)</span>
-<span id="cb32-21"><a href="appendix.html#cb32-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb32-22"><a href="appendix.html#cb32-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-23"><a href="appendix.html#cb32-23" aria-hidden="true" tabindex="-1"></a>get_lasso_tune<span class="ot">&lt;-</span> <span class="cf">function</span>(lasso_model){</span>
-<span id="cb32-24"><a href="appendix.html#cb32-24" aria-hidden="true" tabindex="-1"></a>  lasso_tune<span class="ot">&lt;-</span>lasso_model<span class="sc">$</span>bestTune<span class="sc">%&gt;%</span></span>
-<span id="cb32-25"><a href="appendix.html#cb32-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;LASSO&quot;</span>)</span>
-<span id="cb32-26"><a href="appendix.html#cb32-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(lasso_tune)</span>
-<span id="cb32-27"><a href="appendix.html#cb32-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="co">#LASSO</span></a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">get_lasso_model&lt;-<span class="st"> </span><span class="cf">function</span>(df, lambda_grid){</a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb33-4" data-line-number="4">  lasso_model &lt;-<span class="st"> </span><span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">    y<span class="op">~</span>.<span class="op">-</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb33-6" data-line-number="6">    <span class="dt">data =</span> df,</a>
+<a class="sourceLine" id="cb33-7" data-line-number="7">    <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</a>
+<a class="sourceLine" id="cb33-8" data-line-number="8">    <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>,<span class="st">&quot;scale&quot;</span>),</a>
+<a class="sourceLine" id="cb33-9" data-line-number="9">    <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">selectionFunction =</span> <span class="st">&quot;best&quot;</span>),</a>
+<a class="sourceLine" id="cb33-10" data-line-number="10">    <span class="dt">tuneGrid =</span> <span class="kw">data.frame</span>(<span class="dt">alpha =</span> <span class="dv">1</span>, <span class="dt">lambda =</span> lambda_grid),</a>
+<a class="sourceLine" id="cb33-11" data-line-number="11">    <span class="dt">metric =</span> <span class="st">&quot;RMSE&quot;</span></a>
+<a class="sourceLine" id="cb33-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb33-13" data-line-number="13">  <span class="kw">return</span>(lasso_model)</a>
+<a class="sourceLine" id="cb33-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb33-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb33-16" data-line-number="16">get_lasso_coefficient&lt;-<span class="st"> </span><span class="cf">function</span>(lasso_model){</a>
+<a class="sourceLine" id="cb33-17" data-line-number="17">  b_lasso&lt;-<span class="st"> </span><span class="kw">coef</span>(lasso_model<span class="op">$</span>finalModel, lasso_model<span class="op">$</span>bestTune<span class="op">$</span>lambda)</a>
+<a class="sourceLine" id="cb33-18" data-line-number="18">  b_lasso&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(b_lasso))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-19" data-line-number="19"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model =</span> <span class="st">&quot;LASSO&quot;</span>,<span class="dt">Coefficient =</span> <span class="kw">row_number</span>())</a>
+<a class="sourceLine" id="cb33-20" data-line-number="20">  <span class="kw">return</span>(b_lasso)</a>
+<a class="sourceLine" id="cb33-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb33-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb33-23" data-line-number="23">get_lasso_tune&lt;-<span class="st"> </span><span class="cf">function</span>(lasso_model){</a>
+<a class="sourceLine" id="cb33-24" data-line-number="24">  lasso_tune&lt;-lasso_model<span class="op">$</span>bestTune<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb33-25" data-line-number="25"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model =</span> <span class="st">&quot;LASSO&quot;</span>)</a>
+<a class="sourceLine" id="cb33-26" data-line-number="26">  <span class="kw">return</span>(lasso_tune)</a>
+<a class="sourceLine" id="cb33-27" data-line-number="27">}</a></code></pre></div>
 <ul>
 <li><code>ELASTIC NET</code></li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="appendix.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ELASTIC NET</span></span>
-<span id="cb33-2"><a href="appendix.html#cb33-2" aria-hidden="true" tabindex="-1"></a>get_elastic_net_model <span class="ot">&lt;-</span> <span class="cf">function</span>(df, srchGrd){</span>
-<span id="cb33-3"><a href="appendix.html#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">set.seed</span>(<span class="dv">45</span>)</span>
-<span id="cb33-4"><a href="appendix.html#cb33-4" aria-hidden="true" tabindex="-1"></a>  elastic_net_model<span class="ot">&lt;-</span><span class="fu">train</span>(</span>
-<span id="cb33-5"><a href="appendix.html#cb33-5" aria-hidden="true" tabindex="-1"></a>    y<span class="sc">~</span>.<span class="sc">-</span><span class="dv">1</span>,</span>
-<span id="cb33-6"><a href="appendix.html#cb33-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">data =</span> df,</span>
-<span id="cb33-7"><a href="appendix.html#cb33-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">method =</span> <span class="st">&quot;glmnet&quot;</span>,</span>
-<span id="cb33-8"><a href="appendix.html#cb33-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">trControl =</span> <span class="fu">trainControl</span>(<span class="at">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="at">number =</span> <span class="dv">10</span>, <span class="at">selectionFunction =</span> <span class="st">&quot;best&quot;</span>),</span>
-<span id="cb33-9"><a href="appendix.html#cb33-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">tuneGrid =</span> srchGrd,</span>
-<span id="cb33-10"><a href="appendix.html#cb33-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">preProcess =</span> <span class="fu">c</span>(<span class="st">&quot;center&quot;</span>,<span class="st">&quot;scale&quot;</span>),</span>
-<span id="cb33-11"><a href="appendix.html#cb33-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">metric =</span> <span class="st">&quot;RMSE&quot;</span></span>
-<span id="cb33-12"><a href="appendix.html#cb33-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb33-13"><a href="appendix.html#cb33-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(elastic_net_model)</span>
-<span id="cb33-14"><a href="appendix.html#cb33-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-15"><a href="appendix.html#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="appendix.html#cb33-16" aria-hidden="true" tabindex="-1"></a>get_elastic_net_coefficient<span class="ot">&lt;-</span> <span class="cf">function</span>(elastic_net_model){</span>
-<span id="cb33-17"><a href="appendix.html#cb33-17" aria-hidden="true" tabindex="-1"></a>  b_elastic_net<span class="ot">&lt;-</span> <span class="fu">coef</span>(elastic_net_model<span class="sc">$</span>finalModel, elastic_net_model<span class="sc">$</span>bestTune<span class="sc">$</span>lambda)</span>
-<span id="cb33-18"><a href="appendix.html#cb33-18" aria-hidden="true" tabindex="-1"></a>  b_elastic_net<span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(<span class="fu">as.matrix</span>(b_elastic_net))<span class="sc">%&gt;%</span></span>
-<span id="cb33-19"><a href="appendix.html#cb33-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;ELASTIC NET&quot;</span>, <span class="at">Coefficient =</span> <span class="fu">row_number</span>())</span>
-<span id="cb33-20"><a href="appendix.html#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(b_elastic_net)</span>
-<span id="cb33-21"><a href="appendix.html#cb33-21" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb33-22"><a href="appendix.html#cb33-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-23"><a href="appendix.html#cb33-23" aria-hidden="true" tabindex="-1"></a>get_elastic_net_tune<span class="ot">&lt;-</span> <span class="cf">function</span>(elastic_net_model){</span>
-<span id="cb33-24"><a href="appendix.html#cb33-24" aria-hidden="true" tabindex="-1"></a>  elastic_net_tune<span class="ot">&lt;-</span>elastic_net_model<span class="sc">$</span>bestTune<span class="sc">%&gt;%</span></span>
-<span id="cb33-25"><a href="appendix.html#cb33-25" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Model =</span> <span class="st">&quot;ELASTIC NET&quot;</span>)</span>
-<span id="cb33-26"><a href="appendix.html#cb33-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(elastic_net_tune)</span>
-<span id="cb33-27"><a href="appendix.html#cb33-27" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co">#ELASTIC NET</span></a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">get_elastic_net_model &lt;-<span class="st"> </span><span class="cf">function</span>(df, srchGrd){</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">  <span class="kw">set.seed</span>(<span class="dv">45</span>)</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">  elastic_net_model&lt;-<span class="kw">train</span>(</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">    y<span class="op">~</span>.<span class="op">-</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">    <span class="dt">data =</span> df,</a>
+<a class="sourceLine" id="cb34-7" data-line-number="7">    <span class="dt">method =</span> <span class="st">&quot;glmnet&quot;</span>,</a>
+<a class="sourceLine" id="cb34-8" data-line-number="8">    <span class="dt">trControl =</span> <span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">selectionFunction =</span> <span class="st">&quot;best&quot;</span>),</a>
+<a class="sourceLine" id="cb34-9" data-line-number="9">    <span class="dt">tuneGrid =</span> srchGrd,</a>
+<a class="sourceLine" id="cb34-10" data-line-number="10">    <span class="dt">preProcess =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>,<span class="st">&quot;scale&quot;</span>),</a>
+<a class="sourceLine" id="cb34-11" data-line-number="11">    <span class="dt">metric =</span> <span class="st">&quot;RMSE&quot;</span></a>
+<a class="sourceLine" id="cb34-12" data-line-number="12">  )</a>
+<a class="sourceLine" id="cb34-13" data-line-number="13">  <span class="kw">return</span>(elastic_net_model)</a>
+<a class="sourceLine" id="cb34-14" data-line-number="14">}</a>
+<a class="sourceLine" id="cb34-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb34-16" data-line-number="16">get_elastic_net_coefficient&lt;-<span class="st"> </span><span class="cf">function</span>(elastic_net_model){</a>
+<a class="sourceLine" id="cb34-17" data-line-number="17">  b_elastic_net&lt;-<span class="st"> </span><span class="kw">coef</span>(elastic_net_model<span class="op">$</span>finalModel, elastic_net_model<span class="op">$</span>bestTune<span class="op">$</span>lambda)</a>
+<a class="sourceLine" id="cb34-18" data-line-number="18">  b_elastic_net&lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">as.matrix</span>(b_elastic_net))<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-19" data-line-number="19"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model =</span> <span class="st">&quot;ELASTIC NET&quot;</span>, <span class="dt">Coefficient =</span> <span class="kw">row_number</span>())</a>
+<a class="sourceLine" id="cb34-20" data-line-number="20">  <span class="kw">return</span>(b_elastic_net)</a>
+<a class="sourceLine" id="cb34-21" data-line-number="21">}</a>
+<a class="sourceLine" id="cb34-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb34-23" data-line-number="23">get_elastic_net_tune&lt;-<span class="st"> </span><span class="cf">function</span>(elastic_net_model){</a>
+<a class="sourceLine" id="cb34-24" data-line-number="24">  elastic_net_tune&lt;-elastic_net_model<span class="op">$</span>bestTune<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb34-25" data-line-number="25"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">Model =</span> <span class="st">&quot;ELASTIC NET&quot;</span>)</a>
+<a class="sourceLine" id="cb34-26" data-line-number="26">  <span class="kw">return</span>(elastic_net_tune)</a>
+<a class="sourceLine" id="cb34-27" data-line-number="27">}</a></code></pre></div>
 </div>
-<div id="try-out-simulation-for-one-iteration" class="section level3" number="8.1.4">
+<div id="try-out-simulation-for-one-iteration" class="section level3">
 <h3><span class="header-section-number">8.1.4</span> Try Out Simulation for One Iteration</h3>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="appendix.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">#one simulation tryout</span></span>
-<span id="cb34-2"><a href="appendix.html#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="co">#inputs in the simulation,betas, b_final</span></span>
-<span id="cb34-3"><a href="appendix.html#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-4"><a href="appendix.html#cb34-4" aria-hidden="true" tabindex="-1"></a>df<span class="ot">&lt;-</span><span class="fu">simulation</span>(<span class="dv">2</span>,betas)</span>
-<span id="cb34-5"><a href="appendix.html#cb34-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-6"><a href="appendix.html#cb34-6" aria-hidden="true" tabindex="-1"></a>lambda_grid<span class="ot">&lt;-</span> lambda_grid<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">50</span>)</span>
-<span id="cb34-7"><a href="appendix.html#cb34-7" aria-hidden="true" tabindex="-1"></a>alpha_grid <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
-<span id="cb34-8"><a href="appendix.html#cb34-8" aria-hidden="true" tabindex="-1"></a>srchGrd <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">.alpha =</span> alpha_grid, <span class="at">.lambda =</span> lambda_grid)</span>
-<span id="cb34-9"><a href="appendix.html#cb34-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-10"><a href="appendix.html#cb34-10" aria-hidden="true" tabindex="-1"></a>ols_model<span class="ot">&lt;-</span> <span class="fu">get_ols_model</span>(df)</span>
-<span id="cb34-11"><a href="appendix.html#cb34-11" aria-hidden="true" tabindex="-1"></a>ridge_model<span class="ot">&lt;-</span> <span class="fu">get_ridge_model</span>(df, lambda_grid)</span>
-<span id="cb34-12"><a href="appendix.html#cb34-12" aria-hidden="true" tabindex="-1"></a>lasso_model<span class="ot">&lt;-</span> <span class="fu">get_lasso_model</span>(df, lambda_grid)</span>
-<span id="cb34-13"><a href="appendix.html#cb34-13" aria-hidden="true" tabindex="-1"></a>elastic_net_model<span class="ot">&lt;-</span> <span class="fu">get_elastic_net_model</span>(df, srchGrd)</span>
-<span id="cb34-14"><a href="appendix.html#cb34-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-15"><a href="appendix.html#cb34-15" aria-hidden="true" tabindex="-1"></a>b_ols<span class="ot">&lt;-</span><span class="fu">get_ols_coefficient</span>(ols_model)</span>
-<span id="cb34-16"><a href="appendix.html#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(b_ols)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
-<span id="cb34-17"><a href="appendix.html#cb34-17" aria-hidden="true" tabindex="-1"></a>b_ridge<span class="ot">&lt;-</span><span class="fu">get_ridge_coefficient</span>(ridge_model)</span>
-<span id="cb34-18"><a href="appendix.html#cb34-18" aria-hidden="true" tabindex="-1"></a>b_lasso<span class="ot">&lt;-</span><span class="fu">get_lasso_coefficient</span>(lasso_model)</span>
-<span id="cb34-19"><a href="appendix.html#cb34-19" aria-hidden="true" tabindex="-1"></a>b_elastic_net<span class="ot">&lt;-</span> <span class="fu">get_elastic_net_coefficient</span>(elastic_net_model)</span>
-<span id="cb34-20"><a href="appendix.html#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-21"><a href="appendix.html#cb34-21" aria-hidden="true" tabindex="-1"></a>coefficients_all<span class="ot">&lt;-</span><span class="fu">rbind</span>(b_ols,b_ridge,b_lasso,b_elastic_net)</span>
-<span id="cb34-22"><a href="appendix.html#cb34-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-23"><a href="appendix.html#cb34-23" aria-hidden="true" tabindex="-1"></a>coefficient_column_name<span class="ot">&lt;-</span><span class="fu">paste</span>(<span class="st">&quot;simulation_&quot;</span>,i, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb34-24"><a href="appendix.html#cb34-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-25"><a href="appendix.html#cb34-25" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(coefficients_all)[<span class="dv">1</span>]<span class="ot">&lt;-</span> coefficient_column_name</span>
-<span id="cb34-26"><a href="appendix.html#cb34-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-27"><a href="appendix.html#cb34-27" aria-hidden="true" tabindex="-1"></a>b_final_tryout<span class="ot">&lt;-</span>b_final<span class="sc">%&gt;%</span></span>
-<span id="cb34-28"><a href="appendix.html#cb34-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(coefficients_all)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1"><span class="co">#one simulation tryout</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co">#inputs in the simulation,betas, b_final</span></a>
+<a class="sourceLine" id="cb35-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">df&lt;-<span class="kw">simulation</span>(<span class="dv">2</span>,betas)</a>
+<a class="sourceLine" id="cb35-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb35-6" data-line-number="6">lambda_grid&lt;-<span class="st"> </span>lambda_grid&lt;-<span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb35-7" data-line-number="7">alpha_grid &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb35-8" data-line-number="8">srchGrd =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.alpha =</span> alpha_grid, <span class="dt">.lambda =</span> lambda_grid)</a>
+<a class="sourceLine" id="cb35-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb35-10" data-line-number="10">ols_model&lt;-<span class="st"> </span><span class="kw">get_ols_model</span>(df)</a>
+<a class="sourceLine" id="cb35-11" data-line-number="11">ridge_model&lt;-<span class="st"> </span><span class="kw">get_ridge_model</span>(df, lambda_grid)</a>
+<a class="sourceLine" id="cb35-12" data-line-number="12">lasso_model&lt;-<span class="st"> </span><span class="kw">get_lasso_model</span>(df, lambda_grid)</a>
+<a class="sourceLine" id="cb35-13" data-line-number="13">elastic_net_model&lt;-<span class="st"> </span><span class="kw">get_elastic_net_model</span>(df, srchGrd)</a>
+<a class="sourceLine" id="cb35-14" data-line-number="14"></a>
+<a class="sourceLine" id="cb35-15" data-line-number="15">b_ols&lt;-<span class="kw">get_ols_coefficient</span>(ols_model)</a>
+<a class="sourceLine" id="cb35-16" data-line-number="16"><span class="kw">colnames</span>(b_ols)[<span class="dv">1</span>]&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb35-17" data-line-number="17">b_ridge&lt;-<span class="kw">get_ridge_coefficient</span>(ridge_model)</a>
+<a class="sourceLine" id="cb35-18" data-line-number="18">b_lasso&lt;-<span class="kw">get_lasso_coefficient</span>(lasso_model)</a>
+<a class="sourceLine" id="cb35-19" data-line-number="19">b_elastic_net&lt;-<span class="st"> </span><span class="kw">get_elastic_net_coefficient</span>(elastic_net_model)</a>
+<a class="sourceLine" id="cb35-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb35-21" data-line-number="21">coefficients_all&lt;-<span class="kw">rbind</span>(b_ols,b_ridge,b_lasso,b_elastic_net)</a>
+<a class="sourceLine" id="cb35-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb35-23" data-line-number="23">coefficient_column_name&lt;-<span class="kw">paste</span>(<span class="st">&quot;simulation_&quot;</span>,i, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb35-24" data-line-number="24"></a>
+<a class="sourceLine" id="cb35-25" data-line-number="25"><span class="kw">colnames</span>(coefficients_all)[<span class="dv">1</span>]&lt;-<span class="st"> </span>coefficient_column_name</a>
+<a class="sourceLine" id="cb35-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb35-27" data-line-number="27">b_final_tryout&lt;-b_final<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb35-28" data-line-number="28"><span class="st">  </span><span class="kw">left_join</span>(coefficients_all)</a></code></pre></div>
 </div>
-<div id="simulation-for-multiple-iterations" class="section level3" number="8.1.5">
+<div id="simulation-for-multiple-iterations" class="section level3">
 <h3><span class="header-section-number">8.1.5</span> Simulation for Multiple Iterations</h3>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="appendix.html#cb35-1" aria-hidden="true" tabindex="-1"></a>simulation_final_all_betas<span class="ot">&lt;-</span><span class="cf">function</span>(iterations, betas, b_final){</span>
-<span id="cb35-2"><a href="appendix.html#cb35-2" aria-hidden="true" tabindex="-1"></a>  lambda_grid<span class="ot">&lt;-</span> lambda_grid<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">50</span>)</span>
-<span id="cb35-3"><a href="appendix.html#cb35-3" aria-hidden="true" tabindex="-1"></a>  alpha_grid <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
-<span id="cb35-4"><a href="appendix.html#cb35-4" aria-hidden="true" tabindex="-1"></a>  srchGrd <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">.alpha =</span> alpha_grid, <span class="at">.lambda =</span> lambda_grid)</span>
-<span id="cb35-5"><a href="appendix.html#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, iterations, <span class="dv">1</span>)){</span>
-<span id="cb35-6"><a href="appendix.html#cb35-6" aria-hidden="true" tabindex="-1"></a>    df<span class="ot">&lt;-</span><span class="fu">simulation</span>(i,betas)</span>
-<span id="cb35-7"><a href="appendix.html#cb35-7" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb35-8"><a href="appendix.html#cb35-8" aria-hidden="true" tabindex="-1"></a>    ols_model<span class="ot">&lt;-</span> <span class="fu">get_ols_model</span>(df)</span>
-<span id="cb35-9"><a href="appendix.html#cb35-9" aria-hidden="true" tabindex="-1"></a>    ridge_model<span class="ot">&lt;-</span> <span class="fu">get_ridge_model</span>(df, lambda_grid)</span>
-<span id="cb35-10"><a href="appendix.html#cb35-10" aria-hidden="true" tabindex="-1"></a>    lasso_model<span class="ot">&lt;-</span> <span class="fu">get_lasso_model</span>(df, lambda_grid)</span>
-<span id="cb35-11"><a href="appendix.html#cb35-11" aria-hidden="true" tabindex="-1"></a>    elastic_net_model<span class="ot">&lt;-</span> <span class="fu">get_elastic_net_model</span>(df, srchGrd)</span>
-<span id="cb35-12"><a href="appendix.html#cb35-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb35-13"><a href="appendix.html#cb35-13" aria-hidden="true" tabindex="-1"></a>    b_ols<span class="ot">&lt;-</span><span class="fu">get_ols_coefficient</span>(ols_model)</span>
-<span id="cb35-14"><a href="appendix.html#cb35-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(b_ols)[<span class="dv">1</span>]<span class="ot">&lt;-</span><span class="dv">1</span></span>
-<span id="cb35-15"><a href="appendix.html#cb35-15" aria-hidden="true" tabindex="-1"></a>    b_ridge<span class="ot">&lt;-</span><span class="fu">get_ridge_coefficient</span>(ridge_model)</span>
-<span id="cb35-16"><a href="appendix.html#cb35-16" aria-hidden="true" tabindex="-1"></a>    b_lasso<span class="ot">&lt;-</span><span class="fu">get_lasso_coefficient</span>(lasso_model)</span>
-<span id="cb35-17"><a href="appendix.html#cb35-17" aria-hidden="true" tabindex="-1"></a>    b_elastic_net<span class="ot">&lt;-</span> <span class="fu">get_elastic_net_coefficient</span>(elastic_net_model)</span>
-<span id="cb35-18"><a href="appendix.html#cb35-18" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb35-19"><a href="appendix.html#cb35-19" aria-hidden="true" tabindex="-1"></a>    b_all<span class="ot">&lt;-</span><span class="fu">rbind</span>(b_ols,b_ridge,b_lasso,b_elastic_net)</span>
-<span id="cb35-20"><a href="appendix.html#cb35-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb35-21"><a href="appendix.html#cb35-21" aria-hidden="true" tabindex="-1"></a>    coefficient_column_name<span class="ot">&lt;-</span><span class="fu">paste</span>(<span class="st">&quot;simulation_&quot;</span>,i, <span class="at">sep =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb35-22"><a href="appendix.html#cb35-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">colnames</span>(b_all)[<span class="dv">1</span>]<span class="ot">&lt;-</span> coefficient_column_name</span>
-<span id="cb35-23"><a href="appendix.html#cb35-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb35-24"><a href="appendix.html#cb35-24" aria-hidden="true" tabindex="-1"></a>    b_final<span class="ot">&lt;-</span>b_final<span class="sc">%&gt;%</span></span>
-<span id="cb35-25"><a href="appendix.html#cb35-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">left_join</span>(b_all)</span>
-<span id="cb35-26"><a href="appendix.html#cb35-26" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb35-27"><a href="appendix.html#cb35-27" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb35-28"><a href="appendix.html#cb35-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(b_final)</span>
-<span id="cb35-29"><a href="appendix.html#cb35-29" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">simulation_final_all_betas&lt;-<span class="cf">function</span>(iterations, betas, b_final){</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">  lambda_grid&lt;-<span class="st"> </span>lambda_grid&lt;-<span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">  alpha_grid &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb36-4" data-line-number="4">  srchGrd =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.alpha =</span> alpha_grid, <span class="dt">.lambda =</span> lambda_grid)</a>
+<a class="sourceLine" id="cb36-5" data-line-number="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">1</span>, iterations, <span class="dv">1</span>)){</a>
+<a class="sourceLine" id="cb36-6" data-line-number="6">    df&lt;-<span class="kw">simulation</span>(i,betas)</a>
+<a class="sourceLine" id="cb36-7" data-line-number="7">    </a>
+<a class="sourceLine" id="cb36-8" data-line-number="8">    ols_model&lt;-<span class="st"> </span><span class="kw">get_ols_model</span>(df)</a>
+<a class="sourceLine" id="cb36-9" data-line-number="9">    ridge_model&lt;-<span class="st"> </span><span class="kw">get_ridge_model</span>(df, lambda_grid)</a>
+<a class="sourceLine" id="cb36-10" data-line-number="10">    lasso_model&lt;-<span class="st"> </span><span class="kw">get_lasso_model</span>(df, lambda_grid)</a>
+<a class="sourceLine" id="cb36-11" data-line-number="11">    elastic_net_model&lt;-<span class="st"> </span><span class="kw">get_elastic_net_model</span>(df, srchGrd)</a>
+<a class="sourceLine" id="cb36-12" data-line-number="12">    </a>
+<a class="sourceLine" id="cb36-13" data-line-number="13">    b_ols&lt;-<span class="kw">get_ols_coefficient</span>(ols_model)</a>
+<a class="sourceLine" id="cb36-14" data-line-number="14">    <span class="kw">colnames</span>(b_ols)[<span class="dv">1</span>]&lt;-<span class="dv">1</span></a>
+<a class="sourceLine" id="cb36-15" data-line-number="15">    b_ridge&lt;-<span class="kw">get_ridge_coefficient</span>(ridge_model)</a>
+<a class="sourceLine" id="cb36-16" data-line-number="16">    b_lasso&lt;-<span class="kw">get_lasso_coefficient</span>(lasso_model)</a>
+<a class="sourceLine" id="cb36-17" data-line-number="17">    b_elastic_net&lt;-<span class="st"> </span><span class="kw">get_elastic_net_coefficient</span>(elastic_net_model)</a>
+<a class="sourceLine" id="cb36-18" data-line-number="18">      </a>
+<a class="sourceLine" id="cb36-19" data-line-number="19">    b_all&lt;-<span class="kw">rbind</span>(b_ols,b_ridge,b_lasso,b_elastic_net)</a>
+<a class="sourceLine" id="cb36-20" data-line-number="20">    </a>
+<a class="sourceLine" id="cb36-21" data-line-number="21">    coefficient_column_name&lt;-<span class="kw">paste</span>(<span class="st">&quot;simulation_&quot;</span>,i, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb36-22" data-line-number="22">    <span class="kw">colnames</span>(b_all)[<span class="dv">1</span>]&lt;-<span class="st"> </span>coefficient_column_name</a>
+<a class="sourceLine" id="cb36-23" data-line-number="23">    </a>
+<a class="sourceLine" id="cb36-24" data-line-number="24">    b_final&lt;-b_final<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb36-25" data-line-number="25"><span class="st">      </span><span class="kw">left_join</span>(b_all)</a>
+<a class="sourceLine" id="cb36-26" data-line-number="26">    }</a>
+<a class="sourceLine" id="cb36-27" data-line-number="27">  </a>
+<a class="sourceLine" id="cb36-28" data-line-number="28">  <span class="kw">return</span>(b_final)</a>
+<a class="sourceLine" id="cb36-29" data-line-number="29">}</a></code></pre></div>
 <p>For this study we decided to use 100 iterations, if we had more time we could have used more iterations. You could change the <code>100</code> to any number of iterations you would like, and the simulation will output all the coefficient values for 100 iterations for each of the 4 models.</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="appendix.html#cb36-1" aria-hidden="true" tabindex="-1"></a>simulation_all<span class="ot">&lt;-</span><span class="fu">simulation_final_all_betas</span>(<span class="dv">100</span>, betas, b_final)</span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="appendix.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create dataset for betas</span></span>
-<span id="cb37-2"><a href="appendix.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(simulation_all, <span class="st">&quot;simulation_all.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1">simulation_all&lt;-<span class="kw">simulation_final_all_betas</span>(<span class="dv">100</span>, betas, b_final)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="co">#create dataset for betas</span></a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="kw">write.csv</span>(simulation_all, <span class="st">&quot;simulation_all.csv&quot;</span>)</a></code></pre></div>
 </div>
 </div>
-<div id="tuning-parameters" class="section level2" number="8.2">
+<div id="tuning-parameters" class="section level2">
 <h2><span class="header-section-number">8.2</span> Tuning Parameters</h2>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="appendix.html#cb38-1" aria-hidden="true" tabindex="-1"></a>tuning_final<span class="ot">&lt;-</span><span class="fu">data_frame</span>(<span class="fu">matrix</span>(<span class="at">ncol =</span> <span class="dv">3</span>, <span class="at">nrow =</span> <span class="dv">0</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1">tuning_final&lt;-<span class="kw">data_frame</span>(<span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">0</span>))</a></code></pre></div>
 <pre><code>## Warning: `data_frame()` is deprecated as of tibble 1.1.0.
 ## Please use `tibble()` instead.
 ## This warning is displayed once every 8 hours.
 ## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="appendix.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(tuning_final)<span class="ot">&lt;-</span><span class="fu">c</span>(<span class="st">&quot;alpha&quot;</span>,<span class="st">&quot;lambda&quot;</span>,<span class="st">&quot;Model&quot;</span>)</span>
-<span id="cb40-2"><a href="appendix.html#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-3"><a href="appendix.html#cb40-3" aria-hidden="true" tabindex="-1"></a>tuning_final</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1"><span class="kw">colnames</span>(tuning_final)&lt;-<span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>,<span class="st">&quot;lambda&quot;</span>,<span class="st">&quot;Model&quot;</span>)</a>
+<a class="sourceLine" id="cb41-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb41-3" data-line-number="3">tuning_final</a></code></pre></div>
 <pre><code>## # A tibble: 0 x 1
-## # … with 3 variables: alpha[,1] &lt;lgl&gt;, [,2] &lt;lgl&gt;, [,3] &lt;lgl&gt;</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="appendix.html#cb42-1" aria-hidden="true" tabindex="-1"></a>simulation_final_tuning_parameters<span class="ot">&lt;-</span><span class="cf">function</span>(iterations, betas, tuning_final){</span>
-<span id="cb42-2"><a href="appendix.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq</span>(<span class="dv">1</span>, iterations, <span class="dv">1</span>)){</span>
-<span id="cb42-3"><a href="appendix.html#cb42-3" aria-hidden="true" tabindex="-1"></a>    lambda_grid<span class="ot">&lt;-</span> lambda_grid<span class="ot">&lt;-</span><span class="dv">10</span><span class="sc">^</span><span class="fu">seq</span>(<span class="sc">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="at">length.out =</span> <span class="dv">50</span>)</span>
-<span id="cb42-4"><a href="appendix.html#cb42-4" aria-hidden="true" tabindex="-1"></a>    alpha_grid <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</span>
-<span id="cb42-5"><a href="appendix.html#cb42-5" aria-hidden="true" tabindex="-1"></a>    srchGrd <span class="ot">=</span> <span class="fu">expand.grid</span>(<span class="at">.alpha =</span> alpha_grid, <span class="at">.lambda =</span> lambda_grid)</span>
-<span id="cb42-6"><a href="appendix.html#cb42-6" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-7"><a href="appendix.html#cb42-7" aria-hidden="true" tabindex="-1"></a>    df<span class="ot">&lt;-</span><span class="fu">simulation</span>(<span class="at">seed =</span> i,betas)</span>
-<span id="cb42-8"><a href="appendix.html#cb42-8" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-9"><a href="appendix.html#cb42-9" aria-hidden="true" tabindex="-1"></a>    ridge_model<span class="ot">&lt;-</span> <span class="fu">get_ridge_model</span>(df, lambda_grid)</span>
-<span id="cb42-10"><a href="appendix.html#cb42-10" aria-hidden="true" tabindex="-1"></a>    lasso_model<span class="ot">&lt;-</span> <span class="fu">get_lasso_model</span>(df, lambda_grid)</span>
-<span id="cb42-11"><a href="appendix.html#cb42-11" aria-hidden="true" tabindex="-1"></a>    elastic_net_model<span class="ot">&lt;-</span> <span class="fu">get_elastic_net_model</span>(df, srchGrd)</span>
-<span id="cb42-12"><a href="appendix.html#cb42-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-13"><a href="appendix.html#cb42-13" aria-hidden="true" tabindex="-1"></a>    ridge_tune<span class="ot">&lt;-</span><span class="fu">get_ridge_tune</span>(ridge_model)</span>
-<span id="cb42-14"><a href="appendix.html#cb42-14" aria-hidden="true" tabindex="-1"></a>    lasso_tune<span class="ot">&lt;-</span><span class="fu">get_lasso_tune</span>(lasso_model)</span>
-<span id="cb42-15"><a href="appendix.html#cb42-15" aria-hidden="true" tabindex="-1"></a>    elastic_net_tune<span class="ot">&lt;-</span> <span class="fu">get_elastic_net_tune</span>(elastic_net_model)</span>
-<span id="cb42-16"><a href="appendix.html#cb42-16" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-17"><a href="appendix.html#cb42-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(ridge_tune)</span>
-<span id="cb42-18"><a href="appendix.html#cb42-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(lasso_tune)</span>
-<span id="cb42-19"><a href="appendix.html#cb42-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(elastic_net_tune)</span>
-<span id="cb42-20"><a href="appendix.html#cb42-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-21"><a href="appendix.html#cb42-21" aria-hidden="true" tabindex="-1"></a>    tune_all<span class="ot">&lt;-</span><span class="fu">rbind</span>(ridge_tune,lasso_tune,elastic_net_tune)<span class="sc">%&gt;%</span></span>
-<span id="cb42-22"><a href="appendix.html#cb42-22" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(<span class="at">Simulation_number =</span> i)</span>
-<span id="cb42-23"><a href="appendix.html#cb42-23" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb42-24"><a href="appendix.html#cb42-24" aria-hidden="true" tabindex="-1"></a>    tuning_final<span class="ot">&lt;-</span> <span class="fu">rbind</span>(tuning_final, tune_all)</span>
-<span id="cb42-25"><a href="appendix.html#cb42-25" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb42-26"><a href="appendix.html#cb42-26" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb42-27"><a href="appendix.html#cb42-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(tuning_final)</span>
-<span id="cb42-28"><a href="appendix.html#cb42-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="appendix.html#cb43-1" aria-hidden="true" tabindex="-1"></a>tuning_all<span class="ot">&lt;-</span><span class="fu">simulation_final_tuning_parameters</span>(<span class="dv">100</span>, betas, tuning_final)</span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="appendix.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(tuning_all, <span class="st">&quot;tuning_all.csv&quot;</span>)</span></code></pre></div>
+## # … with 1 variable: alpha &lt;lgl[,3]&gt;</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" data-line-number="1">simulation_final_tuning_parameters&lt;-<span class="cf">function</span>(iterations, betas, tuning_final){</a>
+<a class="sourceLine" id="cb43-2" data-line-number="2">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq</span>(<span class="dv">1</span>, iterations, <span class="dv">1</span>)){</a>
+<a class="sourceLine" id="cb43-3" data-line-number="3">    lambda_grid&lt;-<span class="st"> </span>lambda_grid&lt;-<span class="dv">10</span><span class="op">^</span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">3</span>, <span class="dv">3</span>, <span class="dt">length.out =</span> <span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb43-4" data-line-number="4">    alpha_grid &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">0.1</span>,<span class="fl">0.2</span>,<span class="fl">0.3</span>,<span class="fl">0.4</span>,<span class="fl">0.5</span>,<span class="fl">0.6</span>,<span class="fl">0.7</span>,<span class="fl">0.8</span>,<span class="fl">0.9</span>,<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb43-5" data-line-number="5">    srchGrd =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.alpha =</span> alpha_grid, <span class="dt">.lambda =</span> lambda_grid)</a>
+<a class="sourceLine" id="cb43-6" data-line-number="6">    </a>
+<a class="sourceLine" id="cb43-7" data-line-number="7">    df&lt;-<span class="kw">simulation</span>(<span class="dt">seed =</span> i,betas)</a>
+<a class="sourceLine" id="cb43-8" data-line-number="8">    </a>
+<a class="sourceLine" id="cb43-9" data-line-number="9">    ridge_model&lt;-<span class="st"> </span><span class="kw">get_ridge_model</span>(df, lambda_grid)</a>
+<a class="sourceLine" id="cb43-10" data-line-number="10">    lasso_model&lt;-<span class="st"> </span><span class="kw">get_lasso_model</span>(df, lambda_grid)</a>
+<a class="sourceLine" id="cb43-11" data-line-number="11">    elastic_net_model&lt;-<span class="st"> </span><span class="kw">get_elastic_net_model</span>(df, srchGrd)</a>
+<a class="sourceLine" id="cb43-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb43-13" data-line-number="13">    ridge_tune&lt;-<span class="kw">get_ridge_tune</span>(ridge_model)</a>
+<a class="sourceLine" id="cb43-14" data-line-number="14">    lasso_tune&lt;-<span class="kw">get_lasso_tune</span>(lasso_model)</a>
+<a class="sourceLine" id="cb43-15" data-line-number="15">    elastic_net_tune&lt;-<span class="st"> </span><span class="kw">get_elastic_net_tune</span>(elastic_net_model)</a>
+<a class="sourceLine" id="cb43-16" data-line-number="16">    </a>
+<a class="sourceLine" id="cb43-17" data-line-number="17">    <span class="kw">head</span>(ridge_tune)</a>
+<a class="sourceLine" id="cb43-18" data-line-number="18">    <span class="kw">head</span>(lasso_tune)</a>
+<a class="sourceLine" id="cb43-19" data-line-number="19">    <span class="kw">head</span>(elastic_net_tune)</a>
+<a class="sourceLine" id="cb43-20" data-line-number="20">    </a>
+<a class="sourceLine" id="cb43-21" data-line-number="21">    tune_all&lt;-<span class="kw">rbind</span>(ridge_tune,lasso_tune,elastic_net_tune)<span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb43-22" data-line-number="22"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">Simulation_number =</span> i)</a>
+<a class="sourceLine" id="cb43-23" data-line-number="23">    </a>
+<a class="sourceLine" id="cb43-24" data-line-number="24">    tuning_final&lt;-<span class="st"> </span><span class="kw">rbind</span>(tuning_final, tune_all)</a>
+<a class="sourceLine" id="cb43-25" data-line-number="25">  }</a>
+<a class="sourceLine" id="cb43-26" data-line-number="26">  </a>
+<a class="sourceLine" id="cb43-27" data-line-number="27">  <span class="kw">return</span>(tuning_final)</a>
+<a class="sourceLine" id="cb43-28" data-line-number="28">}</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">tuning_all&lt;-<span class="kw">simulation_final_tuning_parameters</span>(<span class="dv">100</span>, betas, tuning_final)</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1"><span class="kw">write.csv</span>(tuning_all, <span class="st">&quot;tuning_all.csv&quot;</span>)</a></code></pre></div>
 
 </div>
 </div>
